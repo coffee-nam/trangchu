@@ -100,7 +100,7 @@
   <nav class="bg-green-600 text-white shadow-sm sticky top-0 z-40">
     <div class="container-max mx-auto px-4">
       <ul class="flex gap-6 py-3 font-semibold text-sm">
-        <li><a href="#gioithieu" class="hover:underline" onclick="showSection('thongbao')">Giới thiệu</a></li>
+        <li><a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">Giới thiệu</a></li>
         <li><a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Sản Phẩm</a></li>
 
         <!-- ĐÃ XOÁ Album ảnh -->
@@ -175,7 +175,18 @@
 
     <!-- ==== CỘT GIỮA ==== -->
     <section class="space-y-6">
-      <div id="thongbao" class="card p-4">
+
+      <!-- ======= TRANG GIỚI THIỆU MỚI ======= -->
+      <div id="gioithieu" class="card p-4">
+        <h2 class="text-lg font-bold text-green-700 mb-3">🌟 NAM COFFEE – Không gian thưởng thức cà phê đẳng cấp tại Đà Nẵng 🌟</h2>
+        <p>NAM COFFEE, tọa lạc tại 62 Trần Thị Lý, xã Thăng Bình, TP. Đà Nẵng, là điểm đến lý tưởng cho những ai yêu thích cà phê chất lượng và trải nghiệm không gian tinh tế. Chúng tôi không chỉ mang đến những ly cà phê thơm ngon, đậm đà, mà còn kiến tạo một không gian thư giãn, rộng rãi, nơi mọi chi tiết đều được chăm chút tỉ mỉ để đem lại cảm giác dễ chịu và thanh thoát.</p>
+        <p>Với thiết kế hiện đại, tinh tế, kết hợp với view đẹp và thoáng đãng, NAM COFFEE là nơi lý tưởng để tận hưởng những khoảnh khắc bình yên, gặp gỡ bạn bè, họp nhóm, làm việc hay đơn giản là thưởng thức một tách cà phê đậm vị giữa nhịp sống sôi động của thành phố. Mỗi góc nhỏ trong quán đều được bố trí để tạo nên cảm giác thư thái và cảm hứng sáng tạo, từ ánh sáng tự nhiên chan hòa đến nội thất ấm cúng, sang trọng.</p>
+        <p>✨ Chúng tôi hân hạnh thông báo khai trương vào ngày 29/11/2025.<br>
+        NAM COFFEE mong muốn trở thành điểm đến không chỉ của những tín đồ cà phê, mà còn của những ai tìm kiếm một không gian trải nghiệm văn hóa cà phê độc đáo tại Đà Nẵng. Đội ngũ nhân viên tận tâm, chuyên nghiệp cùng thực đơn đa dạng, phong phú sẽ đảm bảo mỗi lần ghé thăm là một trải nghiệm đáng nhớ.</p>
+        <p>Hãy đến NAM COFFEE – nơi hương vị tinh túy của cà phê hòa quyện cùng không gian thanh lịch, để mỗi khoảnh khắc của bạn trở nên đặc biệt và đầy cảm xúc. Chúng tôi rất mong được đón tiếp và chia sẻ cùng bạn những trải nghiệm tuyệt vời nhất.</p>
+      </div>
+
+      <div id="thongbao" class="card p-4 hidden">
         <h2 class="text-lg font-bold text-green-700 mb-3">📢 Tin tức - Thông báo</h2>
         <div id="newsList" class="space-y-3 text-sm text-gray-500">Đang trong quá trình hoàn thiện...</div>
       </div>
@@ -451,13 +462,18 @@
     window.showSection = function(section) {
       const thongbao = document.getElementById('thongbao');
       const thanhvien = document.getElementById('thanhvien');
+      const gioithieu = document.getElementById('gioithieu');
+
+      thongbao.classList.add('hidden');
+      thanhvien.classList.add('hidden');
+      gioithieu.classList.add('hidden');
 
       if (section === 'thanhvien') {
-        thongbao.classList.add('hidden');
         thanhvien.classList.remove('hidden');
         loadMembers();
+      } else if (section === 'gioithieu') {
+        gioithieu.classList.remove('hidden');
       } else {
-        thanhvien.classList.add('hidden');
         thongbao.classList.remove('hidden');
       }
     };
@@ -475,6 +491,8 @@
       }
 
       checkFormVisibility();
+
+      showSection('gioithieu'); // Hiển thị trang giới thiệu khi load
 
       onAuthStateChanged(auth, async (user) => {
         if (user) {
