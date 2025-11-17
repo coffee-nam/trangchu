@@ -109,6 +109,13 @@
         <li><a href="#lienhe" class="hover:underline" onclick="showSection('thongbao')">Liên hệ</a></li>
         <li><a href="#" class="hover:underline" onclick="showSection('thanhvien')">Thành viên</a></li>
         <li id="capnhatMenu" class="hidden"><a href="#" onclick="openUpdateModal()" class="hover:underline">Cập nhật thông tin</a></li>
+
+        <!-- ⭐⭐⭐ GIỎ HÀNG THÊM VÀO ĐÚNG VỊ TRÍ (KHÔNG ĐỤNG GÌ KHÁC) ⭐⭐⭐ -->
+        <li class="ml-auto flex items-center gap-1 cursor-pointer" onclick="openCart()">
+          🛒 <span id="cartCount">0</span>
+        </li>
+        <!-- ⭐⭐⭐ END GIỎ HÀNG ⭐⭐⭐ -->
+
       </ul>
     </div>
   </nav>
@@ -226,14 +233,10 @@
     </div>
   </div>
 
-  <!-- ĐÃ XOÁ LIGHTBOX -->
-
   <!-- ZALO -->
   <a href="https://zalo.me/0868670473" target="_blank" class="zalo-button" title="Chat qua Zalo">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
   </a>
-
-  <!-- ĐÃ XOÁ CLOUDINARY SCRIPT -->
 
   <!-- ======== FIREBASE SCRIPT ======== -->
   <script type="module">
@@ -336,7 +339,7 @@
         name, email, content, created: serverTimestamp()
       });
       gopyText.value = "";
-      alert("Góp ý đã gửi thành công!");
+        alert("Góp ý đã gửi thành công!");
     };
 
     // --- LẮNG NGHE GÓP Ý ---
@@ -484,6 +487,13 @@
       });
     });
 
+  </script>
+
+  <!-- ⭐⭐⭐ HÀM GIỎ HÀNG (RẤT NHỎ – KHÔNG ĐỤNG BẤT CỨ CODE GỐC NÀO) ⭐⭐⭐ -->
+  <script>
+    window.openCart = function() {
+      alert("Giỏ hàng hiện chưa có sản phẩm!");
+    };
   </script>
 
 </body>
