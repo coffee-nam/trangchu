@@ -72,7 +72,6 @@
       padding: 2px 0;
     }
 
-    /* Danh sách thành viên styling */
     #memberList p {
       margin: 0;
       padding: 6px 0;
@@ -80,30 +79,8 @@
     }
     #memberList p:last-child { border-bottom: none; }
 
-    /* Small responsive tweaks */
     @media (max-width: 1024px) {
       .container-max { padding-left: 12px; padding-right: 12px; }
-    }
-
-    /* Album styles */
-    #gallery img { width: 100%; height: 180px; object-fit: cover; display: block; border-radius: 0.5rem; }
-    .album-item { position: relative; }
-    .delete-btn {
-      position: absolute; top: 8px; right: 8px;
-      background: rgba(255,255,255,0.9); border-radius: 6px; padding: 4px 6px; font-size: 12px;
-      display: none;
-    }
-    .album-item:hover .delete-btn { display: block; }
-
-    /* Lightbox */
-    #lightbox {
-      position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.85); z-index: 11000;
-    }
-    #lightbox img { max-width: 90%; max-height: 90%; border-radius: 8px; }
-    #lightbox .close {
-      position: absolute; top: 20px; right: 24px; color: white; font-size: 22px; cursor: pointer;
-      background: rgba(0,0,0,0.4); padding: 6px 10px; border-radius: 6px;
     }
   </style>
 </head>
@@ -111,24 +88,23 @@
 
   <!-- ======== BANNER ======== -->
 <header class="relative overflow-hidden font-[Montserrat,sans-serif]">
-  <!-- Ảnh nền -->
   <img src="https://upanhnhanh.com/251a9f944e0c01196a7f3f7b4f11a159"
        alt="Banner Nam Coffee"
        class="w-full h-40 md:h-52 object-cover brightness-75">
 
-    </p>
-  </div>
-
   <!-- Font chữ đẹp -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
 </header>
+
   <!-- ======== MENU ======== -->
   <nav class="bg-green-600 text-white shadow-sm sticky top-0 z-40">
     <div class="container-max mx-auto px-4">
       <ul class="flex gap-6 py-3 font-semibold text-sm">
         <li><a href="#gioithieu" class="hover:underline" onclick="showSection('thongbao')">Giới thiệu</a></li>
         <li><a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Sản Phẩm</a></li>
-        <li><a href="#album" class="hover:underline" onclick="showSection('thongbao')">Album ảnh</a></li>
+
+        <!-- ĐÃ XOÁ Album ảnh -->
+
         <li><a href="#gopy" class="hover:underline" onclick="showSection('thongbao')">Form góp ý</a></li>
         <li><a href="#lienhe" class="hover:underline" onclick="showSection('thongbao')">Liên hệ</a></li>
         <li><a href="#" class="hover:underline" onclick="showSection('thanhvien')">Thành viên</a></li>
@@ -137,7 +113,7 @@
     </div>
   </nav>
 
-  <!-- ======== DÒNG CHỮ CHẠY NGANG DƯỚI MENU ======== -->
+  <!-- ======== DÒNG CHỮ CHẠY NGANG ======== -->
   <div class="banner-marquee w-full">
     <span>🌿 Nam Coffee ! Nơi thư giản lý tưởng, phục vụ chu đáo, mọi góp ý xin quý khách vui lòng gọi hoặc nhắn tin Zalo : 0964307247. 🌿</span>
   </div>
@@ -197,21 +173,8 @@
         <div id="newsList" class="space-y-3 text-sm text-gray-500">Đang trong quá trình hoàn thiện...</div>
       </div>
 
-      <!-- ALBUM ẢNH (mục mới chèn, giữ nguyên bố cục và hiển thị khi bấm Album ảnh) -->
-      <div id="album" class="card p-4 hidden">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-bold text-green-700">📸 Album ảnh</h2>
-          <!-- Nút upload (chỉ hiện nếu admin) -->
-          <button id="uploadBtn" class="hidden bg-green-600 hover:bg-green-700 text-white px-4 py-1.5 rounded text-sm">
-            + Thêm ảnh mới
-          </button>
-        </div>
+      <!-- ĐÃ XOÁ TOÀN BỘ PHẦN ALBUM ẢNH -->
 
-        <!-- Gallery -->
-        <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
-      </div>
-
-      <!-- Danh sách thành viên (ẩn mặc định) -->
       <div id="thanhvien" class="card p-4 hidden">
         <h2 class="text-lg font-bold text-green-700 mb-3">📋 Danh sách thành viên</h2>
         <div id="memberList" class="space-y-1 text-sm text-gray-700">Đang tải danh sách...</div>
@@ -227,8 +190,6 @@
     <aside>
       <div class="card p-3 text-sm">
         <h3 class="font-semibold text-green-700 mb-2">Thông báo nhanh</h3>
-
-        <!-- Marquee vertical các thông báo -->
         <div id="thongbaoMarquee">
           <div id="thongbaoContent">
             <p>✔ Mừng khai trương giảm giá 10%</p>
@@ -265,21 +226,16 @@
     </div>
   </div>
 
-  <!-- Lightbox for viewing images -->
-  <div id="lightbox" onclick="closeLightbox()">
-    <span class="close" onclick="closeLightbox(); event.stopPropagation();">✕</span>
-    <img id="lightboxImage" src="" alt="Preview">
-  </div>
+  <!-- ĐÃ XOÁ LIGHTBOX -->
 
-  <!-- ======== ZALO BUTTON ======== -->
+  <!-- ZALO -->
   <a href="https://zalo.me/0868670473" target="_blank" class="zalo-button" title="Chat qua Zalo">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
   </a>
 
-  <!-- Cloudinary widget (external script) -->
-  <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
+  <!-- ĐÃ XOÁ CLOUDINARY SCRIPT -->
 
-  <!-- ======== FIREBASE SCRIPT (giữ nguyên toàn bộ chức năng) ======== -->
+  <!-- ======== FIREBASE SCRIPT ======== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { 
@@ -332,7 +288,6 @@
         }
         currentUser = userCred.user;
 
-        // Lưu thông tin đăng nhập nếu chọn checkbox
         if (rememberMe.checked) {
           localStorage.setItem("savedEmail", loginEmail.value);
           localStorage.setItem("savedPass", loginPass.value);
@@ -371,7 +326,7 @@
       checkFormVisibility();
     };
 
-    // --- GỬI GÓP Ý ---
+    // --- GÓP Ý ---
     window.sendGopy = async function() {
       const content = gopyText.value.trim();
       if (!content) return alert("Vui lòng nhập nội dung!");
@@ -395,14 +350,15 @@
         el.innerHTML = `
           <div class="text-gray-700 text-sm"><b>${d.name}</b>: ${d.content}</div>
           ${localStorage.getItem("userEmail") === adminEmail
-            ? `<button onclick="deleteGopy('${docu.id}')" class="text-xs text-red-500 mt-1 underline">Xóa</button>` : ""
+            ? `<button onclick="deleteGopy('${docu.id}')" class="text-xs text-red-500 mt-1 underline">Xóa</button>`
+            : ""
           }
         `;
         gopyList.appendChild(el);
       });
     });
 
-    // --- XÓA GÓP Ý (admin) ---
+    // --- XÓA GÓP Ý ---
     window.deleteGopy = async function(id) {
       const userEmail = localStorage.getItem("userEmail");
       if (userEmail !== adminEmail) return alert("Chỉ admin mới được xóa góp ý!");
@@ -411,7 +367,6 @@
       alert("Đã xóa góp ý!");
     };
 
-    // --- KIỂM TRA FORM GÓP Ý CÓ ĐƯỢC HIỂN THỊ KHÔNG ---
     function checkFormVisibility() {
       const user = localStorage.getItem("userEmail");
       if (user) {
@@ -423,17 +378,14 @@
       }
     }
 
-    // --- CHUYỂN GIỮA ĐĂNG KÝ & ĐĂNG NHẬP ---
     window.toggleRegisterForm = function() {
       loginBox.classList.toggle("hidden");
       registerBox.classList.toggle("hidden");
     };
 
-    // --- MỞ / ĐÓNG MODAL CẬP NHẬT ---
     window.openUpdateModal = function() { updateModal.style.display = "flex"; };
     window.closeUpdateModal = function() { updateModal.style.display = "none"; };
 
-    // --- LƯU THÔNG TIN NGƯỜI DÙNG ---
     window.saveUserInfo = async function() {
       const u = auth.currentUser;
       if (!u) return alert("Bạn chưa đăng nhập!");
@@ -446,11 +398,11 @@
       closeUpdateModal();
     };
 
-    // --- LOAD MEMBERS FROM FIRESTORE (giữ nguyên nhưng thêm nút xóa cho admin) ---
+    // --- LOAD MEMBERS ---
     async function loadMembers() {
       try {
         const memberListEl = document.getElementById('memberList');
-        memberListEl.innerHTML = "<p>⏳ Đang tải danh sách thành viên...</p>";
+        memberListEl.innerHTML = "<p>⏳ Đang tải danh sách...</p>";
         const snap = await getDocs(collection(db, "users"));
         if (snap.empty) {
           memberListEl.innerHTML = "<p>Chưa có thành viên nào đăng ký.</p>";
@@ -462,7 +414,7 @@
         snap.forEach(docu => {
           const d = docu.data();
           const displayName = d.name && d.name.trim() !== "" ? d.name : (d.email || "Không rõ");
-          // nếu user hiện tại là admin, hiển thị nút xóa kế bên (xóa theo uid)
+
           if (currentEmail === adminEmail) {
             html += `<p>${i++}. ${escapeHtml(displayName)} <button onclick="deleteMember('${docu.id}')" class="text-xs text-red-500 ml-2 underline">🗑 Xóa</button></p>`;
           } else {
@@ -472,26 +424,19 @@
         memberListEl.innerHTML = html;
       } catch (err) {
         document.getElementById('memberList').innerHTML = `<p>Lỗi khi tải danh sách: ${err.message}</p>`;
-        console.error("loadMembers error:", err);
       }
     }
 
-    // --- XÓA THÀNH VIÊN (ADMIN) ---
     window.deleteMember = async function(uid) {
       const userEmail = localStorage.getItem("userEmail");
       if (userEmail !== adminEmail) return alert("Chỉ admin mới được phép xóa thành viên!");
       if (!confirm("Xác nhận xóa thành viên này?")) return;
-      try {
-        await deleteDoc(doc(db, "users", uid));
-        alert("Đã xóa thành viên!");
-        loadMembers();
-      } catch (err) {
-        console.error("deleteMember error:", err);
-        alert("Xóa không thành công: " + err.message);
-      }
+
+      await deleteDoc(doc(db, "users", uid));
+      alert("Đã xóa thành viên!");
+      loadMembers();
     };
 
-    // Escape HTML to avoid injection (simple)
     function escapeHtml(str) {
       if (!str) return "";
       return str.replace(/[&<>"']/g, function(m) {
@@ -499,46 +444,25 @@
       });
     }
 
-    // --- CHUYỂN HIển THỊ GIỮA THÔNG BÁO VÀ THÀNH VIÊN ---
+    // --- HIỆN / ẨN CÁC MỤC ---
     window.showSection = function(section) {
       const thongbao = document.getElementById('thongbao');
       const thanhvien = document.getElementById('thanhvien');
-      const albumEl = document.getElementById('album');
 
-      if (section === 'thanhvien' || section === 'members') {
-        // ẩn thông báo, hiện danh sách thành viên
-        if (thongbao) thongbao.classList.add('hidden');
-        if (thanhvien) {
-          thanhvien.classList.remove('hidden');
-          loadMembers();
-        }
+      if (section === 'thanhvien') {
+        thongbao.classList.add('hidden');
+        thanhvien.classList.remove('hidden');
+        loadMembers();
       } else {
-        // hiện thông báo, ẩn danh sách thành viên
-        if (thanhvien) thanhvien.classList.add('hidden');
-        if (thongbao) thongbao.classList.remove('hidden');
-      }
-
-      // NOTE: menu "Album ảnh" trong file gốc có onclick showSection('thongbao')
-      // để đảm bảo người dùng vẫn có thể truy cập album, nếu anchor #album được click,
-      // chúng ta cũng hiển thị album: (không thay đổi hành vi gốc, chỉ bổ sung)
-      // Nếu có phần tử album tồn tại và location.hash === '#album', hiển thị album
-      if (location.hash === "#album" && albumEl) {
-        // ẩn thông báo và thành viên, hiện album
-        if (thongbao) thongbao.classList.add('hidden');
-        if (thanhvien) thanhvien.classList.add('hidden');
-        albumEl.classList.remove('hidden');
-        loadAlbum(); // load album khi mở
-      } else {
-        // nếu album đang hiển thị nhưng không phải hash #album thì ẩn (giữ hành vi gốc)
-        if (albumEl && location.hash !== "#album") {
-          albumEl.classList.add('hidden');
-        }
+        thanhvien.classList.add('hidden');
+        thongbao.classList.remove('hidden');
       }
     };
 
     // --- KHỞI TẠO ---
     window.addEventListener("load", () => {
       document.body.classList.add("banner-loaded");
+
       const savedEmail = localStorage.getItem("savedEmail");
       const savedPass = localStorage.getItem("savedPass");
       if (savedEmail && savedPass) {
@@ -546,188 +470,21 @@
         loginPass.value = savedPass;
         rememberMe.checked = true;
       }
+
       checkFormVisibility();
 
-      // Nếu lúc load trang đã ở #album, hiển thị album
-      if (location.hash === "#album") {
-        showSection('thongbao'); // giữ hành vi gọi showSection
-        const albumEl = document.getElementById('album');
-        if (albumEl) {
-          albumEl.classList.remove('hidden');
-          loadAlbum();
-        }
-      }
-
-      // Lắng nghe thay đổi auth để cập nhật currentUser
       onAuthStateChanged(auth, async (user) => {
         if (user) {
           currentUser = user;
-          // lưu email vào localStorage để code khác kiểm tra quyền admin
           localStorage.setItem("userEmail", user.email);
-          // nếu admin thì hiển thị nút upload
-          if (user.email === adminEmail) {
-            const upl = document.getElementById('uploadBtn');
-            if (upl) upl.classList.remove('hidden');
-          }
         } else {
           currentUser = null;
           localStorage.removeItem("userEmail");
-          const upl = document.getElementById('uploadBtn');
-          if (upl) upl.classList.add('hidden');
         }
       });
     });
 
-    // --- Các hàm giữ nguyên trong file gốc đã có ở trên (đã chèn, không thay đổi) ---
-    // (Đoạn code gốc bạn cung cấp vẫn được giữ nguyên; mình chỉ bổ sung hàm loadMembers, deleteMember, escapeHtml và showSection)
-    // ---------------------------------------------------------------------------------------
-    // BỔ SUNG: ALBUM ẢNH (Cloudinary + Firestore) - lưu link ảnh vào Firestore, admin upload & delete
-    // ---------------------------------------------------------------------------------------
+  </script>
 
-    // Cloudinary config (theo thông tin bạn đã cung cấp)
-    const cloudName = "dhdmvqitk";
-    const uploadPreset = "unsigned_upload";
-
-    // Tạo widget Cloudinary (unsigned)
-    const myWidget = cloudinary.createUploadWidget({
-      cloudName: cloudName,
-      uploadPreset: uploadPreset,
-      sources: ['local', 'camera', 'url'],
-      multiple: true,
-      maxFiles: 20,
-      folder: "album_lop9_1"
-    }, async (error, result) => {
-      if (!error && result && result.event === "success") {
-        // Lưu link ảnh vào Firestore
-        try {
-          await addDoc(collection(db, "album"), {
-            url: result.info.secure_url,
-            uploadedBy: currentUser ? currentUser.email : "unknown",
-            createdAt: serverTimestamp()
-          });
-          // loadAlbum(); // onSnapshot sẽ tự cập nhật
-          alert("✅ Ảnh đã được tải lên và lưu vào album!");
-        } catch (err) {
-          console.error("Lỗi lưu album vào Firestore:", err);
-          alert("Lỗi khi lưu ảnh vào hệ thống: " + err.message);
-        }
-      }
-    });
-
-    // Mở widget khi bấm nút upload (nút chỉ hiển thị nếu admin)
-    const uploadBtnEl = document.getElementById('uploadBtn');
-    if (uploadBtnEl) {
-      uploadBtnEl.addEventListener('click', () => {
-        myWidget.open();
-      });
-    }
-
-    // Hàm render 1 image vào gallery (dùng bởi onSnapshot)
-    function renderImageItem(docId, data) {
-      const gallery = document.getElementById('gallery');
-      if (!gallery) return;
-      const div = document.createElement('div');
-      div.className = "album-item";
-      div.dataset.id = docId;
-
-      // Inner HTML with image and optional delete button (for admin)
-      const currentEmail = localStorage.getItem("userEmail");
-      const isAdminLocal = currentEmail === adminEmail;
-
-      let inner = `
-        <div class="relative rounded-xl overflow-hidden card">
-          <img src="${data.url}" alt="Ảnh lớp 9/1" loading="lazy" style="width:100%;height:180px;object-fit:cover;cursor:pointer;" onclick="openLightbox('${data.url}')" />
-      `;
-
-      if (isAdminLocal) {
-        inner += `<button class="delete-btn" onclick="deleteImage('${docId}'); event.stopPropagation();">🗑️ Xóa</button>`;
-      }
-
-      inner += `</div>`;
-
-      div.innerHTML = inner;
-
-      return div;
-    }
-
-    // Load album once (not necessary if using onSnapshot but useful)
-    async function loadAlbum() {
-      const gallery = document.getElementById('gallery');
-      if (!gallery) return;
-      gallery.innerHTML = `<p class="text-sm text-gray-500 col-span-full">⏳ Đang tải album...</p>`;
-      try {
-        const qAlbum = query(collection(db, "album"), orderBy("createdAt", "desc"));
-        const snap = await getDocs(qAlbum);
-        gallery.innerHTML = "";
-        if (snap.empty) {
-          gallery.innerHTML = `<p class="text-sm text-gray-500 col-span-full">Chưa có ảnh trong album.</p>`;
-          return;
-        }
-        snap.forEach(docu => {
-          const el = renderImageItem(docu.id, docu.data());
-          if (el) gallery.appendChild(el);
-        });
-      } catch (err) {
-        console.error("loadAlbum error:", err);
-        gallery.innerHTML = `<p class="text-sm text-red-500">Lỗi khi tải album: ${err.message}</p>`;
-      }
-    }
-
-    // Real-time listener: khi collection 'album' thay đổi, cập nhật gallery
-    (function subscribeAlbumRealtime() {
-      try {
-        const qAlbumSnap = query(collection(db, "album"), orderBy("createdAt", "desc"));
-        onSnapshot(qAlbumSnap, (snapshot) => {
-          const gallery = document.getElementById('gallery');
-          if (!gallery) return;
-          gallery.innerHTML = "";
-          if (snapshot.empty) {
-            gallery.innerHTML = `<p class="text-sm text-gray-500 col-span-full">Chưa có ảnh trong album.</p>`;
-            return;
-          }
-          snapshot.forEach(docu => {
-            const el = renderImageItem(docu.id, docu.data());
-            if (el) gallery.appendChild(el);
-          });
-        });
-      } catch (err) {
-        console.error("subscribeAlbumRealtime error:", err);
-      }
-    })();
-
-    // Xóa ảnh (admin) - xóa document trong Firestore
-    window.deleteImage = async function(docId) {
-      const currentEmail = localStorage.getItem("userEmail");
-      if (currentEmail !== adminEmail) {
-        return alert("Chỉ admin mới được xóa ảnh!");
-      }
-      if (!confirm("Bạn có chắc muốn xóa ảnh này khỏi album?")) return;
-      try {
-        await deleteDoc(doc(db, "album", docId));
-        alert("Đã xóa ảnh khỏi album!");
-      } catch (err) {
-        console.error("deleteImage error:", err);
-        alert("Xóa ảnh không thành công: " + err.message);
-      }
-    };
-
-    // Lightbox functions
-    window.openLightbox = function(url) {
-      const lb = document.getElementById('lightbox');
-      const lbImg = document.getElementById('lightboxImage');
-      if (lb && lbImg) {
-        lbImg.src = url;
-        lb.style.display = 'flex';
-      }
-    };
-    window.closeLightbox = function() {
-      const lb = document.getElementById('lightbox');
-      const lbImg = document.getElementById('lightboxImage');
-      if (lb && lbImg) {
-        lb.style.display = 'none';
-        lbImg.src = "";
-      }
-    };
-  
 </body>
 </html>
