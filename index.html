@@ -14,7 +14,16 @@
       background-color: #f3f4f6;
     }
     .container-max { max-width: 1200px; margin: 0 auto; }
-    .card { background: white; border-radius: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .card {
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
     .banner-text { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
     .banner-loaded .banner-text { opacity: 1; transform: translateY(0); }
     .zalo-button {
@@ -99,21 +108,20 @@
   <!-- ======== MENU ======== -->
   <nav class="bg-green-600 text-white shadow-sm sticky top-0 z-40">
     <div class="container-max mx-auto px-4">
-      <ul class="flex gap-6 py-3 font-semibold text-sm">
+      <ul class="flex gap-4 md:gap-6 py-3 font-semibold text-sm items-center">
         <li><a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">Giới thiệu</a></li>
         <li><a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Sản Phẩm</a></li>
-
-        <!-- ĐÃ XOÁ Album ảnh -->
-
         <li><a href="#gopy" class="hover:underline" onclick="showSection('thongbao')">Form góp ý</a></li>
         <li><a href="#lienhe" class="hover:underline" onclick="showSection('thongbao')">Liên hệ</a></li>
         <li><a href="#" class="hover:underline" onclick="showSection('thanhvien')">Thành viên</a></li>
         <li id="capnhatMenu" class="hidden"><a href="#" onclick="openUpdateModal()" class="hover:underline">Cập nhật thông tin</a></li>
 
-        <!-- ⭐⭐⭐ GIỎ HÀNG THÊM VÀO ĐÚNG VỊ TRÍ (KHÔNG ĐỤNG GÌ KHÁC) ⭐⭐⭐ -->
-        <li class="ml-auto flex items-center gap-1 cursor-pointer" onclick="openCart()">
-  🛒 Giỏ Hàng (<span id="cartCount">0</span>)
-</li>
+        <!-- ⭐⭐⭐ GIỎ HÀNG ⭐⭐⭐ -->
+        <li class="ml-auto flex items-center gap-1 cursor-pointer text-[13px] md:text-sm px-3 py-1 rounded-full bg-green-700 hover:bg-green-800 transition"
+            onclick="openCart()">
+          🛒 <span class="hidden sm:inline">Giỏ Hàng</span>
+          (<span id="cartCount">0</span>)
+        </li>
         <!-- ⭐⭐⭐ END GIỎ HÀNG ⭐⭐⭐ -->
 
       </ul>
@@ -139,7 +147,7 @@
           <input type="checkbox" id="rememberMe" class="mr-2">
           <label for="rememberMe" class="text-xs text-gray-700">Lưu thông tin đăng nhập</label>
         </div>
-        <button onclick="doLogin()" class="w-full bg-green-600 text-white py-1.5 rounded text-sm">Đăng nhập</button>
+        <button onclick="doLogin()" class="w-full bg-green-600 hover:bg-green-700 transition text-white py-1.5 rounded text-sm">Đăng nhập</button>
         <div class="flex justify-between text-xs mt-2">
           <button onclick="toggleRegisterForm()" class="text-gray-600 underline">Đăng ký tài khoản mới</button>
           <button onclick="resetPassword()" class="text-gray-600 underline">Quên mật khẩu?</button>
@@ -152,14 +160,14 @@
         <input id="regName" type="text" placeholder="Họ và tên" class="w-full border p-1.5 rounded mb-1" />
         <input id="regEmail" type="email" placeholder="Email" class="w-full border p-1.5 rounded mb-1" />
         <input id="regPass" type="password" placeholder="Mật khẩu (≥6 ký tự)" class="w-full border p-1.5 rounded mb-2" />
-        <button onclick="doRegister()" class="w-full bg-blue-600 text-white py-1.5 rounded text-sm">Đăng ký</button>
+        <button onclick="doRegister()" class="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-1.5 rounded text-sm">Đăng ký</button>
         <button onclick="toggleRegisterForm()" class="mt-2 text-xs text-gray-600 underline">← Quay lại</button>
       </div>
 
       <!-- Đã đăng nhập -->
       <div id="loggedBox" class="card p-3 mt-3 hidden text-sm">
         <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">Xin chào <b>...</b></div>
-        <button onclick="doLogout()" class="w-full bg-red-500 text-white py-1.5 rounded">Đăng xuất</button>
+        <button onclick="doLogout()" class="w-full bg-red-500 hover:bg-red-600 transition text-white py-1.5 rounded">Đăng xuất</button>
       </div>
 
       <!-- Form góp ý -->
@@ -167,7 +175,7 @@
         <h4 class="font-semibold text-green-700 mb-2">💬 Form góp ý</h4>
         <div id="gopyFormArea">
           <textarea id="gopyText" rows="3" placeholder="Nhập nội dung góp ý..." class="w-full border rounded p-2 text-sm"></textarea>
-          <button onclick="sendGopy()" class="mt-2 bg-green-600 text-white px-4 py-1.5 rounded text-sm w-full">Gửi góp ý</button>
+          <button onclick="sendGopy()" class="mt-2 bg-green-600 hover:bg-green-700 transition text-white px-4 py-1.5 rounded text-sm w-full">Gửi góp ý</button>
         </div>
         <p id="loginToComment" class="hidden text-gray-500 text-xs">🔒 Vui lòng đăng nhập để gửi góp ý.</p>
       </div>
@@ -176,7 +184,7 @@
     <!-- ==== CỘT GIỮA ==== -->
     <section class="space-y-6">
 
-      <!-- ======= TRANG GIỚI THIỆU MỚI ======= -->
+      <!-- ======= GIỚI THIỆU ======= -->
       <div id="gioithieu" class="card p-4">
         <h2 class="text-lg font-bold text-green-700 mb-3">🌟 NAM COFFEE – Không gian thưởng thức cà phê đẳng cấp tại Đà Nẵng 🌟</h2>
         <p>NAM COFFEE, tọa lạc tại 62 Trần Thị Lý, xã Thăng Bình, TP. Đà Nẵng, là điểm đến lý tưởng cho những ai yêu thích cà phê chất lượng và trải nghiệm không gian tinh tế. Chúng tôi không chỉ mang đến những ly cà phê thơm ngon, đậm đà, mà còn kiến tạo một không gian thư giãn, rộng rãi, nơi mọi chi tiết đều được chăm chút tỉ mỉ để đem lại cảm giác dễ chịu và thanh thoát.</p>
@@ -186,12 +194,502 @@
         <p>Hãy đến NAM COFFEE – nơi hương vị tinh túy của cà phê hòa quyện cùng không gian thanh lịch, để mỗi khoảnh khắc của bạn trở nên đặc biệt và đầy cảm xúc. Chúng tôi rất mong được đón tiếp và chia sẻ cùng bạn những trải nghiệm tuyệt vời nhất.</p>
       </div>
 
+      <!-- ======= SẢN PHẨM / MENU NƯỚC ======= -->
+      <div id="sanpham" class="card p-4 hidden">
+        <h2 class="text-lg font-bold text-green-700 mb-4">☕ Menu thức uống NAM COFFEE</h2>
+
+        <div class="space-y-6 text-sm">
+
+          <!-- 1. CÀ PHÊ -->
+          <div>
+            <h3 class="font-semibold text-green-700 mb-2">✅ 1. CÀ PHÊ</h3>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <!-- Cà phê đen -->
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
+                <div>
+                  <p class="font-medium">Cà phê đen</p>
+                  <p class="text-xs text-gray-500">16k / 18k</p>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button onclick="openOrderModal('Cà phê đen')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Cà phê đen', 16000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <!-- Cà phê sữa -->
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
+                <div>
+                  <p class="font-medium">Cà phê sữa</p>
+                  <p class="text-xs text-gray-500">17k / 19k</p>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button onclick="openOrderModal('Cà phê sữa')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Cà phê sữa', 17000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <!-- Cà phê đen Sài Gòn -->
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
+                <div>
+                  <p class="font-medium">Cà phê đen Sài Gòn</p>
+                  <p class="text-xs text-gray-500">18k / 20k</p>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button onclick="openOrderModal('Cà phê đen Sài Gòn')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Cà phê đen Sài Gòn', 18000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <!-- Cà phê sữa Sài Gòn -->
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
+                <div>
+                  <p class="font-medium">Cà phê sữa Sài Gòn</p>
+                  <p class="text-xs text-gray-500">20k / 22k</p>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button onclick="openOrderModal('Cà phê sữa Sài Gòn')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Cà phê sữa Sài Gòn', 20000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <!-- Cà phê muối -->
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
+                <div>
+                  <p class="font-medium">Cà phê muối</p>
+                  <p class="text-xs text-gray-500">28k</p>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button onclick="openOrderModal('Cà phê muối')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Cà phê muối', 28000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <!-- Bạc xỉu -->
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
+                <div>
+                  <p class="font-medium">Bạc xỉu</p>
+                  <p class="text-xs text-gray-500">25k</p>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button onclick="openOrderModal('Bạc xỉu')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Bạc xỉu', 25000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. CA CAO -->
+          <div>
+            <h3 class="font-semibold text-green-700 mb-2">🍫 2. CA CAO</h3>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div>
+                  <p class="font-medium">Ca cao nóng/đá</p>
+                  <p class="text-xs text-gray-500">25k</p>
+                </div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Ca cao nóng/đá')" class="btn-primary-sm bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Ca cao nóng/đá', 25000)" class="btn-secondary-sm border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div>
+                  <p class="font-medium">Ca cao muối</p>
+                  <p class="text-xs text-gray-500">26k</p>
+                </div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Ca cao muối')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Ca cao muối', 26000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div>
+                  <p class="font-medium">Socola nóng</p>
+                  <p class="text-xs text-gray-500">26k</p>
+                </div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Socola nóng')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Socola nóng', 26000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div>
+                  <p class="font-medium">Ca cao latte</p>
+                  <p class="text-xs text-gray-500">26k</p>
+                </div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Ca cao latte')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Ca cao latte', 26000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. TRÀ -->
+          <div>
+            <h3 class="font-semibold text-green-700 mb-2">🍵 3. TRÀ</h3>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <!-- Lặp các món trà -->
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Trà gừng</p><p class="text-xs text-gray-500">22k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Trà gừng')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà gừng', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Trà chanh</p><p class="text-xs text-gray-500">22k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Trà chanh')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà chanh', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Trà Lipton</p><p class="text-xs text-gray-500">22k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Trà Lipton')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà Lipton', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Trà đào</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Trà đào')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà đào', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Trà vải</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Trà vải')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà vải', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Trà việt quất</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Trà việt quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà việt quất', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Trà đào cam sả</p><p class="text-xs text-gray-500">28k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Trà đào cam sả')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà đào cam sả', 28000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. TRÀ SỮA -->
+          <div>
+            <h3 class="font-semibold text-green-700 mb-2">🥤 4. TRÀ SỮA</h3>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div>
+                  <p class="font-medium">Trà sữa truyền thống</p>
+                  <p class="text-xs text-gray-500">M: 22k — L: 25k</p>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button onclick="openOrderModal('Trà sữa truyền thống')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà sữa truyền thống (M)', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
+                  <button onclick="addToCart('Trà sữa truyền thống (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div>
+                  <p class="font-medium">Trà sữa thái xanh</p>
+                  <p class="text-xs text-gray-500">M: 22k — L: 25k</p>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button onclick="openOrderModal('Trà sữa thái xanh')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà sữa thái xanh (M)', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
+                  <button onclick="addToCart('Trà sữa thái xanh (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div>
+                  <p class="font-medium">Trà sữa khoai môn</p>
+                  <p class="text-xs text-gray-500">M: 22k — L: 25k</p>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button onclick="openOrderModal('Trà sữa khoai môn')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà sữa khoai môn (M)', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
+                  <button onclick="addToCart('Trà sữa khoai môn (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div>
+                  <p class="font-medium">Sữa tươi trân châu đường đen</p>
+                  <p class="text-xs text-gray-500">M: 25k — L: 28k</p>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button onclick="openOrderModal('Sữa tươi trân châu đường đen')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa tươi trân châu đường đen (M)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
+                  <button onclick="addToCart('Sữa tươi trân châu đường đen (L)', 28000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. SỮA CHUA -->
+          <div>
+            <h3 class="font-semibold text-green-700 mb-2">🍶 5. SỮA CHUA</h3>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Sữa chua hũ</p><p class="text-xs text-gray-500">14k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Sữa chua hũ')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa chua hũ', 14000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Sữa chua đá</p><p class="text-xs text-gray-500">22k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Sữa chua đá')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa chua đá', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Sữa chua Việt Quất</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Sữa chua Việt Quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa chua Việt Quất', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Sữa chua Dâu</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Sữa chua Dâu')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa chua Dâu', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Sữa chua nếp cẩm</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Sữa chua nếp cẩm')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa chua nếp cẩm', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. SINH TỐ -->
+          <div>
+            <h3 class="font-semibold text-green-700 mb-2">🍓 6. SINH TỐ</h3>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Sinh tố xoài</p><p class="text-xs text-gray-500">30k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Sinh tố xoài')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sinh tố xoài', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Sinh tố mãng cầu</p><p class="text-xs text-gray-500">30k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Sinh tố mãng cầu')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sinh tố mãng cầu', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Sinh tố dâu</p><p class="text-xs text-gray-500">30k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Sinh tố dâu')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sinh tố dâu', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Sinh tố việt quất</p><p class="text-xs text-gray-500">30k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Sinh tố việt quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sinh tố việt quất', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. NƯỚC ÉP -->
+          <div>
+            <h3 class="font-semibold text-green-700 mb-2">🍈 7. NƯỚC ÉP</h3>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <!-- Các món nước ép -->
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Chanh đá</p><p class="text-xs text-gray-500">22k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Chanh đá')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Chanh đá', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Nước ép thơm</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Nước ép thơm')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Nước ép thơm', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Nước ép cà rốt</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Nước ép cà rốt')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Nước ép cà rốt', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Nước ép cóc</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Nước ép cóc')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Nước ép cóc', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Chanh dây</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Chanh dây')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Chanh dây', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Nước ép cam</p><p class="text-xs text-gray-500">28k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Nước ép cam')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Nước ép cam', 28000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Nước ép mix vị</p><p class="text-xs text-gray-500">30k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Nước ép mix vị')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Nước ép mix vị', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. ĐÁ XAY -->
+          <div>
+            <h3 class="font-semibold text-green-700 mb-2">🧊 8. ĐÁ XAY</h3>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Chanh tuyết</p><p class="text-xs text-gray-500">30k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Chanh tuyết')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Chanh tuyết', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Matcha đá xay</p><p class="text-xs text-gray-500">30k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Matcha đá xay')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Matcha đá xay', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Socola đá xay</p><p class="text-xs text-gray-500">30k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Socola đá xay')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Socola đá xay', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. SODA -->
+          <div>
+            <h3 class="font-semibold text-green-700 mb-2">🥤 9. SODA</h3>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Soda Blue Sky</p><p class="text-xs text-gray-500">22k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Soda Blue Sky')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Soda Blue Sky', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Soda bạc hà</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Soda bạc hà')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Soda bạc hà', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Soda dâu</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Soda dâu')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Soda dâu', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Soda việt quất</p><p class="text-xs text-gray-500">25k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Soda việt quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Soda việt quất', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. NƯỚC ĐÓNG CHAI -->
+          <div>
+            <h3 class="font-semibold text-green-700 mb-2">🧃 10. NƯỚC ĐÓNG CHAI</h3>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Bò húc</p><p class="text-xs text-gray-500">22k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Bò húc')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Bò húc', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Sting</p><p class="text-xs text-gray-500">22k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Sting')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sting', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Pepsi</p><p class="text-xs text-gray-500">15k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Pepsi')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Pepsi', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Khoáng</p><p class="text-xs text-gray-500">15k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Khoáng')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Khoáng', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Hạt dừa</p><p class="text-xs text-gray-500">15k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Hạt dừa')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Hạt dừa', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
+                <div><p class="font-medium">Hạt hướng dương</p><p class="text-xs text-gray-500">15k</p></div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <button onclick="openOrderModal('Hạt hướng dương')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Hạt hướng dương', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       <div id="thongbao" class="card p-4 hidden">
         <h2 class="text-lg font-bold text-green-700 mb-3">📢 Tin tức - Thông báo</h2>
         <div id="newsList" class="space-y-3 text-sm text-gray-500">Đang trong quá trình hoàn thiện...</div>
       </div>
-
-      <!-- ĐÃ XOÁ TOÀN BỘ PHẦN ALBUM ẢNH -->
 
       <div id="thanhvien" class="card p-4 hidden">
         <h2 class="text-lg font-bold text-green-700 mb-3">📋 Danh sách thành viên</h2>
@@ -239,7 +737,60 @@
       <input id="upAddress" class="border rounded p-2 w-full mb-3 text-sm" placeholder="Địa chỉ" />
       <div class="flex justify-end gap-2">
         <button onclick="closeUpdateModal()" class="text-gray-600 text-sm">Hủy</button>
-        <button onclick="saveUserInfo()" class="bg-green-600 text-white px-3 py-1 rounded text-sm">Lưu</button>
+        <button onclick="saveUserInfo()" class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700 transition">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== MODAL GIỎ HÀNG ======== -->
+  <div id="cartModal" class="modal">
+    <div class="bg-white rounded-xl p-5 w-11/12 max-w-lg shadow-xl">
+      <h3 class="text-lg font-semibold text-green-700 mb-3 flex items-center gap-2">
+        🛒 Giỏ hàng của bạn
+      </h3>
+      <div id="cartItems" class="max-h-72 overflow-y-auto text-sm space-y-2">
+        <!-- Render bằng JS -->
+      </div>
+      <div class="mt-3 flex justify-between text-sm font-semibold text-gray-700">
+        <span>Tổng cộng:</span>
+        <span id="cartTotal">0đ</span>
+      </div>
+      <div class="mt-4 flex flex-wrap justify-between gap-2 text-sm">
+        <button onclick="clearCart()" class="px-3 py-1.5 rounded border border-red-400 text-red-500 hover:bg-red-50 transition">
+          Xóa hết
+        </button>
+        <div class="flex gap-2 ml-auto">
+          <button onclick="closeCartModal()" class="px-3 py-1.5 rounded border border-gray-300 text-gray-700 hover:bg-gray-50 transition">
+            Đóng
+          </button>
+          <button onclick="openOrderFromCart()" class="px-3 py-1.5 rounded bg-green-600 text-white hover:bg-green-700 transition">
+            Đặt hàng
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== MODAL ĐẶT HÀNG ======== -->
+  <div id="orderModal" class="modal">
+    <div class="bg-white rounded-xl p-5 w-11/12 max-w-md shadow-xl">
+      <h3 class="text-lg font-semibold text-green-700 mb-3">📦 Thông tin đặt hàng</h3>
+      <p class="text-sm mb-2 text-gray-700">
+        Món / đơn hàng: <b id="orderItemName">...</b>
+      </p>
+      <div class="space-y-2 text-sm">
+        <input id="orderCustomerName" class="border rounded w-full p-2" placeholder="Họ và tên" />
+        <input id="orderCustomerPhone" class="border rounded w-full p-2" placeholder="Số điện thoại" />
+        <textarea id="orderCustomerAddress" class="border rounded w-full p-2" rows="2" placeholder="Địa chỉ giao hàng"></textarea>
+        <textarea id="orderNote" class="border rounded w-full p-2" rows="2" placeholder="Ghi chú (ví dụ: ít đá, ít ngọt...)"></textarea>
+      </div>
+      <div class="flex justify-end gap-2 mt-4 text-sm">
+        <button onclick="closeOrderModal()" class="px-3 py-1.5 rounded border border-gray-300 text-gray-700 hover:bg-gray-50 transition">
+          Hủy
+        </button>
+        <button onclick="submitOrder()" class="px-3 py-1.5 rounded bg-green-600 text-white hover:bg-green-700 transition">
+          Gửi đơn
+        </button>
       </div>
     </div>
   </div>
@@ -350,7 +901,7 @@
         name, email, content, created: serverTimestamp()
       });
       gopyText.value = "";
-        alert("Góp ý đã gửi thành công!");
+      alert("Góp ý đã gửi thành công!");
     };
 
     // --- LẮNG NGHE GÓP Ý ---
@@ -463,16 +1014,20 @@
       const thongbao = document.getElementById('thongbao');
       const thanhvien = document.getElementById('thanhvien');
       const gioithieu = document.getElementById('gioithieu');
+      const sanpham = document.getElementById('sanpham');
 
       thongbao.classList.add('hidden');
       thanhvien.classList.add('hidden');
       gioithieu.classList.add('hidden');
+      sanpham.classList.add('hidden');
 
       if (section === 'thanhvien') {
         thanhvien.classList.remove('hidden');
         loadMembers();
       } else if (section === 'gioithieu') {
         gioithieu.classList.remove('hidden');
+      } else if (section === 'sanpham') {
+        sanpham.classList.remove('hidden');
       } else {
         thongbao.classList.remove('hidden');
       }
@@ -507,11 +1062,213 @@
 
   </script>
 
-  <!-- ⭐⭐⭐ HÀM GIỎ HÀNG (RẤT NHỎ – KHÔNG ĐỤNG BẤT CỨ CODE GỐC NÀO) ⭐⭐⭐ -->
+  <!-- ⭐⭐⭐ HÀM GIỎ HÀNG & ĐẶT HÀNG ⭐⭐⭐ -->
   <script>
-    window.openCart = function() {
-      alert("Giỏ hàng hiện chưa có sản phẩm!");
+    let cart = [];
+    let currentOrderSource = "single"; // 'single' | 'cart'
+    let currentOrderItem = "";
+
+    function formatCurrency(v) {
+      if (!v) return "0đ";
+      return v.toLocaleString("vi-VN") + "đ";
+    }
+
+    function loadCart() {
+      try {
+        const data = localStorage.getItem("namcoffee_cart");
+        cart = data ? JSON.parse(data) : [];
+      } catch (e) {
+        cart = [];
+      }
+      updateCartCount();
+      renderCart();
+    }
+
+    function saveCart() {
+      localStorage.setItem("namcoffee_cart", JSON.stringify(cart));
+      updateCartCount();
+      renderCart();
+    }
+
+    function updateCartCount() {
+      const countEl = document.getElementById("cartCount");
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      if (countEl) countEl.textContent = totalItems;
+    }
+
+    window.addToCart = function(name, price) {
+      const existing = cart.find(i => i.name === name && i.price === price);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      saveCart();
+      alert(`Đã thêm "${name}" vào giỏ hàng!`);
     };
+
+    function renderCart() {
+      const container = document.getElementById("cartItems");
+      const totalEl = document.getElementById("cartTotal");
+      if (!container) return;
+      container.innerHTML = "";
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p class="text-gray-500 text-sm">Giỏ hàng hiện đang trống.</p>';
+        if (totalEl) totalEl.textContent = "0đ";
+        return;
+      }
+
+      let total = 0;
+      cart.forEach((item, index) => {
+        const lineTotal = item.price * item.qty;
+        total += lineTotal;
+        const div = document.createElement("div");
+        div.className = "flex items-center justify-between border rounded-lg px-3 py-2 bg-gray-50";
+        div.innerHTML = `
+          <div class="text-sm">
+            <div class="font-medium text-gray-800">${item.name}</div>
+            <div class="text-xs text-gray-500">${formatCurrency(item.price)} x ${item.qty} = <b>${formatCurrency(lineTotal)}</b></div>
+          </div>
+          <div class="flex items-center gap-2 text-xs">
+            <button onclick="decreaseQty(${index})" class="px-2 py-1 rounded border border-gray-300 hover:bg-gray-100">-</button>
+            <button onclick="increaseQty(${index})" class="px-2 py-1 rounded border border-gray-300 hover:bg-gray-100">+</button>
+            <button onclick="removeItem(${index})" class="px-2 py-1 rounded border border-red-300 text-red-500 hover:bg-red-50">Xóa</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+
+      if (totalEl) totalEl.textContent = formatCurrency(total);
+    }
+
+    window.decreaseQty = function(index) {
+      if (!cart[index]) return;
+      cart[index].qty -= 1;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      saveCart();
+    };
+
+    window.increaseQty = function(index) {
+      if (!cart[index]) return;
+      cart[index].qty += 1;
+      saveCart();
+    };
+
+    window.removeItem = function(index) {
+      if (!cart[index]) return;
+      if (!confirm("Xóa món này khỏi giỏ hàng?")) return;
+      cart.splice(index, 1);
+      saveCart();
+    };
+
+    window.clearCart = function() {
+      if (cart.length === 0) return;
+      if (!confirm("Bạn có chắc muốn xóa hết giỏ hàng?")) return;
+      cart = [];
+      saveCart();
+    };
+
+    // Mở / đóng modal giỏ hàng
+    window.openCart = function() {
+      const modal = document.getElementById("cartModal");
+      if (modal) modal.style.display = "flex";
+      renderCart();
+    };
+
+    function closeCartModal() {
+      const modal = document.getElementById("cartModal");
+      if (modal) modal.style.display = "none";
+    }
+    window.closeCartModal = closeCartModal;
+
+    // Modal đặt hàng
+    window.openOrderModal = function(itemName) {
+      currentOrderSource = "single";
+      currentOrderItem = itemName;
+      const orderNameEl = document.getElementById("orderItemName");
+      if (orderNameEl) orderNameEl.textContent = itemName;
+      const modal = document.getElementById("orderModal");
+      if (modal) modal.style.display = "flex";
+    };
+
+    window.openOrderFromCart = function() {
+      if (cart.length === 0) {
+        alert("Giỏ hàng đang trống, vui lòng thêm sản phẩm trước!");
+        return;
+      }
+      currentOrderSource = "cart";
+      currentOrderItem = "Giỏ hàng (" + cart.length + " sản phẩm)";
+      const orderNameEl = document.getElementById("orderItemName");
+      if (orderNameEl) orderNameEl.textContent = currentOrderItem;
+      const modal = document.getElementById("orderModal");
+      if (modal) modal.style.display = "flex";
+    };
+
+    window.closeOrderModal = function() {
+      const modal = document.getElementById("orderModal");
+      if (modal) modal.style.display = "none";
+
+      // reset form
+      document.getElementById("orderCustomerName").value = "";
+      document.getElementById("orderCustomerPhone").value = "";
+      document.getElementById("orderCustomerAddress").value = "";
+      document.getElementById("orderNote").value = "";
+    };
+
+    window.submitOrder = function() {
+      const name = document.getElementById("orderCustomerName").value.trim();
+      const phone = document.getElementById("orderCustomerPhone").value.trim();
+      const address = document.getElementById("orderCustomerAddress").value.trim();
+      const note = document.getElementById("orderNote").value.trim();
+
+      if (!name || !phone || !address) {
+        alert("Vui lòng nhập đầy đủ Họ tên, Số điện thoại và Địa chỉ!");
+        return;
+      }
+
+      let orderDetail = "";
+      if (currentOrderSource === "single") {
+        orderDetail = currentOrderItem;
+      } else {
+        orderDetail = cart.map(i => `${i.name} (${i.qty} x ${formatCurrency(i.price)})`).join("; ");
+      }
+
+      const message =
+        `ĐƠN HÀNG MỚI\n` +
+        `Món: ${orderDetail}\n` +
+        `Khách: ${name}\n` +
+        `SĐT: ${phone}\n` +
+        `Địa chỉ: ${address}\n` +
+        (note ? `Ghi chú: ${note}\n` : "");
+
+      console.log("Order:", message);
+      alert("Cảm ơn bạn! Đơn hàng đã được ghi nhận. Nam Coffee sẽ liên hệ xác nhận trong thời gian sớm nhất.");
+
+      if (currentOrderSource === "cart") {
+        cart = [];
+        saveCart();
+        closeCartModal();
+      }
+      closeOrderModal();
+    };
+
+    // Đóng modal khi bấm nền tối
+    window.addEventListener("click", function(e) {
+      const cartModal = document.getElementById("cartModal");
+      const orderModal = document.getElementById("orderModal");
+      if (e.target === cartModal) {
+        closeCartModal();
+      }
+      if (e.target === orderModal) {
+        closeOrderModal();
+      }
+    });
+
+    // Khởi tạo giỏ hàng khi load trang
+    window.addEventListener("load", loadCart);
   </script>
 
 </body>
