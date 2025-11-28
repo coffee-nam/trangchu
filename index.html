@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>NAM CÀ PHÊ-62 Trần Thị Lý</title>
+  <title>NAM CÀ PHÊ - 62 Trần Thị Lý</title>
 
   <!-- TailwindCSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -89,32 +89,43 @@
 <body>
 
   <!-- ======== BANNER ======== -->
-<header class="relative overflow-hidden font-[Montserrat,sans-serif]">
-  <img src="https://upanhnhanh.com/df05732c49f6ae1d201a0c63e13a8aaf"
-       alt="Banner Nam Coffee"
-       class="w-full h-40 md:h-52 object-cover brightness-75">
+  <header class="relative overflow-hidden font-[Montserrat,sans-serif]">
+    <img src="https://upanhnhanh.com/df05732c49f6ae1d201a0c63e13a8aaf"
+         alt="Banner Nam Coffee"
+         class="w-full h-40 md:h-52 object-cover brightness-75">
 
-  <!-- Font chữ đẹp -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
-</header>
+    <!-- Font chữ đẹp -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+  </header>
 
   <!-- ======== MENU ======== -->
   <nav class="bg-green-600 text-white shadow-sm sticky top-0 z-40">
     <div class="container-max mx-auto px-4">
       <ul class="flex flex-wrap gap-3 md:gap-6 py-3 font-semibold text-sm items-center">
-        <li><a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">Giới thiệu</a></li>
-        <li><a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Thực Đơn</a></li>
-        <li><a href="#gopy" class="hover:underline" onclick="showSection('thongbao')">Form góp ý</a></li>
-        <li><a href="#lienhe" class="hover:underline" onclick="showSection('thongbao')">Liên hệ</a></li>
-
-        <!-- Không còn nút Thành viên -->
-
-        <li id="capnhatMenu" class="hidden">
-          <a href="#" onclick="openUpdateModal()" class="hover:underline">Cập nhật thông tin</a>
+        <li>
+          <a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">
+            Giới thiệu
+          </a>
         </li>
-        <!-- Nút danh sách đơn hàng (chỉ admin mới được bật lên) -->
+        <li>
+          <a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">
+            Thực Đơn
+          </a>
+        </li>
+        <li>
+          <a href="#gopySection" class="hover:underline">
+            Form góp ý
+          </a>
+        </li>
+        <li>
+          <a href="#lienhe" class="hover:underline">
+            Liên hệ
+          </a>
+        </li>
+
+        <!-- Nút danh sách đơn hàng (chỉ admin mới thấy) -->
         <li id="orderListMenu" class="hidden">
-          <a href="#orders" class="hover:underline" onclick="showSection('orders')">
+          <a href="#ordersSection" class="hover:underline" onclick="showSection('orders')">
             Danh sách khách đặt hàng
           </a>
         </li>
@@ -126,14 +137,13 @@
           (<span id="cartCount">0</span>)
         </li>
         <!-- ⭐⭐⭐ END GIỎ HÀNG ⭐⭐⭐ -->
-
       </ul>
     </div>
   </nav>
 
   <!-- ======== DÒNG CHỮ CHẠY NGANG ======== -->
   <div class="banner-marquee w-full">
-    <span>🌿 Nam Cà Phê ! Nơi thư giản lý tưởng, phục vụ chu đáo, mọi góp ý xin quý khách vui lòng gọi hoặc nhắn tin Zalo : 0905.638.959. 🌿</span>
+    <span>🌿 Nam Cà Phê ! Nơi thư giãn lý tưởng, phục vụ chu đáo, mọi góp ý xin quý khách vui lòng gọi hoặc nhắn tin Zalo : 0905.638.959. 🌿</span>
   </div>
 
   <!-- ======== MAIN ======== -->
@@ -141,23 +151,31 @@
 
     <!-- ==== CỘT TRÁI ==== -->
     <aside>
-      <!-- Đăng nhập (CHỈ ADMIN) -->
+      <!-- Đăng nhập (chỉ Admin) -->
       <div id="loginBox" class="card p-3">
-        <h3 class="font-semibold text-green-700 mb-2 text-sm">🔐 Đăng nhập Admin</h3>
+        <h3 class="font-semibold text-green-700 mb-2 text-sm">🔐 Đăng nhập quản trị</h3>
+        <p class="text-xs text-gray-500 mb-2">
+          Chỉ dành cho Admin Nam Cà Phê.
+        </p>
         <input id="loginEmail" type="email" placeholder="Email admin" class="w-full border p-1.5 rounded mb-1" />
         <input id="loginPass" type="password" placeholder="Mật khẩu" class="w-full border p-1.5 rounded mb-2" />
         <div class="flex items-center mb-2">
           <input type="checkbox" id="rememberMe" class="mr-2">
           <label for="rememberMe" class="text-xs text-gray-700">Lưu thông tin đăng nhập</label>
         </div>
-        <button onclick="doLogin()" class="w-full bg-green-600 hover:bg-green-700 transition text-white py-1.5 rounded text-sm">Đăng nhập</button>
-        <!-- Đã bỏ nút Quên mật khẩu -->
+        <button onclick="doLogin()" class="w-full bg-green-600 hover:bg-green-700 transition text-white py-1.5 rounded text-sm">
+          Đăng nhập
+        </button>
       </div>
 
-      <!-- Đã đăng nhập -->
+      <!-- Đã đăng nhập (Admin) -->
       <div id="loggedBox" class="card p-3 mt-3 hidden text-sm">
-        <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">Xin chào <b>Admin</b></div>
-        <button onclick="doLogout()" class="w-full bg-red-500 hover:bg-red-600 transition text-white py-1.5 rounded">Đăng xuất</button>
+        <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">
+          Xin chào <b>Admin</b>
+        </div>
+        <button onclick="doLogout()" class="w-full bg-red-500 hover:bg-red-600 transition text-white py-1.5 rounded">
+          Đăng xuất
+        </button>
       </div>
 
       <!-- Form góp ý (KHÁCH KHÔNG CẦN ĐĂNG NHẬP) -->
@@ -165,11 +183,11 @@
         <h4 class="font-semibold text-green-700 mb-2">💬 Form góp ý</h4>
         <div id="gopyFormArea">
           <input id="gopyName" class="border rounded p-2 w-full mb-2 text-sm" placeholder="Họ và tên" />
-          <input id="gopyPhone" class="border rounded p-2 w-full mb-2 text-sm" placeholder="Số điện thoại" />
           <textarea id="gopyText" rows="3" placeholder="Nội dung góp ý..." class="w-full border rounded p-2 text-sm"></textarea>
-          <button onclick="sendGopy()" class="mt-2 bg-green-600 hover:bg-green-700 transition text-white px-4 py-1.5 rounded text-sm w-full">Gửi góp ý</button>
+          <button onclick="sendGopy()" class="mt-2 bg-green-600 hover:bg-green-700 transition text-white px-4 py-1.5 rounded text-sm w-full">
+            Gửi góp ý
+          </button>
         </div>
-        <p id="loginToComment" class="hidden text-gray-500 text-xs"></p>
       </div>
     </aside>
 
@@ -178,12 +196,22 @@
 
       <!-- ======= GIỚI THIỆU ======= -->
       <div id="gioithieu" class="card p-4">
-        <h2 class="text-lg font-bold text-green-700 mb-3">🌟 NAM CÀ PHÊ – Không gian thưởng thức cà phê đẳng cấp tại Đà Nẵng 🌟</h2>
-        <p>NAM CÀ PHÊ, tọa lạc tại 62 Trần Thị Lý, xã Thăng Bình, TP. Đà Nẵng, là điểm đến lý tưởng cho những ai yêu thích cà phê chất lượng và trải nghiệm không gian tinh tế. Chúng tôi không chỉ mang đến những ly cà phê thơm ngon, đậm đà, mà còn kiến tạo một không gian thư giãn, rộng rãi, nơi mọi chi tiết đều được chăm chút tỉ mỉ để đem lại cảm giác dễ chịu và thanh thoát.</p>
-        <p>Với thiết kế hiện đại, tinh tế, kết hợp với view đẹp và thoáng đãng, NAM CÀ PHÊ là nơi lý tưởng để tận hưởng những khoảnh khắc bình yên, gặp gỡ bạn bè, họp nhóm, làm việc hay đơn giản là thưởng thức một tách cà phê đậm vị giữa nhịp sống sôi động của thành phố. Mỗi góc nhỏ trong quán đều được bố trí để tạo nên cảm giác thư thái và cảm hứng sáng tạo, từ ánh sáng tự nhiên chan hòa đến nội thất ấm cúng, sang trọng.</p>
-        <p>✨ Chúng tôi hân hạnh thông báo khai trương vào ngày 29/11/2025.<br>
-        NAM CÀ PHÊ mong muốn trở thành điểm đến không chỉ của những tín đồ cà phê, mà còn của những ai tìm kiếm một không gian trải nghiệm văn hóa cà phê độc đáo tại Đà Nẵng. Đội ngũ nhân viên tận tâm, chuyên nghiệp cùng thực đơn đa dạng, phong phú sẽ đảm bảo mỗi lần ghé thăm là một trải nghiệm đáng nhớ.</p>
-        <p>Hãy đến NAM CÀ PHÊ – nơi hương vị tinh túy của cà phê hòa quyện cùng không gian thanh lịch, để mỗi khoảnh khắc của bạn trở nên đặc biệt và đầy cảm xúc. Chúng tôi rất mong được đón tiếp và chia sẻ cùng bạn những trải nghiệm tuyệt vời nhất.</p>
+        <h2 class="text-lg font-bold text-green-700 mb-3">
+          🌟 NAM CÀ PHÊ – Không gian thưởng thức cà phê đẳng cấp tại Đà Nẵng 🌟
+        </h2>
+        <p>
+          NAM CÀ PHÊ, tọa lạc tại 62 Trần Thị Lý, xã Thăng Bình, TP. Đà Nẵng, là điểm đến lý tưởng cho những ai yêu thích cà phê chất lượng và trải nghiệm không gian tinh tế. Chúng tôi không chỉ mang đến những ly cà phê thơm ngon, đậm đà, mà còn kiến tạo một không gian thư giãn, rộng rãi, nơi mọi chi tiết đều được chăm chút tỉ mỉ để đem lại cảm giác dễ chịu và thanh thoát.
+        </p>
+        <p class="mt-2">
+          Với thiết kế hiện đại, tinh tế, kết hợp với view đẹp và thoáng đãng, NAM CÀ PHÊ là nơi lý tưởng để tận hưởng những khoảnh khắc bình yên, gặp gỡ bạn bè, họp nhóm, làm việc hay đơn giản là thưởng thức một tách cà phê đậm vị giữa nhịp sống sôi động của thành phố. Mỗi góc nhỏ trong quán đều được bố trí để tạo nên cảm giác thư thái và cảm hứng sáng tạo, từ ánh sáng tự nhiên chan hòa đến nội thất ấm cúng, sang trọng.
+        </p>
+        <p class="mt-2">
+          ✨ Chúng tôi hân hạnh thông báo khai trương vào ngày 29/11/2025.<br>
+          NAM CÀ PHÊ mong muốn trở thành điểm đến không chỉ của những tín đồ cà phê, mà còn của những ai tìm kiếm một không gian trải nghiệm văn hóa cà phê độc đáo tại Đà Nẵng. Đội ngũ nhân viên tận tâm, chuyên nghiệp cùng thực đơn đa dạng, phong phú sẽ đảm bảo mỗi lần ghé thăm là một trải nghiệm đáng nhớ.
+        </p>
+        <p class="mt-2">
+          Hãy đến NAM CÀ PHÊ – nơi hương vị tinh túy của cà phê hòa quyện cùng không gian thanh lịch, để mỗi khoảnh khắc của bạn trở nên đặc biệt và đầy cảm xúc. Chúng tôi rất mong được đón tiếp và chia sẻ cùng bạn những trải nghiệm tuyệt vời nhất.
+        </p>
       </div>
 
       <!-- ======= THỰC ĐƠN / MENU NƯỚC ======= -->
@@ -688,6 +716,7 @@
         </div>
       </div>
 
+      <!-- ======= TIN TỨC (để sẵn, hiện tại chưa dùng) ======= -->
       <div id="thongbao" class="card p-4 hidden">
         <h2 class="text-lg font-bold text-green-700 mb-3">📢 Tin tức - Thông báo</h2>
         <div id="newsList" class="space-y-3 text-sm text-gray-500">Đang trong quá trình hoàn thiện...</div>
@@ -703,11 +732,14 @@
         </div>
       </div>
 
-      <!-- ======= DANH SÁCH GÓP Ý (CHỈ ADMIN THẤY) ======= -->
-      <div id="gopyListCard" class="card p-4 hidden">
-        <h2 class="text-lg font-bold text-green-700 mb-3">📜 Danh sách góp ý</h2>
+      <!-- ======= DANH SÁCH GÓP Ý (ADMIN) ======= -->
+      <div id="gopyAdminSection" class="card p-4 hidden">
+        <h2 class="text-lg font-bold text-green-700 mb-3">
+          📜 Danh sách góp ý (Admin)
+        </h2>
         <div id="gopyList" class="text-sm space-y-2"></div>
       </div>
+
     </section>
 
     <!-- ==== CỘT PHẢI ==== -->
@@ -734,21 +766,6 @@
   <footer class="container-max mx-auto px-4 py-4 text-center text-xs text-gray-600">
     © 2025 Nam Cà Phê  — Thiết kế bởi <b>Mr.Thiên</b>
   </footer>
-
-  <!-- ======== FORM CẬP NHẬT THÔNG TIN (ADMIN) ======== -->
-  <div id="updateModal" class="modal">
-    <div class="bg-white rounded-lg p-6 w-80">
-      <h3 class="text-lg font-semibold mb-3 text-green-700">📝 Cập nhật thông tin</h3>
-      <input id="upName" class="border rounded p-2 w-full mb-2 text-sm" placeholder="Họ và tên" />
-      <input id="upPhone" class="border rounded p-2 w-full mb-2 text-sm" placeholder="Số điện thoại" />
-      <input id="upBirth" class="border rounded p-2 w-full mb-2 text-sm" placeholder="Ngày sinh (dd/mm/yyyy)" />
-      <input id="upAddress" class="border rounded p-2 w-full mb-3 text-sm" placeholder="Địa chỉ" />
-      <div class="flex justify-end gap-2">
-        <button onclick="closeUpdateModal()" class="text-gray-600 text-sm">Hủy</button>
-        <button onclick="saveUserInfo()" class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700 transition">Lưu</button>
-      </div>
-    </div>
-  </div>
 
   <!-- ======== MODAL GIỎ HÀNG ======== -->
   <div id="cartModal" class="modal">
@@ -811,12 +828,12 @@
   <!-- ======== FIREBASE SCRIPT (MODULE) ======== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { 
-      getAuth, signInWithEmailAndPassword, 
-      signOut, onAuthStateChanged 
+    import {
+      getAuth, signInWithEmailAndPassword,
+      signOut, onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { 
-      getFirestore, doc, setDoc, addDoc, deleteDoc, updateDoc,
+    import {
+      getFirestore, doc, addDoc, deleteDoc, updateDoc,
       collection, serverTimestamp, onSnapshot, query, orderBy
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -832,100 +849,110 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-
-    // ĐỔI EMAIL ADMIN Ở ĐÂY NẾU CẦN
     const adminEmail = "thien.miraeasset@gmail.com";
-    window.adminEmail = adminEmail; // cho script ngoài dùng
+    window.adminEmail = adminEmail; // cho script ngoài dùng nếu cần
 
     let currentUser = null;
+    let ordersUnsub = null;
 
-    // --- ĐĂNG NHẬP (CHỈ ADMIN) ---
+    // ========== ĐĂNG NHẬP (CHỈ ADMIN) ==========
     window.doLogin = async function() {
       try {
-        const userCred = await signInWithEmailAndPassword(auth, loginEmail.value, loginPass.value);
+        const email = document.getElementById("loginEmail").value.trim();
+        const pass = document.getElementById("loginPass").value.trim();
+
+        if (!email || !pass) {
+          alert("Vui lòng nhập Email và Mật khẩu!");
+          return;
+        }
+
+        const userCred = await signInWithEmailAndPassword(auth, email, pass);
 
         if (userCred.user.email !== adminEmail) {
           await signOut(auth);
-          alert("Chỉ tài khoản ADMIN mới được đăng nhập!");
+          alert("Chỉ Admin Nam Cà Phê mới được phép đăng nhập.");
           return;
         }
 
         currentUser = userCred.user;
 
-        if (rememberMe.checked) {
-          localStorage.setItem("savedEmail", loginEmail.value);
-          localStorage.setItem("savedPass", loginPass.value);
+        if (document.getElementById("rememberMe").checked) {
+          localStorage.setItem("savedEmail", email);
+          localStorage.setItem("savedPass", pass);
         } else {
           localStorage.removeItem("savedEmail");
           localStorage.removeItem("savedPass");
         }
 
         localStorage.setItem("userEmail", currentUser.email);
-        localStorage.setItem("userName", "Admin Nam Cà Phê");
 
-        loginBox.classList.add("hidden");
-        loggedBox.classList.remove("hidden");
-        loggedInfo.innerHTML = `Xin chào <b>Admin Nam Cà Phê</b>`;
-        capnhatMenu.classList.remove("hidden");
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("loggedBox").classList.remove("hidden");
+        document.getElementById("loggedInfo").innerHTML = `Xin chào <b>Admin</b>`;
 
-        checkFormVisibility();
         enableAdminUI(currentUser.email);
+
       } catch (e) {
         console.error(e);
-        alert("Sai thông tin đăng nhập!");
+        alert("Đăng nhập thất bại! Vui lòng kiểm tra lại thông tin.");
       }
     };
 
-    // --- ĐĂNG XUẤT ---
+    // ========== ĐĂNG XUẤT ==========
     window.doLogout = async function() {
       await signOut(auth);
       currentUser = null;
-      localStorage.clear();
-      loginBox.classList.remove("hidden");
-      loggedBox.classList.add("hidden");
-      capnhatMenu.classList.add("hidden");
+      document.getElementById("loginBox").classList.remove("hidden");
+      document.getElementById("loggedBox").classList.add("hidden");
+
+      localStorage.removeItem("userEmail");
+      localStorage.removeItem("savedEmail");
+      localStorage.removeItem("savedPass");
+
       enableAdminUI("");
-      checkFormVisibility();
     };
 
-    // --- GÓP Ý ---
+    // ========== GÓP Ý ==========
     window.sendGopy = async function() {
       const name = document.getElementById("gopyName").value.trim();
-      const phone = document.getElementById("gopyPhone").value.trim();
       const content = document.getElementById("gopyText").value.trim();
 
-      if (!name || !phone || !content) {
-        alert("Vui lòng nhập đầy đủ Họ tên, Số điện thoại và Nội dung góp ý!");
+      if (!name || !content) {
+        alert("Vui lòng nhập đầy đủ Họ tên và Nội dung góp ý!");
         return;
       }
 
       await addDoc(collection(db, "gopy"), {
         name,
-        phone,
         content,
         created: serverTimestamp()
       });
 
       document.getElementById("gopyName").value = "";
-      document.getElementById("gopyPhone").value = "";
       document.getElementById("gopyText").value = "";
 
       alert(`Nam Cà Phê xin chân thành ghi nhận góp ý của Anh/Chị ${name}. Cảm ơn bạn đã dành thời gian chia sẻ, chúng tôi sẽ xem xét và cải thiện dịch vụ để phục vụ bạn tốt hơn trong những lần ghé sau!`);
     };
 
-    // --- LẮNG NGHE GÓP Ý (ADMIN THẤY LIST) ---
+    // Lắng nghe danh sách góp ý (hiển thị trong khu vực Admin)
     const qGopy = query(collection(db, "gopy"), orderBy("created", "desc"));
     onSnapshot(qGopy, (snapshot) => {
       const gopyList = document.getElementById("gopyList");
       if (!gopyList) return;
+
       gopyList.innerHTML = "";
+      if (snapshot.empty) {
+        gopyList.innerHTML = `<p class="text-gray-500 text-sm">Chưa có góp ý nào.</p>`;
+        return;
+      }
+
       snapshot.forEach((docu) => {
         const d = docu.data();
         const el = document.createElement("div");
         el.className = "border rounded p-2 bg-gray-50";
         el.innerHTML = `
           <div class="text-gray-700 text-sm">
-            <b>${d.name || "Khách"}</b> - ${d.phone || "Không rõ"}<br/>
+            <b>${d.name || "Khách"}</b><br/>
             ${d.content || ""}
           </div>
           ${localStorage.getItem("userEmail") === adminEmail
@@ -937,37 +964,19 @@
       });
     });
 
-    // --- XÓA GÓP Ý (ADMIN) ---
+    // Xóa góp ý (Admin)
     window.deleteGopy = async function(id) {
       const userEmail = localStorage.getItem("userEmail");
-      if (userEmail !== adminEmail) return alert("Chỉ admin mới được xóa góp ý!");
+      if (userEmail !== adminEmail) {
+        alert("Chỉ admin mới được xóa góp ý!");
+        return;
+      }
       if (!confirm("Bạn có chắc muốn xóa góp ý này không?")) return;
       await deleteDoc(doc(db, "gopy", id));
       alert("Đã xóa góp ý!");
     };
 
-    // Luôn cho phép góp ý, không cần đăng nhập
-    function checkFormVisibility() {
-      gopyFormArea.classList.remove("hidden");
-      loginToComment.classList.add("hidden");
-    }
-
-    window.openUpdateModal = function() { updateModal.style.display = "flex"; };
-    window.closeUpdateModal = function() { updateModal.style.display = "none"; };
-
-    window.saveUserInfo = async function() {
-      const u = auth.currentUser;
-      if (!u) return alert("Bạn chưa đăng nhập!");
-      await setDoc(doc(db, "users", u.uid), {
-        name: upName.value, phone: upPhone.value,
-        birth: upBirth.value, address: upAddress.value,
-        email: u.email, approved: true
-      }, { merge: true });
-      alert("Đã lưu thông tin!");
-      closeUpdateModal();
-    };
-
-    // === LƯU ĐƠN HÀNG XUỐNG FIRESTORE ===
+    // ========== ĐƠN HÀNG ==========
     window.saveOrderToFirestore = async function(orderData) {
       try {
         await addDoc(collection(db, "orders"), {
@@ -981,7 +990,6 @@
       }
     };
 
-    // === CẬP NHẬT TRẠNG THÁI ĐƠN HÀNG ===
     window.updateOrderStatus = async function(orderId, newStatus) {
       const email = localStorage.getItem("userEmail");
       if (email !== adminEmail) {
@@ -996,9 +1004,6 @@
       }
     };
 
-    // === LẮNG NGHE DANH SÁCH ĐƠN HÀNG (CHỈ ADMIN) ===
-    let ordersUnsub = null;
-
     function startOrdersListener() {
       const ordersListEl = document.getElementById("ordersList");
       if (!ordersListEl) return;
@@ -1008,11 +1013,7 @@
         ordersUnsub = null;
       }
 
-      const qOrders = query(
-        collection(db, "orders"),
-        orderBy("created", "desc")
-      );
-
+      const qOrders = query(collection(db, "orders"), orderBy("created", "desc"));
       ordersUnsub = onSnapshot(qOrders, (snapshot) => {
         if (snapshot.empty) {
           ordersListEl.innerHTML = `<p class="text-gray-500 text-sm">Chưa có đơn hàng nào.</p>`;
@@ -1065,18 +1066,18 @@
       });
     }
 
-    // Bật / tắt UI admin
+    // ========== BẬT / TẮT UI ADMIN ==========
     function enableAdminUI(email) {
-      const menu = document.getElementById("orderListMenu");
-      const gopyCard = document.getElementById("gopyListCard");
+      const orderMenu = document.getElementById("orderListMenu");
+      const gopyAdminSection = document.getElementById("gopyAdminSection");
 
       if (email === adminEmail) {
-        if (menu) menu.classList.remove("hidden");
-        if (gopyCard) gopyCard.classList.remove("hidden");
+        if (orderMenu) orderMenu.classList.remove("hidden");
+        if (gopyAdminSection) gopyAdminSection.classList.remove("hidden");
         startOrdersListener();
       } else {
-        if (menu) menu.classList.add("hidden");
-        if (gopyCard) gopyCard.classList.add("hidden");
+        if (orderMenu) orderMenu.classList.add("hidden");
+        if (gopyAdminSection) gopyAdminSection.classList.add("hidden");
         if (ordersUnsub) {
           ordersUnsub();
           ordersUnsub = null;
@@ -1085,74 +1086,75 @@
     }
     window.enableAdminUI = enableAdminUI;
 
-    // --- HIỆN / ẨN CÁC MỤC ---
+    // ========== HIỆN / ẨN CÁC MỤC TRUNG TÂM ==========
     window.showSection = function(section) {
       const thongbao = document.getElementById('thongbao');
       const gioithieu = document.getElementById('gioithieu');
       const sanpham = document.getElementById('sanpham');
       const ordersSection = document.getElementById('ordersSection');
 
-      thongbao.classList.add('hidden');
-      gioithieu.classList.add('hidden');
-      sanpham.classList.add('hidden');
+      if (thongbao) thongbao.classList.add('hidden');
+      if (gioithieu) gioithieu.classList.add('hidden');
+      if (sanpham) sanpham.classList.add('hidden');
       if (ordersSection) ordersSection.classList.add('hidden');
 
       if (section === 'gioithieu') {
-        gioithieu.classList.remove('hidden');
+        if (gioithieu) gioithieu.classList.remove('hidden');
       } else if (section === 'sanpham') {
-        sanpham.classList.remove('hidden');
+        if (sanpham) sanpham.classList.remove('hidden');
       } else if (section === 'orders') {
         const email = localStorage.getItem("userEmail");
         if (email === adminEmail) {
           if (ordersSection) ordersSection.classList.remove('hidden');
         } else {
           alert("Chỉ admin mới được xem danh sách đơn đặt hàng!");
-          gioithieu.classList.remove('hidden');
+          if (gioithieu) gioithieu.classList.remove('hidden');
         }
       } else {
-        thongbao.classList.remove('hidden');
+        if (thongbao) thongbao.classList.remove('hidden');
       }
     };
 
-    // --- KHỞI TẠO ---
+    // ========== KHỞI TẠO ==========
     window.addEventListener("load", () => {
       document.body.classList.add("banner-loaded");
 
       const savedEmail = localStorage.getItem("savedEmail");
       const savedPass = localStorage.getItem("savedPass");
       if (savedEmail && savedPass) {
-        loginEmail.value = savedEmail;
-        loginPass.value = savedPass;
-        rememberMe.checked = true;
+        const emailInput = document.getElementById("loginEmail");
+        const passInput = document.getElementById("loginPass");
+        const remember = document.getElementById("rememberMe");
+        if (emailInput) emailInput.value = savedEmail;
+        if (passInput) passInput.value = savedPass;
+        if (remember) remember.checked = true;
       }
 
-      checkFormVisibility();
       showSection('gioithieu');
 
       onAuthStateChanged(auth, async (user) => {
         if (user && user.email === adminEmail) {
           currentUser = user;
           localStorage.setItem("userEmail", user.email);
-          localStorage.setItem("userName", "Admin Nam Cà Phê");
 
-          loginBox.classList.add("hidden");
-          loggedBox.classList.remove("hidden");
-          loggedInfo.innerHTML = `Xin chào <b>Admin Nam Cà Phê</b>`;
-          capnhatMenu.classList.remove("hidden");
+          const loginBox = document.getElementById("loginBox");
+          const loggedBox = document.getElementById("loggedBox");
+          if (loginBox) loginBox.classList.add("hidden");
+          if (loggedBox) loggedBox.classList.remove("hidden");
+          const loggedInfo = document.getElementById("loggedInfo");
+          if (loggedInfo) loggedInfo.innerHTML = `Xin chào <b>Admin</b>`;
 
           enableAdminUI(user.email);
-          checkFormVisibility();
         } else {
           currentUser = null;
           localStorage.removeItem("userEmail");
-          localStorage.removeItem("userName");
 
-          loginBox.classList.remove("hidden");
-          loggedBox.classList.add("hidden");
-          capnhatMenu.classList.add("hidden");
+          const loginBox = document.getElementById("loginBox");
+          const loggedBox = document.getElementById("loggedBox");
+          if (loginBox) loginBox.classList.remove("hidden");
+          if (loggedBox) loggedBox.classList.add("hidden");
 
           enableAdminUI("");
-          checkFormVisibility();
         }
       });
     });
