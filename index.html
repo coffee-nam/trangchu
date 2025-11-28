@@ -107,7 +107,7 @@
         <li><a href="#gopy" class="hover:underline" onclick="showSection('thongbao')">Form góp ý</a></li>
         <li><a href="#lienhe" class="hover:underline" onclick="showSection('thongbao')">Liên hệ</a></li>
 
-        <!-- ĐÃ BỎ NÚT THÀNH VIÊN -->
+        <!-- Không còn nút Thành viên -->
 
         <li id="capnhatMenu" class="hidden">
           <a href="#" onclick="openUpdateModal()" class="hover:underline">Cập nhật thông tin</a>
@@ -151,9 +151,7 @@
           <label for="rememberMe" class="text-xs text-gray-700">Lưu thông tin đăng nhập</label>
         </div>
         <button onclick="doLogin()" class="w-full bg-green-600 hover:bg-green-700 transition text-white py-1.5 rounded text-sm">Đăng nhập</button>
-        <div class="flex justify-end text-xs mt-2">
-          <button onclick="resetPassword()" class="text-gray-600 underline">Quên mật khẩu?</button>
-        </div>
+        <!-- Đã bỏ nút Quên mật khẩu -->
       </div>
 
       <!-- Đã đăng nhập -->
@@ -166,7 +164,9 @@
       <div class="card p-3 mt-3 text-sm" id="gopySection">
         <h4 class="font-semibold text-green-700 mb-2">💬 Form góp ý</h4>
         <div id="gopyFormArea">
-          <textarea id="gopyText" rows="3" placeholder="Nhập nội dung góp ý..." class="w-full border rounded p-2 text-sm"></textarea>
+          <input id="gopyName" class="border rounded p-2 w-full mb-2 text-sm" placeholder="Họ và tên" />
+          <input id="gopyPhone" class="border rounded p-2 w-full mb-2 text-sm" placeholder="Số điện thoại" />
+          <textarea id="gopyText" rows="3" placeholder="Nội dung góp ý..." class="w-full border rounded p-2 text-sm"></textarea>
           <button onclick="sendGopy()" class="mt-2 bg-green-600 hover:bg-green-700 transition text-white px-4 py-1.5 rounded text-sm w-full">Gửi góp ý</button>
         </div>
         <p id="loginToComment" class="hidden text-gray-500 text-xs"></p>
@@ -703,7 +703,8 @@
         </div>
       </div>
 
-      <div class="card p-4">
+      <!-- ======= DANH SÁCH GÓP Ý (CHỈ ADMIN THẤY) ======= -->
+      <div id="gopyListCard" class="card p-4 hidden">
         <h2 class="text-lg font-bold text-green-700 mb-3">📜 Danh sách góp ý</h2>
         <div id="gopyList" class="text-sm space-y-2"></div>
       </div>
@@ -812,7 +813,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { 
       getAuth, signInWithEmailAndPassword, 
-      sendPasswordResetEmail, signOut, onAuthStateChanged 
+      signOut, onAuthStateChanged 
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { 
       getFirestore, doc, setDoc, addDoc, deleteDoc, updateDoc,
@@ -875,14 +876,6 @@
       }
     };
 
-    // --- QUÊN MẬT KHẨU ---
-    window.resetPassword = async function() {
-      const email = prompt("Nhập email admin để đặt lại mật khẩu:");
-      if (!email) return;
-      await sendPasswordResetEmail(auth, email);
-      alert("Hệ thống đã gửi liên kết đặt lại mật khẩu tới email!");
-    };
-
     // --- ĐĂNG XUẤT ---
     window.doLogout = async function() {
       await signOut(auth);
@@ -897,27 +890,44 @@
 
     // --- GÓP Ý ---
     window.sendGopy = async function() {
-      const content = gopyText.value.trim();
-      if (!content) return alert("Vui lòng nhập nội dung!");
-      const name = localStorage.getItem("userName") || "Khách";
-      const email = localStorage.getItem("userEmail") || "Không xác định";
+      const name = document.getElementById("gopyName").value.trim();
+      const phone = document.getElementById("gopyPhone").value.trim();
+      const content = document.getElementById("gopyText").value.trim();
+
+      if (!name || !phone || !content) {
+        alert("Vui lòng nhập đầy đủ Họ tên, Số điện thoại và Nội dung góp ý!");
+        return;
+      }
+
       await addDoc(collection(db, "gopy"), {
-        name, email, content, created: serverTimestamp()
+        name,
+        phone,
+        content,
+        created: serverTimestamp()
       });
-      gopyText.value = "";
-      alert("Góp ý đã gửi thành công!");
+
+      document.getElementById("gopyName").value = "";
+      document.getElementById("gopyPhone").value = "";
+      document.getElementById("gopyText").value = "";
+
+      alert(`Nam Cà Phê xin chân thành ghi nhận góp ý của Anh/Chị ${name}. Cảm ơn bạn đã dành thời gian chia sẻ, chúng tôi sẽ xem xét và cải thiện dịch vụ để phục vụ bạn tốt hơn trong những lần ghé sau!`);
     };
 
-    // --- LẮNG NGHE GÓP Ý ---
+    // --- LẮNG NGHE GÓP Ý (ADMIN THẤY LIST) ---
     const qGopy = query(collection(db, "gopy"), orderBy("created", "desc"));
     onSnapshot(qGopy, (snapshot) => {
+      const gopyList = document.getElementById("gopyList");
+      if (!gopyList) return;
       gopyList.innerHTML = "";
       snapshot.forEach((docu) => {
         const d = docu.data();
         const el = document.createElement("div");
         el.className = "border rounded p-2 bg-gray-50";
         el.innerHTML = `
-          <div class="text-gray-700 text-sm"><b>${d.name}</b>: ${d.content}</div>
+          <div class="text-gray-700 text-sm">
+            <b>${d.name || "Khách"}</b> - ${d.phone || "Không rõ"}<br/>
+            ${d.content || ""}
+          </div>
           ${localStorage.getItem("userEmail") === adminEmail
             ? `<button onclick="deleteGopy('${docu.id}')" class="text-xs text-red-500 mt-1 underline">Xóa</button>`
             : ""
@@ -1058,13 +1068,15 @@
     // Bật / tắt UI admin
     function enableAdminUI(email) {
       const menu = document.getElementById("orderListMenu");
-      if (!menu) return;
+      const gopyCard = document.getElementById("gopyListCard");
 
       if (email === adminEmail) {
-        menu.classList.remove("hidden");
+        if (menu) menu.classList.remove("hidden");
+        if (gopyCard) gopyCard.classList.remove("hidden");
         startOrdersListener();
       } else {
-        menu.classList.add("hidden");
+        if (menu) menu.classList.add("hidden");
+        if (gopyCard) gopyCard.classList.add("hidden");
         if (ordersUnsub) {
           ordersUnsub();
           ordersUnsub = null;
