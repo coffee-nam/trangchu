@@ -81,13 +81,6 @@
       padding: 2px 0;
     }
 
-    #memberList p {
-      margin: 0;
-      padding: 6px 0;
-      border-bottom: 1px dashed #e5e7eb;
-    }
-    #memberList p:last-child { border-bottom: none; }
-
     @media (max-width: 1024px) {
       .container-max { padding-left: 12px; padding-right: 12px; }
     }
@@ -110,10 +103,12 @@
     <div class="container-max mx-auto px-4">
       <ul class="flex flex-wrap gap-3 md:gap-6 py-3 font-semibold text-sm items-center">
         <li><a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">Giới thiệu</a></li>
-        <li><a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Sản Phẩm</a></li>
+        <li><a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Thực Đơn</a></li>
         <li><a href="#gopy" class="hover:underline" onclick="showSection('thongbao')">Form góp ý</a></li>
         <li><a href="#lienhe" class="hover:underline" onclick="showSection('thongbao')">Liên hệ</a></li>
-        <li><a href="#" class="hover:underline" onclick="showSection('thanhvien')">Thành viên</a></li>
+
+        <!-- ĐÃ BỎ NÚT THÀNH VIÊN -->
+
         <li id="capnhatMenu" class="hidden">
           <a href="#" onclick="openUpdateModal()" class="hover:underline">Cập nhật thông tin</a>
         </li>
@@ -146,46 +141,35 @@
 
     <!-- ==== CỘT TRÁI ==== -->
     <aside>
-      <!-- Đăng nhập -->
+      <!-- Đăng nhập (CHỈ ADMIN) -->
       <div id="loginBox" class="card p-3">
-        <h3 class="font-semibold text-green-700 mb-2 text-sm">🔐 Đăng nhập</h3>
-        <input id="loginEmail" type="email" placeholder="Email" class="w-full border p-1.5 rounded mb-1" />
+        <h3 class="font-semibold text-green-700 mb-2 text-sm">🔐 Đăng nhập Admin</h3>
+        <input id="loginEmail" type="email" placeholder="Email admin" class="w-full border p-1.5 rounded mb-1" />
         <input id="loginPass" type="password" placeholder="Mật khẩu" class="w-full border p-1.5 rounded mb-2" />
         <div class="flex items-center mb-2">
           <input type="checkbox" id="rememberMe" class="mr-2">
           <label for="rememberMe" class="text-xs text-gray-700">Lưu thông tin đăng nhập</label>
         </div>
         <button onclick="doLogin()" class="w-full bg-green-600 hover:bg-green-700 transition text-white py-1.5 rounded text-sm">Đăng nhập</button>
-        <div class="flex justify-between text-xs mt-2">
-          <button onclick="toggleRegisterForm()" class="text-gray-600 underline">Đăng ký tài khoản mới</button>
+        <div class="flex justify-end text-xs mt-2">
           <button onclick="resetPassword()" class="text-gray-600 underline">Quên mật khẩu?</button>
         </div>
       </div>
 
-      <!-- Đăng ký -->
-      <div id="registerBox" class="card p-3 mt-3 hidden">
-        <h3 class="font-semibold text-green-700 mb-2 text-sm">📝 Đăng ký tài khoản</h3>
-        <input id="regName" type="text" placeholder="Họ và tên" class="w-full border p-1.5 rounded mb-1" />
-        <input id="regEmail" type="email" placeholder="Email" class="w-full border p-1.5 rounded mb-1" />
-        <input id="regPass" type="password" placeholder="Mật khẩu (≥6 ký tự)" class="w-full border p-1.5 rounded mb-2" />
-        <button onclick="doRegister()" class="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-1.5 rounded text-sm">Đăng ký</button>
-        <button onclick="toggleRegisterForm()" class="mt-2 text-xs text-gray-600 underline">← Quay lại</button>
-      </div>
-
       <!-- Đã đăng nhập -->
       <div id="loggedBox" class="card p-3 mt-3 hidden text-sm">
-        <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">Xin chào <b>...</b></div>
+        <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">Xin chào <b>Admin</b></div>
         <button onclick="doLogout()" class="w-full bg-red-500 hover:bg-red-600 transition text-white py-1.5 rounded">Đăng xuất</button>
       </div>
 
-      <!-- Form góp ý -->
+      <!-- Form góp ý (KHÁCH KHÔNG CẦN ĐĂNG NHẬP) -->
       <div class="card p-3 mt-3 text-sm" id="gopySection">
         <h4 class="font-semibold text-green-700 mb-2">💬 Form góp ý</h4>
         <div id="gopyFormArea">
           <textarea id="gopyText" rows="3" placeholder="Nhập nội dung góp ý..." class="w-full border rounded p-2 text-sm"></textarea>
           <button onclick="sendGopy()" class="mt-2 bg-green-600 hover:bg-green-700 transition text-white px-4 py-1.5 rounded text-sm w-full">Gửi góp ý</button>
         </div>
-        <p id="loginToComment" class="hidden text-gray-500 text-xs">🔒 Vui lòng đăng nhập để gửi góp ý.</p>
+        <p id="loginToComment" class="hidden text-gray-500 text-xs"></p>
       </div>
     </aside>
 
@@ -202,9 +186,9 @@
         <p>Hãy đến NAM CÀ PHÊ – nơi hương vị tinh túy của cà phê hòa quyện cùng không gian thanh lịch, để mỗi khoảnh khắc của bạn trở nên đặc biệt và đầy cảm xúc. Chúng tôi rất mong được đón tiếp và chia sẻ cùng bạn những trải nghiệm tuyệt vời nhất.</p>
       </div>
 
-      <!-- ======= SẢN PHẨM / MENU NƯỚC ======= -->
+      <!-- ======= THỰC ĐƠN / MENU NƯỚC ======= -->
       <div id="sanpham" class="card p-4 hidden">
-        <h2 class="text-lg font-bold text-green-700 mb-4">☕ Menu thức uống NAM CÀ PHÊ</h2>
+        <h2 class="text-lg font-bold text-green-700 mb-4">☕ Thực đơn thức uống NAM CÀ PHÊ</h2>
 
         <div class="space-y-6 text-sm">
 
@@ -709,11 +693,6 @@
         <div id="newsList" class="space-y-3 text-sm text-gray-500">Đang trong quá trình hoàn thiện...</div>
       </div>
 
-      <div id="thanhvien" class="card p-4 hidden">
-        <h2 class="text-lg font-bold text-green-700 mb-3">📋 Danh sách thành viên</h2>
-        <div id="memberList" class="space-y-1 text-sm text-gray-700">Đang tải danh sách...</div>
-      </div>
-
       <!-- ======= DANH SÁCH ĐƠN HÀNG (ADMIN) ======= -->
       <div id="ordersSection" class="card p-4 hidden">
         <h2 class="text-lg font-bold text-green-700 mb-3">
@@ -755,7 +734,7 @@
     © 2025 Nam Cà Phê  — Thiết kế bởi <b>Mr.Thiên</b>
   </footer>
 
-  <!-- ======== FORM CẬP NHẬT THÔNG TIN ======== -->
+  <!-- ======== FORM CẬP NHẬT THÔNG TIN (ADMIN) ======== -->
   <div id="updateModal" class="modal">
     <div class="bg-white rounded-lg p-6 w-80">
       <h3 class="text-lg font-semibold mb-3 text-green-700">📝 Cập nhật thông tin</h3>
@@ -832,12 +811,12 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { 
-      getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
+      getAuth, signInWithEmailAndPassword, 
       sendPasswordResetEmail, signOut, onAuthStateChanged 
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { 
-      getFirestore, doc, setDoc, getDoc, addDoc, deleteDoc, updateDoc,
-      collection, serverTimestamp, onSnapshot, query, orderBy, getDocs
+      getFirestore, doc, setDoc, addDoc, deleteDoc, updateDoc,
+      collection, serverTimestamp, onSnapshot, query, orderBy
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -852,34 +831,24 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+
+    // ĐỔI EMAIL ADMIN Ở ĐÂY NẾU CẦN
     const adminEmail = "thien.miraeasset@gmail.com";
     window.adminEmail = adminEmail; // cho script ngoài dùng
 
     let currentUser = null;
 
-    // --- ĐĂNG KÝ ---
-    window.doRegister = async function() {
-      const name = regName.value.trim();
-      const email = regEmail.value.trim();
-      const pass = regPass.value.trim();
-      if (!name || !email || pass.length < 6) return alert("Vui lòng nhập đủ thông tin!");
-      try {
-        const userCred = await createUserWithEmailAndPassword(auth, email, pass);
-        await setDoc(doc(db, "users", userCred.user.uid), { name, email, approved: false, created: new Date() });
-        alert("Đăng ký thành công! Vui lòng chờ admin duyệt tài khoản.");
-        toggleRegisterForm();
-      } catch (e) { alert("Lỗi: " + e.message); }
-    };
-
-    // --- ĐĂNG NHẬP ---
+    // --- ĐĂNG NHẬP (CHỈ ADMIN) ---
     window.doLogin = async function() {
       try {
         const userCred = await signInWithEmailAndPassword(auth, loginEmail.value, loginPass.value);
-        const userDoc = await getDoc(doc(db, "users", userCred.user.uid));
-        if (!userDoc.exists() || !userDoc.data().approved) {
+
+        if (userCred.user.email !== adminEmail) {
           await signOut(auth);
-          return alert("Tài khoản chưa được admin duyệt!");
+          alert("Chỉ tài khoản ADMIN mới được đăng nhập!");
+          return;
         }
+
         currentUser = userCred.user;
 
         if (rememberMe.checked) {
@@ -891,19 +860,24 @@
         }
 
         localStorage.setItem("userEmail", currentUser.email);
-        localStorage.setItem("userName", userDoc.data().name || currentUser.email);
+        localStorage.setItem("userName", "Admin Nam Cà Phê");
 
         loginBox.classList.add("hidden");
         loggedBox.classList.remove("hidden");
-        loggedInfo.innerHTML = `Xin chào <b>${userDoc.data().name || currentUser.email}</b>`;
+        loggedInfo.innerHTML = `Xin chào <b>Admin Nam Cà Phê</b>`;
         capnhatMenu.classList.remove("hidden");
+
         checkFormVisibility();
-      } catch (e) { alert("Sai thông tin hoặc chưa được duyệt!"); }
+        enableAdminUI(currentUser.email);
+      } catch (e) {
+        console.error(e);
+        alert("Sai thông tin đăng nhập!");
+      }
     };
 
     // --- QUÊN MẬT KHẨU ---
     window.resetPassword = async function() {
-      const email = prompt("Nhập email để đặt lại mật khẩu:");
+      const email = prompt("Nhập email admin để đặt lại mật khẩu:");
       if (!email) return;
       await sendPasswordResetEmail(auth, email);
       alert("Hệ thống đã gửi liên kết đặt lại mật khẩu tới email!");
@@ -917,6 +891,7 @@
       loginBox.classList.remove("hidden");
       loggedBox.classList.add("hidden");
       capnhatMenu.classList.add("hidden");
+      enableAdminUI("");
       checkFormVisibility();
     };
 
@@ -924,7 +899,7 @@
     window.sendGopy = async function() {
       const content = gopyText.value.trim();
       if (!content) return alert("Vui lòng nhập nội dung!");
-      const name = localStorage.getItem("userName") || "Người ẩn danh";
+      const name = localStorage.getItem("userName") || "Khách";
       const email = localStorage.getItem("userEmail") || "Không xác định";
       await addDoc(collection(db, "gopy"), {
         name, email, content, created: serverTimestamp()
@@ -952,7 +927,7 @@
       });
     });
 
-    // --- XÓA GÓP Ý ---
+    // --- XÓA GÓP Ý (ADMIN) ---
     window.deleteGopy = async function(id) {
       const userEmail = localStorage.getItem("userEmail");
       if (userEmail !== adminEmail) return alert("Chỉ admin mới được xóa góp ý!");
@@ -961,21 +936,11 @@
       alert("Đã xóa góp ý!");
     };
 
+    // Luôn cho phép góp ý, không cần đăng nhập
     function checkFormVisibility() {
-      const user = localStorage.getItem("userEmail");
-      if (user) {
-        gopyFormArea.classList.remove("hidden");
-        loginToComment.classList.add("hidden");
-      } else {
-        gopyFormArea.classList.add("hidden");
-        loginToComment.classList.remove("hidden");
-      }
+      gopyFormArea.classList.remove("hidden");
+      loginToComment.classList.add("hidden");
     }
-
-    window.toggleRegisterForm = function() {
-      loginBox.classList.toggle("hidden");
-      registerBox.classList.toggle("hidden");
-    };
 
     window.openUpdateModal = function() { updateModal.style.display = "flex"; };
     window.closeUpdateModal = function() { updateModal.style.display = "none"; };
@@ -991,52 +956,6 @@
       alert("Đã lưu thông tin!");
       closeUpdateModal();
     };
-
-    // --- LOAD MEMBERS ---
-    async function loadMembers() {
-      try {
-        const memberListEl = document.getElementById('memberList');
-        memberListEl.innerHTML = "<p>⏳ Đang tải danh sách...</p>";
-        const snap = await getDocs(collection(db, "users"));
-        if (snap.empty) {
-          memberListEl.innerHTML = "<p>Chưa có thành viên nào đăng ký.</p>";
-          return;
-        }
-        let i = 1;
-        let html = "";
-        const currentEmail = localStorage.getItem("userEmail");
-        snap.forEach(docu => {
-          const d = docu.data();
-          const displayName = d.name && d.name.trim() !== "" ? d.name : (d.email || "Không rõ");
-
-          if (currentEmail === adminEmail) {
-            html += `<p>${i++}. ${escapeHtml(displayName)} <button onclick="deleteMember('${docu.id}')" class="text-xs text-red-500 ml-2 underline">🗑 Xóa</button></p>`;
-          } else {
-            html += `<p>${i++}. ${escapeHtml(displayName)}</p>`;
-          }
-        });
-        memberListEl.innerHTML = html;
-      } catch (err) {
-        document.getElementById('memberList').innerHTML = `<p>Lỗi khi tải danh sách: ${err.message}</p>`;
-      }
-    }
-
-    window.deleteMember = async function(uid) {
-      const userEmail = localStorage.getItem("userEmail");
-      if (userEmail !== adminEmail) return alert("Chỉ admin mới được phép xóa thành viên!");
-      if (!confirm("Xác nhận xóa thành viên này?")) return;
-
-      await deleteDoc(doc(db, "users", uid));
-      alert("Đã xóa thành viên!");
-      loadMembers();
-    };
-
-    function escapeHtml(str) {
-      if (!str) return "";
-      return str.replace(/[&<>"']/g, function(m) {
-        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m];
-      });
-    }
 
     // === LƯU ĐƠN HÀNG XUỐNG FIRESTORE ===
     window.saveOrderToFirestore = async function(orderData) {
@@ -1157,21 +1076,16 @@
     // --- HIỆN / ẨN CÁC MỤC ---
     window.showSection = function(section) {
       const thongbao = document.getElementById('thongbao');
-      const thanhvien = document.getElementById('thanhvien');
       const gioithieu = document.getElementById('gioithieu');
       const sanpham = document.getElementById('sanpham');
       const ordersSection = document.getElementById('ordersSection');
 
       thongbao.classList.add('hidden');
-      thanhvien.classList.add('hidden');
       gioithieu.classList.add('hidden');
       sanpham.classList.add('hidden');
       if (ordersSection) ordersSection.classList.add('hidden');
 
-      if (section === 'thanhvien') {
-        thanhvien.classList.remove('hidden');
-        loadMembers();
-      } else if (section === 'gioithieu') {
+      if (section === 'gioithieu') {
         gioithieu.classList.remove('hidden');
       } else if (section === 'sanpham') {
         sanpham.classList.remove('hidden');
@@ -1204,14 +1118,29 @@
       showSection('gioithieu');
 
       onAuthStateChanged(auth, async (user) => {
-        if (user) {
+        if (user && user.email === adminEmail) {
           currentUser = user;
           localStorage.setItem("userEmail", user.email);
+          localStorage.setItem("userName", "Admin Nam Cà Phê");
+
+          loginBox.classList.add("hidden");
+          loggedBox.classList.remove("hidden");
+          loggedInfo.innerHTML = `Xin chào <b>Admin Nam Cà Phê</b>`;
+          capnhatMenu.classList.remove("hidden");
+
           enableAdminUI(user.email);
+          checkFormVisibility();
         } else {
           currentUser = null;
           localStorage.removeItem("userEmail");
+          localStorage.removeItem("userName");
+
+          loginBox.classList.remove("hidden");
+          loggedBox.classList.add("hidden");
+          capnhatMenu.classList.add("hidden");
+
           enableAdminUI("");
+          checkFormVisibility();
         }
       });
     });
