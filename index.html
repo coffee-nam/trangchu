@@ -108,14 +108,8 @@
 
   <!-- ======== MENU ======== -->
   <nav class="bg-green-600 text-white shadow-sm sticky top-0 z-40">
-    <div class="container-max mx-auto px-4 flex items-center">
-      <!-- Logo góc trái - thay src bằng logo thật của bạn -->
-      <a href="#gioithieu" class="flex items-center gap-2 py-2 mr-6" onclick="showSection('gioithieu')">
-        <img src="https://upanhnhanh.com/b7e3f61799de160c963ee1af62b820e4" alt="Nam Cà Phê" class="h-8 w-8 rounded-full border border-white shadow">
-        <span class="font-bold text-sm md:text-base">NAM CÀ PHÊ</span>
-      </a>
-
-      <ul class="flex flex-wrap gap-3 md:gap-6 py-3 font-semibold text-sm items-center flex-1">
+    <div class="container-max mx-auto px-4">
+      <ul class="flex flex-wrap gap-3 md:gap-6 py-3 font-semibold text-sm items-center">
         <li><a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">Giới thiệu</a></li>
         <li><a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Thực Đơn</a></li>
         <li><a href="#lienhe" class="hover:underline" onclick="showSection('lienhe')">Liên hệ</a></li>
@@ -160,7 +154,7 @@
       <!-- Đã đăng nhập admin -->
       <div id="loggedBox" class="card p-3 mt-3 hidden text-sm">
         <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">
-          Đã đăng nhập với tài khoản admin.
+          Xin chào Admin
         </div>
         <button onclick="doLogout()" class="w-full bg-red-500 hover:bg-red-600 transition text-white py-1.5 rounded">
           Đăng xuất
@@ -869,7 +863,7 @@
       signOut, onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import {
-      getFirestore, doc, setDoc, addDoc, deleteDoc, updateDoc,
+      getFirestore, doc, addDoc, deleteDoc, updateDoc,
       collection, serverTimestamp, onSnapshot, query, orderBy
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -947,7 +941,7 @@
       if (currentUser) {
         loginBox.classList.add("hidden");
         loggedBox.classList.remove("hidden");
-        loggedInfo.innerHTML = `Đang đăng nhập với tài khoản admin: <b>${currentUser.email}</b>`;
+        loggedInfo.innerHTML = `Xin chào Admin`;
         enableAdminUI(true);
       } else {
         loginBox.classList.remove("hidden");
