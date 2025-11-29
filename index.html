@@ -91,10 +91,8 @@
   <!-- ======== BANNER ======== -->
   <header class="relative overflow-hidden font-[Montserrat,sans-serif]">
     <img src="https://upanhnhanh.com/df05732c49f6ae1d201a0c63e13a8aaf"
-         alt="Banner Nam Coffee"
+         alt="Banner Nam Cà Phê"
          class="w-full h-40 md:h-52 object-cover brightness-75">
-
-    <!-- Font chữ đẹp -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
   </header>
 
@@ -102,64 +100,47 @@
   <nav class="bg-green-600 text-white shadow-sm sticky top-0 z-40">
     <div class="container-max mx-auto px-4">
       <ul class="flex flex-wrap gap-3 md:gap-6 py-3 font-semibold text-sm items-center">
-        <li>
-          <a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">
-            Giới thiệu
-          </a>
-        </li>
-        <li>
-          <a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">
-            Thực Đơn
-          </a>
-        </li>
+        <li><a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">Giới thiệu</a></li>
+        <li><a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Thực Đơn</a></li>
 
-        <!-- Nút Form góp ý (TRANG ADMIN, chỉ admin mới thấy) -->
+        <!-- Nút Form góp ý (chỉ admin thấy) -->
         <li id="gopyMenu" class="hidden">
-          <a href="#gopyAdminSection" class="hover:underline" onclick="showSection('gopyAdmin')">
-            Form góp ý
-          </a>
+          <a href="#gopyPage" class="hover:underline" onclick="showSection('gopy')">Form góp ý</a>
         </li>
 
-        <li>
-          <a href="#lienhe" class="hover:underline">
-            Liên hệ
-          </a>
-        </li>
-
-        <!-- Nút danh sách đơn hàng (chỉ admin mới thấy) -->
+        <!-- Nút danh sách đơn hàng (chỉ admin thấy) -->
         <li id="orderListMenu" class="hidden">
           <a href="#ordersSection" class="hover:underline" onclick="showSection('orders')">
             Danh sách khách đặt hàng
           </a>
         </li>
 
-        <!-- ⭐⭐⭐ GIỎ HÀNG ⭐⭐⭐ -->
+        <!-- Liên hệ: chỉ cuộn xuống khu vực liên hệ -->
+        <li><a href="#lienhe" class="hover:underline">Liên hệ</a></li>
+
+        <!-- GIỎ HÀNG -->
         <li class="ml-auto flex items-center gap-1 cursor-pointer text-[13px] md:text-sm px-3 py-1 rounded-full bg-green-700 hover:bg-green-800 transition"
             onclick="openCart()">
           🛒 <span class="hidden sm:inline">Giỏ Hàng</span>
           (<span id="cartCount">0</span>)
         </li>
-        <!-- ⭐⭐⭐ END GIỎ HÀNG ⭐⭐⭐ -->
       </ul>
     </div>
   </nav>
 
   <!-- ======== DÒNG CHỮ CHẠY NGANG ======== -->
   <div class="banner-marquee w-full">
-    <span>🌿 Nam Cà Phê ! Nơi thư giãn lý tưởng, phục vụ chu đáo, mọi góp ý xin quý khách vui lòng gọi hoặc nhắn tin Zalo : 0905.638.959. 🌿</span>
+    <span>🌿 Nam Cà Phê! Nơi thư giãn lý tưởng, phục vụ chu đáo. Mọi góp ý xin quý khách vui lòng để lại ngay trên website hoặc liên hệ Zalo: 0905 638 959. 🌿</span>
   </div>
 
   <!-- ======== MAIN ======== -->
-  <main class="container-max mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[260px_1fr_240px] gap-6">
+  <main class="container-max mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[260px_1fr_260px] gap-6">
 
     <!-- ==== CỘT TRÁI ==== -->
     <aside>
-      <!-- Đăng nhập (chỉ Admin) -->
+      <!-- Đăng nhập admin -->
       <div id="loginBox" class="card p-3">
-        <h3 class="font-semibold text-green-700 mb-2 text-sm">🔐 Đăng nhập quản trị</h3>
-        <p class="text-xs text-gray-500 mb-2">
-          Chỉ dành cho Admin Nam Cà Phê.
-        </p>
+        <h3 class="font-semibold text-green-700 mb-2 text-sm">🔐 Đăng nhập (Admin)</h3>
         <input id="loginEmail" type="email" placeholder="Email admin" class="w-full border p-1.5 rounded mb-1" />
         <input id="loginPass" type="password" placeholder="Mật khẩu" class="w-full border p-1.5 rounded mb-2" />
         <div class="flex items-center mb-2">
@@ -169,28 +150,30 @@
         <button onclick="doLogin()" class="w-full bg-green-600 hover:bg-green-700 transition text-white py-1.5 rounded text-sm">
           Đăng nhập
         </button>
+        <p class="mt-2 text-[11px] text-gray-500">
+          * Khu vực này chỉ dành cho quản trị quán.
+        </p>
       </div>
 
-      <!-- Đã đăng nhập (Admin) -->
+      <!-- Đã đăng nhập admin -->
       <div id="loggedBox" class="card p-3 mt-3 hidden text-sm">
-        <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">
-          Xin chào <b>Admin</b>
-        </div>
+        <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">Xin chào <b>Admin</b></div>
         <button onclick="doLogout()" class="w-full bg-red-500 hover:bg-red-600 transition text-white py-1.5 rounded">
           Đăng xuất
         </button>
       </div>
 
-      <!-- Form góp ý (KHÁCH KHÔNG CẦN ĐĂNG NHẬP) -->
+      <!-- Form góp ý KHÁCH HÀNG -->
       <div class="card p-3 mt-3 text-sm" id="gopySection">
-        <h4 class="font-semibold text-green-700 mb-2">💬 Form góp ý</h4>
-        <div id="gopyFormArea">
-          <input id="gopyName" class="border rounded p-2 w-full mb-2 text-sm" placeholder="Họ và tên" />
-          <textarea id="gopyText" rows="3" placeholder="Nội dung góp ý..." class="w-full border rounded p-2 text-sm"></textarea>
-          <button onclick="sendGopy()" class="mt-2 bg-green-600 hover:bg-green-700 transition text-white px-4 py-1.5 rounded text-sm w-full">
-            Gửi góp ý
-          </button>
-        </div>
+        <h4 class="font-semibold text-green-700 mb-2">💬 Góp ý cho Nam Cà Phê</h4>
+        <p class="text-xs text-gray-500 mb-2">
+          Mọi chia sẻ của bạn giúp Nam Cà Phê phục vụ tốt hơn trong những lần ghé thăm tiếp theo. 🥰
+        </p>
+        <input id="gopyName" type="text" placeholder="Họ và tên của bạn" class="w-full border p-2 rounded mb-2 text-sm" />
+        <textarea id="gopyText" rows="3" placeholder="Nội dung góp ý..." class="w-full border rounded p-2 text-sm"></textarea>
+        <button onclick="sendGopy()" class="mt-2 bg-green-600 hover:bg-green-700 transition text-white px-4 py-1.5 rounded text-sm w-full">
+          Gửi góp ý
+        </button>
       </div>
     </aside>
 
@@ -199,27 +182,56 @@
 
       <!-- ======= GIỚI THIỆU ======= -->
       <div id="gioithieu" class="card p-4">
-        <h2 class="text-lg font-bold text-green-700 mb-3">
-          🌟 NAM CÀ PHÊ – Không gian thưởng thức cà phê đẳng cấp tại Đà Nẵng 🌟
+        <h2 class="text-lg font-bold text-green-700 mb-3 text-center">
+          ✨ LỜI CẢM ƠN – KHAI TRƯƠNG NAM CÀ PHÊ ✨
         </h2>
-        <p>
-          NAM CÀ PHÊ, tọa lạc tại 62 Trần Thị Lý, xã Thăng Bình, TP. Đà Nẵng, là điểm đến lý tưởng cho những ai yêu thích cà phê chất lượng và trải nghiệm không gian tinh tế. Chúng tôi không chỉ mang đến những ly cà phê thơm ngon, đậm đà, mà còn kiến tạo một không gian thư giãn, rộng rãi, nơi mọi chi tiết đều được chăm chút tỉ mỉ để đem lại cảm giác dễ chịu và thanh thoát.
+
+        <p class="mb-2">
+          Hôm nay, 📅 <b>Ngày 29/11/2025</b>, <b>NAM CÀ PHÊ</b> 
+          (📍 <b>62 Trần Thị Lý, xã Thăng Bình, TP. Đà Nẵng</b>) 
+          hân hoan chào đón ngày khai trương trong không khí thật tưng bừng và ấm áp.
         </p>
-        <p class="mt-2">
-          Với thiết kế hiện đại, tinh tế, kết hợp với view đẹp và thoáng đãng, NAM CÀ PHÊ là nơi lý tưởng để tận hưởng những khoảnh khắc bình yên, gặp gỡ bạn bè, họp nhóm, làm việc hay đơn giản là thưởng thức một tách cà phê đậm vị giữa nhịp sống sôi động của thành phố. Mỗi góc nhỏ trong quán đều được bố trí để tạo nên cảm giác thư thái và cảm hứng sáng tạo, từ ánh sáng tự nhiên chan hòa đến nội thất ấm cúng, sang trọng.
+
+        <p class="mb-2">
+          Chúng tôi xin gửi lời cảm ơn chân thành đến tất cả quý khách hàng, bạn bè và người thân 
+          đã ghé thăm, ủng hộ và chia sẻ niềm vui cùng quán trong ngày đặc biệt này. 
+          Sự hiện diện của quý khách là niềm vinh hạnh và cũng là động lực để 
+          <b>NAM CÀ PHÊ</b> không ngừng hoàn thiện mỗi ngày.
         </p>
-        <p class="mt-2">
-          ✨ Chúng tôi hân hạnh thông báo khai trương vào ngày 29/11/2025.<br>
-          NAM CÀ PHÊ mong muốn trở thành điểm đến không chỉ của những tín đồ cà phê, mà còn của những ai tìm kiếm một không gian trải nghiệm văn hóa cà phê độc đáo tại Đà Nẵng. Đội ngũ nhân viên tận tâm, chuyên nghiệp cùng thực đơn đa dạng, phong phú sẽ đảm bảo mỗi lần ghé thăm là một trải nghiệm đáng nhớ.
+
+        <h3 class="font-semibold text-green-700 mt-3 mb-1">🎉 Ưu đãi khai trương</h3>
+        <ul class="list-disc list-inside text-sm mb-2">
+          <li>🎁 <b>Giảm 10%</b> trên toàn bộ hoá đơn.</li>
+          <li>🥤 <b>Mua 2 ly Trà Sữa size L – Tặng 1 ly Trà Sữa size M</b><br>
+              (Quý khách được tự chọn topping &amp; hương vị)</li>
+        </ul>
+        <p class="mb-2 text-sm text-gray-600">
+          ⏳ Chương trình áp dụng đến hết ngày <b>01/12/2025</b>.
         </p>
-        <p class="mt-2">
-          Hãy đến NAM CÀ PHÊ – nơi hương vị tinh túy của cà phê hòa quyện cùng không gian thanh lịch, để mỗi khoảnh khắc của bạn trở nên đặc biệt và đầy cảm xúc. Chúng tôi rất mong được đón tiếp và chia sẻ cùng bạn những trải nghiệm tuyệt vời nhất.
+
+        <p class="mb-2">
+          Do lượng khách đến trong ngày khai trương khá đông, 
+          không thể tránh khỏi một số thiếu sót trong phục vụ. 
+          <b>NAM CÀ PHÊ</b> rất mong nhận được sự thông cảm và những góp ý chân thành từ quý khách 
+          để chúng tôi có thể hoàn thiện hơn và mang đến trải nghiệm tốt nhất trong những lần sau.
+        </p>
+
+        <p class="mb-2">
+          🌿 Với thiết kế hiện đại – tinh tế, không gian thoáng đãng cùng view đẹp, 
+          <b>NAM CÀ PHÊ</b> hy vọng sẽ trở thành nơi lý tưởng để quý khách thư giãn, 
+          làm việc hoặc trò chuyện cùng bạn bè. Đội ngũ nhân viên tận tình, chu đáo 
+          luôn sẵn sàng mang đến cho quý khách những ly nước chất lượng và sự hài lòng trọn vẹn.
+        </p>
+
+        <p class="mt-3 font-semibold text-center">
+          Một lần nữa, xin chân thành cảm ơn và rất hân hạnh được phục vụ quý khách! ❤️<br/>
+          <span class="text-green-700">NAM CÀ PHÊ – Hương vị làm nên cảm xúc</span>
         </p>
       </div>
 
       <!-- ======= THỰC ĐƠN / MENU NƯỚC ======= -->
       <div id="sanpham" class="card p-4 hidden">
-        <h2 class="text-lg font-bold text-green-700 mb-4">☕ Thực đơn thức uống NAM CÀ PHÊ</h2>
+        <h2 class="text-lg font-bold text-green-700 mb-4">☕ Thực Đơn NAM CÀ PHÊ</h2>
 
         <div class="space-y-6 text-sm">
 
@@ -301,40 +313,28 @@
             <h3 class="font-semibold text-green-700 mb-2">🍫 2. CA CAO</h3>
             <div class="grid sm:grid-cols-2 gap-3">
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Ca cao nóng/đá</p>
-                  <p class="text-xs text-gray-500">25k</p>
-                </div>
+                <div><p class="font-medium">Ca cao nóng/đá</p><p class="text-xs text-gray-500">25k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
                   <button onclick="openOrderModal('Ca cao nóng/đá')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Ca cao nóng/đá', 25000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Ca cao muối</p>
-                  <p class="text-xs text-gray-500">26k</p>
-                </div>
+                <div><p class="font-medium">Ca cao muối</p><p class="text-xs text-gray-500">26k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
                   <button onclick="openOrderModal('Ca cao muối')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Ca cao muối', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Socola nóng</p>
-                  <p class="text-xs text-gray-500">26k</p>
-                </div>
+                <div><p class="font-medium">Socola nóng</p><p class="text-xs text-gray-500">26k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
                   <button onclick="openOrderModal('Socola nóng')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Socola nóng', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Ca cao latte</p>
-                  <p class="text-xs text-gray-500">26k</p>
-                </div>
+                <div><p class="font-medium">Ca cao latte</p><p class="text-xs text-gray-500">26k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
                   <button onclick="openOrderModal('Ca cao latte')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Ca cao latte', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
@@ -347,7 +347,6 @@
           <div>
             <h3 class="font-semibold text-green-700 mb-2">🍵 3. TRÀ</h3>
             <div class="grid sm:grid-cols-2 gap-3">
-              <!-- Trà gừng -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà gừng</p><p class="text-xs text-gray-500">22k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -355,7 +354,6 @@
                   <button onclick="addToCart('Trà gừng', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <!-- Trà chanh -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà chanh</p><p class="text-xs text-gray-500">22k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -363,7 +361,6 @@
                   <button onclick="addToCart('Trà chanh', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <!-- Trà Lipton -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà Lipton</p><p class="text-xs text-gray-500">22k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -371,7 +368,6 @@
                   <button onclick="addToCart('Trà Lipton', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <!-- Trà đào -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà đào</p><p class="text-xs text-gray-500">25k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -379,7 +375,6 @@
                   <button onclick="addToCart('Trà đào', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <!-- Trà vải -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà vải</p><p class="text-xs text-gray-500">25k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -387,7 +382,6 @@
                   <button onclick="addToCart('Trà vải', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <!-- Trà việt quất -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà việt quất</p><p class="text-xs text-gray-500">25k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -395,7 +389,6 @@
                   <button onclick="addToCart('Trà việt quất', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <!-- Trà đào cam sả -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà đào cam sả</p><p class="text-xs text-gray-500">28k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -542,7 +535,6 @@
           <div>
             <h3 class="font-semibold text-green-700 mb-2">🍈 7. NƯỚC ÉP</h3>
             <div class="grid sm:grid-cols-2 gap-3">
-              <!-- Các món nước ép -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Chanh đá</p><p class="text-xs text-gray-500">22k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -719,10 +711,21 @@
         </div>
       </div>
 
-      <!-- ======= TIN TỨC (để sẵn) ======= -->
+      <!-- ======= TIN TỨC / THÔNG BÁO (tạm để, có thể dùng sau) ======= -->
       <div id="thongbao" class="card p-4 hidden">
         <h2 class="text-lg font-bold text-green-700 mb-3">📢 Tin tức - Thông báo</h2>
         <div id="newsList" class="space-y-3 text-sm text-gray-500">Đang trong quá trình hoàn thiện...</div>
+      </div>
+
+      <!-- ======= DANH SÁCH GÓP Ý (ADMIN) ======= -->
+      <div id="gopyPage" class="card p-4 hidden">
+        <h2 class="text-lg font-bold text-green-700 mb-3">
+          💬 Danh sách góp ý từ khách hàng (Admin)
+        </h2>
+        <p class="text-xs text-gray-500 mb-3">
+          Chỉ tài khoản admin mới xem được mục này. Góp ý được sắp xếp từ mới đến cũ.
+        </p>
+        <div id="gopyList" class="text-sm space-y-2"></div>
       </div>
 
       <!-- ======= DANH SÁCH ĐƠN HÀNG (ADMIN) ======= -->
@@ -735,17 +738,6 @@
         </div>
       </div>
 
-      <!-- ======= TRANG FORM GÓP Ý (ADMIN – DANH SÁCH GÓP Ý) ======= -->
-      <div id="gopyAdminSection" class="card p-4 hidden">
-        <h2 class="text-lg font-bold text-green-700 mb-3">
-          📜 Danh sách góp ý của khách
-        </h2>
-        <p class="text-xs text-gray-500 mb-3">
-          Chỉ admin nhìn thấy trang này. Khách chỉ có thể gửi góp ý ở khung bên trái.
-        </p>
-        <div id="gopyList" class="text-sm space-y-2"></div>
-      </div>
-
     </section>
 
     <!-- ==== CỘT PHẢI ==== -->
@@ -755,22 +747,36 @@
         <div id="thongbaoMarquee">
           <div id="thongbaoContent">
             <p>✔ Mừng khai trương giảm giá 10%</p>
-            <p>✔ Menu đa dạng</p>
+            <p>✔ Ưu đãi mua 2 tặng 1 Trà Sữa size L</p>
           </div>
         </div>
       </div>
 
+      <!-- LIÊN HỆ + BẢN ĐỒ -->
       <div class="card p-3 mt-3 text-sm" id="lienhe">
-        <h4 class="font-semibold text-green-700 mb-2">Liên hệ</h4>
-        <p>Admin: <b>Huỳnh Đức Nam</b></p>
-        <p>Email: <a href="mailto:contact@namcoffee.vn" class="text-blue-600 hover:underline">contact@namcoffee.vn</a></p>
-        <p>SĐT: 0905 638 959</p>
+        <h4 class="font-semibold text-green-700 mb-2">📍 Liên hệ</h4>
+        <p><b>NAM CÀ PHÊ</b></p>
+        <p>Địa chỉ: 62 Trần Thị Lý, xã Thăng Bình, TP. Đà Nẵng</p>
+        <p>Điện thoại: <b>0905 638 959 (Nam)</b></p>
+
+        <!-- Bản đồ Google Map -->
+        <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border mt-3">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3932414.5703062806!2d103.74066778749997!3d15.7379825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420b003dce5bf9%3A0x73125560dcbe374a!2zTkFNIEPDgCBQSMOK!5e0!3m2!1svi!2s!4v1764414484264!5m2!1svi!2s"
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
       </div>
     </aside>
   </main>
 
   <footer class="container-max mx-auto px-4 py-4 text-center text-xs text-gray-600">
-    © 2025 Nam Cà Phê  — Thiết kế bởi <b>Mr.Thiên</b>
+    © 2025 Nam Cà Phê — Thiết kế & vận hành bởi <b>Mr. Thiên</b>
   </footer>
 
   <!-- ======== MODAL GIỎ HÀNG ======== -->
@@ -779,9 +785,7 @@
       <h3 class="text-lg font-semibold text-green-700 mb-3 flex items-center gap-2">
         🛒 Giỏ hàng của bạn
       </h3>
-      <div id="cartItems" class="max-h-72 overflow-y-auto text-sm space-y-2">
-        <!-- Render bằng JS -->
-      </div>
+      <div id="cartItems" class="max-h-72 overflow-y-auto text-sm space-y-2"></div>
       <div class="mt-3 flex justify-between text-sm font-semibold text-gray-700">
         <span>Tổng cộng:</span>
         <span id="cartTotal">0đ</span>
@@ -834,12 +838,11 @@
   <!-- ======== FIREBASE SCRIPT (MODULE) ======== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import {
-      getAuth, signInWithEmailAndPassword,
-      signOut, onAuthStateChanged
+    import { 
+      getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged 
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import {
-      getFirestore, doc, addDoc, deleteDoc, updateDoc,
+    import { 
+      getFirestore, doc, setDoc, getDoc, addDoc, deleteDoc, updateDoc,
       collection, serverTimestamp, onSnapshot, query, orderBy
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -861,28 +864,26 @@
     let currentUser = null;
     let ordersUnsub = null;
 
-    // ========== ĐĂNG NHẬP (CHỈ ADMIN) ==========
+    // ===== ĐĂNG NHẬP ADMIN =====
     window.doLogin = async function() {
+      const email = loginEmail.value.trim();
+      const pass = loginPass.value.trim();
+
+      if (!email || !pass) {
+        alert("Vui lòng nhập đầy đủ Email và Mật khẩu!");
+        return;
+      }
+
+      if (email !== adminEmail) {
+        alert("Chỉ tài khoản Admin mới được phép đăng nhập!");
+        return;
+      }
+
       try {
-        const email = document.getElementById("loginEmail").value.trim();
-        const pass = document.getElementById("loginPass").value.trim();
-
-        if (!email || !pass) {
-          alert("Vui lòng nhập Email và Mật khẩu!");
-          return;
-        }
-
         const userCred = await signInWithEmailAndPassword(auth, email, pass);
-
-        if (userCred.user.email !== adminEmail) {
-          await signOut(auth);
-          alert("Chỉ Admin Nam Cà Phê mới được phép đăng nhập.");
-          return;
-        }
-
         currentUser = userCred.user;
 
-        if (document.getElementById("rememberMe").checked) {
+        if (rememberMe.checked) {
           localStorage.setItem("savedEmail", email);
           localStorage.setItem("savedPass", pass);
         } else {
@@ -892,85 +893,96 @@
 
         localStorage.setItem("userEmail", currentUser.email);
 
-        document.getElementById("loginBox").classList.add("hidden");
-        document.getElementById("loggedBox").classList.remove("hidden");
-        document.getElementById("loggedInfo").innerHTML = `Xin chào <b>Admin</b>`;
-
+        loginBox.classList.add("hidden");
+        loggedBox.classList.remove("hidden");
+        loggedInfo.innerHTML = `Xin chào <b>Admin</b>`;
         enableAdminUI(currentUser.email);
-
       } catch (e) {
-        console.error(e);
-        alert("Đăng nhập thất bại! Vui lòng kiểm tra lại thông tin.");
+        alert("Đăng nhập thất bại. Vui lòng kiểm tra lại mật khẩu!");
       }
     };
 
-    // ========== ĐĂNG XUẤT ==========
+    // ===== ĐĂNG XUẤT ADMIN =====
     window.doLogout = async function() {
       await signOut(auth);
       currentUser = null;
-      document.getElementById("loginBox").classList.remove("hidden");
-      document.getElementById("loggedBox").classList.add("hidden");
-
       localStorage.removeItem("userEmail");
-      localStorage.removeItem("savedEmail");
-      localStorage.removeItem("savedPass");
-
+      loginBox.classList.remove("hidden");
+      loggedBox.classList.add("hidden");
       enableAdminUI("");
     };
 
-    // ========== GÓP Ý ==========
+    // ===== GÓP Ý: THÊM VÀO FIRESTORE =====
     window.sendGopy = async function() {
-      const name = document.getElementById("gopyName").value.trim();
-      const content = document.getElementById("gopyText").value.trim();
+      const name = gopyName.value.trim();
+      const content = gopyText.value.trim();
 
       if (!name || !content) {
-        alert("Vui lòng nhập đầy đủ Họ tên và Nội dung góp ý!");
+        alert("Vui lòng nhập Họ tên và Nội dung góp ý.");
         return;
       }
 
-      await addDoc(collection(db, "gopy"), {
-        name,
-        content,
-        created: serverTimestamp()
-      });
+      try {
+        await addDoc(collection(db, "gopy"), {
+          name,
+          content,
+          created: serverTimestamp()
+        });
 
-      document.getElementById("gopyName").value = "";
-      document.getElementById("gopyText").value = "";
+        gopyName.value = "";
+        gopyText.value = "";
 
-      alert(`Nam Cà Phê xin chân thành ghi nhận góp ý của Anh/Chị ${name}. Cảm ơn bạn đã dành thời gian chia sẻ, chúng tôi sẽ xem xét và cải thiện dịch vụ để phục vụ bạn tốt hơn trong những lần ghé sau!`);
+        alert(
+          "Nam Cà Phê xin chân thành cảm ơn và ghi nhận góp ý của bạn.\n" +
+          "Chúng tôi sẽ nỗ lực hoàn thiện hơn để mang đến trải nghiệm tốt hơn trong những lần ghé thăm tiếp theo! ☕🌿"
+        );
+      } catch (err) {
+        console.error(err);
+        alert("Có lỗi xảy ra khi gửi góp ý. Vui lòng thử lại sau!");
+      }
     };
 
-    // Lắng nghe danh sách góp ý (hiển thị trong TRANG ADMIN)
+    // ===== LẮNG NGHE DANH SÁCH GÓP Ý (ADMIN VIEW) =====
     const qGopy = query(collection(db, "gopy"), orderBy("created", "desc"));
     onSnapshot(qGopy, (snapshot) => {
-      const gopyList = document.getElementById("gopyList");
-      if (!gopyList) return;
+      const listEl = document.getElementById("gopyList");
+      if (!listEl) return;
 
-      gopyList.innerHTML = "";
+      listEl.innerHTML = "";
       if (snapshot.empty) {
-        gopyList.innerHTML = `<p class="text-gray-500 text-sm">Chưa có góp ý nào.</p>`;
+        listEl.innerHTML = `<p class="text-gray-500 text-sm">Chưa có góp ý nào.</p>`;
         return;
       }
 
       snapshot.forEach((docu) => {
         const d = docu.data();
+        const created =
+          d.created?.toDate
+            ? d.created.toDate().toLocaleString("vi-VN")
+            : "";
+
         const el = document.createElement("div");
         el.className = "border rounded p-2 bg-gray-50";
+
+        const isAdmin = localStorage.getItem("userEmail") === adminEmail;
+        const deleteBtn = isAdmin
+          ? `<button onclick="deleteGopy('${docu.id}')" class="text-xs text-red-500 mt-1 underline">Xóa góp ý</button>`
+          : "";
+
         el.innerHTML = `
-          <div class="text-gray-700 text-sm">
-            <b>${d.name || "Khách"}</b><br/>
-            ${d.content || ""}
+          <div class="flex justify-between items-center mb-1">
+            <span class="text-xs text-gray-400">${created}</span>
           </div>
-          ${localStorage.getItem("userEmail") === adminEmail
-            ? `<button onclick="deleteGopy('${docu.id}')" class="text-xs text-red-500 mt-1 underline">Xóa</button>`
-            : ""
-          }
+          <div class="text-gray-700 text-sm">
+            <b>${d.name}</b>: ${d.content}
+          </div>
+          ${deleteBtn}
         `;
-        gopyList.appendChild(el);
+        listEl.appendChild(el);
       });
     });
 
-    // Xóa góp ý (Admin)
+    // XÓA GÓP Ý (chỉ admin)
     window.deleteGopy = async function(id) {
       const userEmail = localStorage.getItem("userEmail");
       if (userEmail !== adminEmail) {
@@ -978,11 +990,16 @@
         return;
       }
       if (!confirm("Bạn có chắc muốn xóa góp ý này không?")) return;
-      await deleteDoc(doc(db, "gopy", id));
-      alert("Đã xóa góp ý!");
+      try {
+        await deleteDoc(doc(db, "gopy", id));
+        alert("Đã xóa góp ý!");
+      } catch (err) {
+        console.error(err);
+        alert("Lỗi khi xóa góp ý!");
+      }
     };
 
-    // ========== ĐƠN HÀNG ==========
+    // ===== LƯU ĐƠN HÀNG XUỐNG FIRESTORE =====
     window.saveOrderToFirestore = async function(orderData) {
       try {
         await addDoc(collection(db, "orders"), {
@@ -996,6 +1013,7 @@
       }
     };
 
+    // ===== CẬP NHẬT TRẠNG THÁI ĐƠN HÀNG =====
     window.updateOrderStatus = async function(orderId, newStatus) {
       const email = localStorage.getItem("userEmail");
       if (email !== adminEmail) {
@@ -1010,6 +1028,7 @@
       }
     };
 
+    // ===== LẮNG NGHE DANH SÁCH ĐƠN HÀNG (ADMIN) =====
     function startOrdersListener() {
       const ordersListEl = document.getElementById("ordersList");
       if (!ordersListEl) return;
@@ -1019,7 +1038,11 @@
         ordersUnsub = null;
       }
 
-      const qOrders = query(collection(db, "orders"), orderBy("created", "desc"));
+      const qOrders = query(
+        collection(db, "orders"),
+        orderBy("created", "desc")
+      );
+
       ordersUnsub = onSnapshot(qOrders, (snapshot) => {
         if (snapshot.empty) {
           ordersListEl.innerHTML = `<p class="text-gray-500 text-sm">Chưa có đơn hàng nào.</p>`;
@@ -1029,11 +1052,10 @@
         let html = "";
         snapshot.forEach((docu) => {
           const d = docu.data();
-          const created = d.created?.toDate
-            ? d.created.toDate().toLocaleString("vi-VN")
-            : "";
+          const created =
+            d.created?.toDate ? d.created.toDate().toLocaleString("vi-VN") : "";
           const itemsText = (d.items || [])
-            .map(i => {
+            .map((i) => {
               const p = i.price ? ` - ${i.price.toLocaleString("vi-VN")}đ` : "";
               return `• ${i.name} x ${i.qty}${p}`;
             })
@@ -1041,13 +1063,15 @@
 
           const status = d.status || "pending";
           const statusLabel = status === "done" ? "Đã xử lý" : "Chưa xử lý";
-          const statusClass = status === "done"
-            ? "bg-green-100 text-green-700"
-            : "bg-yellow-100 text-yellow-700";
+          const statusClass =
+            status === "done"
+              ? "bg-green-100 text-green-700"
+              : "bg-yellow-100 text-yellow-700";
 
-          const toggleBtn = status === "done"
-            ? `<button onclick="updateOrderStatus('${docu.id}','pending')" class="mt-2 text-xs px-2 py-1 rounded border border-yellow-400 text-yellow-700 hover:bg-yellow-50">Đánh dấu CHƯA xử lý</button>`
-            : `<button onclick="updateOrderStatus('${docu.id}','done')" class="mt-2 text-xs px-2 py-1 rounded border border-green-500 text-green-700 hover:bg-green-50">Đánh dấu ĐÃ xử lý</button>`;
+          const toggleBtn =
+            status === "done"
+              ? `<button onclick="updateOrderStatus('${docu.id}','pending')" class="mt-2 text-xs px-2 py-1 rounded border border-yellow-400 text-yellow-700 hover:bg-yellow-50">Đánh dấu CHƯA xử lý</button>`
+              : `<button onclick="updateOrderStatus('${docu.id}','done')" class="mt-2 text-xs px-2 py-1 rounded border border-green-500 text-green-700 hover:bg-green-50">Đánh dấu ĐÃ xử lý</button>`;
 
           html += `
             <div class="border rounded-lg p-3 bg-gray-50">
@@ -1072,115 +1096,102 @@
       });
     }
 
-    // ========== BẬT / TẮT UI ADMIN ==========
+    // ===== BẬT / TẮT UI ADMIN =====
     function enableAdminUI(email) {
       const orderMenu = document.getElementById("orderListMenu");
-      const gopyAdminSection = document.getElementById("gopyAdminSection");
       const gopyMenu = document.getElementById("gopyMenu");
 
+      if (!orderMenu || !gopyMenu) return;
+
       if (email === adminEmail) {
-        if (orderMenu) orderMenu.classList.remove("hidden");
-        if (gopyMenu) gopyMenu.classList.remove("hidden");
-        // Chỉ bật listener đơn hàng, còn gopy thì snapshot đã chạy sẵn
+        orderMenu.classList.remove("hidden");
+        gopyMenu.classList.remove("hidden");
         startOrdersListener();
       } else {
-        if (orderMenu) orderMenu.classList.add("hidden");
-        if (gopyMenu) gopyMenu.classList.add("hidden");
-        if (gopyAdminSection) gopyAdminSection.classList.add("hidden");
+        orderMenu.classList.add("hidden");
+        gopyMenu.classList.add("hidden");
         if (ordersUnsub) {
           ordersUnsub();
           ordersUnsub = null;
         }
       }
     }
+
     window.enableAdminUI = enableAdminUI;
 
-    // ========== HIỆN / ẨN CÁC MỤC TRUNG TÂM ==========
+    // ===== CHUYỂN SECTION =====
     window.showSection = function(section) {
-      const thongbao = document.getElementById('thongbao');
-      const gioithieu = document.getElementById('gioithieu');
-      const sanpham = document.getElementById('sanpham');
-      const ordersSection = document.getElementById('ordersSection');
-      const gopyAdminSection = document.getElementById('gopyAdminSection');
+      const gioithieu = document.getElementById("gioithieu");
+      const sanpham = document.getElementById("sanpham");
+      const thongbao = document.getElementById("thongbao");
+      const gopyPage = document.getElementById("gopyPage");
+      const ordersSection = document.getElementById("ordersSection");
 
-      if (thongbao) thongbao.classList.add('hidden');
-      if (gioithieu) gioithieu.classList.add('hidden');
-      if (sanpham) sanpham.classList.add('hidden');
-      if (ordersSection) ordersSection.classList.add('hidden');
-      if (gopyAdminSection) gopyAdminSection.classList.add('hidden');
+      [gioithieu, sanpham, thongbao, gopyPage, ordersSection].forEach((el) => {
+        if (el) el.classList.add("hidden");
+      });
 
-      if (section === 'gioithieu') {
-        if (gioithieu) gioithieu.classList.remove('hidden');
-      } else if (section === 'sanpham') {
-        if (sanpham) sanpham.classList.remove('hidden');
-      } else if (section === 'orders') {
+      if (section === "gioithieu") {
+        gioithieu.classList.remove("hidden");
+      } else if (section === "sanpham") {
+        sanpham.classList.remove("hidden");
+      } else if (section === "thongbao") {
+        thongbao.classList.remove("hidden");
+      } else if (section === "gopy") {
         const email = localStorage.getItem("userEmail");
         if (email === adminEmail) {
-          if (ordersSection) ordersSection.classList.remove('hidden');
-        } else {
-          alert("Chỉ admin mới được xem danh sách đơn đặt hàng!");
-          if (gioithieu) gioithieu.classList.remove('hidden');
-        }
-      } else if (section === 'gopyAdmin') {
-        const email = localStorage.getItem("userEmail");
-        if (email === adminEmail) {
-          if (gopyAdminSection) gopyAdminSection.classList.remove('hidden');
+          gopyPage.classList.remove("hidden");
         } else {
           alert("Chỉ admin mới được xem danh sách góp ý!");
-          if (gioithieu) gioithieu.classList.remove('hidden');
+          gioithieu.classList.remove("hidden");
+        }
+      } else if (section === "orders") {
+        const email = localStorage.getItem("userEmail");
+        if (email === adminEmail) {
+          ordersSection.classList.remove("hidden");
+        } else {
+          alert("Chỉ admin mới được xem danh sách khách đặt hàng!");
+          gioithieu.classList.remove("hidden");
         }
       } else {
-        if (thongbao) thongbao.classList.remove('hidden');
+        gioithieu.classList.remove("hidden");
       }
     };
 
-    // ========== KHỞI TẠO ==========
+    // ===== KHỞI TẠO =====
     window.addEventListener("load", () => {
       document.body.classList.add("banner-loaded");
 
       const savedEmail = localStorage.getItem("savedEmail");
       const savedPass = localStorage.getItem("savedPass");
       if (savedEmail && savedPass) {
-        const emailInput = document.getElementById("loginEmail");
-        const passInput = document.getElementById("loginPass");
-        const remember = document.getElementById("rememberMe");
-        if (emailInput) emailInput.value = savedEmail;
-        if (passInput) passInput.value = savedPass;
-        if (remember) remember.checked = true;
+        loginEmail.value = savedEmail;
+        loginPass.value = savedPass;
+        rememberMe.checked = true;
       }
 
-      showSection('gioithieu');
+      showSection("gioithieu");
 
-      onAuthStateChanged(auth, async (user) => {
+      onAuthStateChanged(auth, (user) => {
         if (user && user.email === adminEmail) {
           currentUser = user;
           localStorage.setItem("userEmail", user.email);
-
-          const loginBox = document.getElementById("loginBox");
-          const loggedBox = document.getElementById("loggedBox");
-          if (loginBox) loginBox.classList.add("hidden");
-          if (loggedBox) loggedBox.classList.remove("hidden");
-          const loggedInfo = document.getElementById("loggedInfo");
-          if (loggedInfo) loggedInfo.innerHTML = `Xin chào <b>Admin</b>`;
-
+          loginBox.classList.add("hidden");
+          loggedBox.classList.remove("hidden");
+          loggedInfo.innerHTML = `Xin chào <b>Admin</b>`;
           enableAdminUI(user.email);
         } else {
           currentUser = null;
+          loginBox.classList.remove("hidden");
+          loggedBox.classList.add("hidden");
           localStorage.removeItem("userEmail");
-
-          const loginBox = document.getElementById("loginBox");
-          const loggedBox = document.getElementById("loggedBox");
-          if (loginBox) loginBox.classList.remove("hidden");
-          if (loggedBox) loggedBox.classList.add("hidden");
-
           enableAdminUI("");
         }
       });
     });
-
   </script>
 
-  <!-- ⭐⭐⭐ GIỎ HÀNG & ĐẶT HÀNG (SCRIPT THƯỜNG) ⭐⭐⭐ -->
+  <!-- ======== GIỎ HÀNG & ĐẶT HÀNG (SCRIPT THƯỜNG) ======== -->
   <script>
     let cart = [];
     let currentOrderSource = "single"; // 'single' | 'cart'
