@@ -24,8 +24,6 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
-    .banner-text { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
-    .banner-loaded .banner-text { opacity: 1; transform: translateY(0); }
     .zalo-button {
       position: fixed; bottom: 20px; right: 20px; z-index: 9999;
       width: 60px; height: 60px; border-radius: 50%;
@@ -34,9 +32,22 @@
     }
     .zalo-button:hover { transform: scale(1.1); box-shadow: 0 6px 14px rgba(0,0,0,0.3); }
     .zalo-button img { width: 35px; height: 35px; }
+
     .modal {
       position: fixed; inset: 0; background: rgba(0,0,0,0.5);
       display: none; align-items: center; justify-content: center; z-index: 10000;
+    }
+    .modal-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .modal.show {
+      display: flex;
+    }
+    .modal.show .modal-content {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Dòng chữ chạy NGANG dưới menu */
@@ -75,7 +86,6 @@
       0% { transform: translateY(100%); }
       100% { transform: translateY(-100%); }
     }
-
     #thongbaoContent p {
       margin: 0;
       padding: 2px 0;
@@ -98,25 +108,25 @@
 
   <!-- ======== MENU ======== -->
   <nav class="bg-green-600 text-white shadow-sm sticky top-0 z-40">
-    <div class="container-max mx-auto px-4">
-      <ul class="flex flex-wrap gap-3 md:gap-6 py-3 font-semibold text-sm items-center">
+    <div class="container-max mx-auto px-4 flex items-center">
+      <!-- Logo góc trái - thay src bằng logo thật của bạn -->
+      <a href="#gioithieu" class="flex items-center gap-2 py-2 mr-6" onclick="showSection('gioithieu')">
+        <img src="https://upanhnhanh.com/b7e3f61799de160c963ee1af62b820e4" alt="Nam Cà Phê" class="h-8 w-8 rounded-full border border-white shadow">
+        <span class="font-bold text-sm md:text-base">NAM CÀ PHÊ</span>
+      </a>
+
+      <ul class="flex flex-wrap gap-3 md:gap-6 py-3 font-semibold text-sm items-center flex-1">
         <li><a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">Giới thiệu</a></li>
         <li><a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Thực Đơn</a></li>
+        <li><a href="#lienhe" class="hover:underline" onclick="showSection('lienhe')">Liên hệ</a></li>
 
-        <!-- Nút Form góp ý (chỉ admin thấy) -->
+        <!-- Chỉ admin mới thấy -->
         <li id="gopyMenu" class="hidden">
-          <a href="#gopyPage" class="hover:underline" onclick="showSection('gopy')">Form góp ý</a>
+          <a href="#gopyAdmin" class="hover:underline" onclick="showSection('gopyAdmin')">Form góp ý</a>
         </li>
-
-        <!-- Nút danh sách đơn hàng (chỉ admin thấy) -->
         <li id="orderListMenu" class="hidden">
-          <a href="#ordersSection" class="hover:underline" onclick="showSection('orders')">
-            Danh sách khách đặt hàng
-          </a>
+          <a href="#orders" class="hover:underline" onclick="showSection('orders')">Danh sách khách đặt hàng</a>
         </li>
-
-        <!-- Liên hệ: chỉ cuộn xuống khu vực liên hệ -->
-        <li><a href="#lienhe" class="hover:underline">Liên hệ</a></li>
 
         <!-- GIỎ HÀNG -->
         <li class="ml-auto flex items-center gap-1 cursor-pointer text-[13px] md:text-sm px-3 py-1 rounded-full bg-green-700 hover:bg-green-800 transition"
@@ -130,46 +140,40 @@
 
   <!-- ======== DÒNG CHỮ CHẠY NGANG ======== -->
   <div class="banner-marquee w-full">
-    <span>🌿 Nam Cà Phê! Nơi thư giãn lý tưởng, phục vụ chu đáo. Mọi góp ý xin quý khách vui lòng để lại ngay trên website hoặc liên hệ Zalo: 0905 638 959. 🌿</span>
+    <span>🌿 Nam Cà Phê ! Nơi thư giãn lý tưởng, phục vụ chu đáo, mọi góp ý xin quý khách vui lòng gọi hoặc nhắn tin Zalo : 0905 638 959. 🌿</span>
   </div>
 
   <!-- ======== MAIN ======== -->
-  <main class="container-max mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[260px_1fr_260px] gap-6">
+  <main class="container-max mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[260px_1fr_240px] gap-6">
 
     <!-- ==== CỘT TRÁI ==== -->
     <aside>
       <!-- Đăng nhập admin -->
-      <div id="loginBox" class="card p-3">
-        <h3 class="font-semibold text-green-700 mb-2 text-sm">🔐 Đăng nhập (Admin)</h3>
+      <div id="loginBox" class="card p-3 text-sm">
+        <h3 class="font-semibold text-green-700 mb-2">🔐 Đăng nhập quản trị</h3>
+        <p class="text-xs text-gray-600 mb-2">Chỉ dành cho Admin để xem danh sách góp ý & đơn đặt hàng.</p>
         <input id="loginEmail" type="email" placeholder="Email admin" class="w-full border p-1.5 rounded mb-1" />
         <input id="loginPass" type="password" placeholder="Mật khẩu" class="w-full border p-1.5 rounded mb-2" />
-        <div class="flex items-center mb-2">
-          <input type="checkbox" id="rememberMe" class="mr-2">
-          <label for="rememberMe" class="text-xs text-gray-700">Lưu thông tin đăng nhập</label>
-        </div>
-        <button onclick="doLogin()" class="w-full bg-green-600 hover:bg-green-700 transition text-white py-1.5 rounded text-sm">
-          Đăng nhập
-        </button>
-        <p class="mt-2 text-[11px] text-gray-500">
-          * Khu vực này chỉ dành cho quản trị quán.
-        </p>
+        <button onclick="doLogin()" class="w-full bg-green-600 hover:bg-green-700 transition text-white py-1.5 rounded text-sm">Đăng nhập</button>
       </div>
 
       <!-- Đã đăng nhập admin -->
       <div id="loggedBox" class="card p-3 mt-3 hidden text-sm">
-        <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">Xin chào <b>Admin</b></div>
+        <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">
+          Đã đăng nhập với tài khoản admin.
+        </div>
         <button onclick="doLogout()" class="w-full bg-red-500 hover:bg-red-600 transition text-white py-1.5 rounded">
           Đăng xuất
         </button>
       </div>
 
-      <!-- Form góp ý KHÁCH HÀNG -->
+      <!-- Form góp ý của khách -->
       <div class="card p-3 mt-3 text-sm" id="gopySection">
         <h4 class="font-semibold text-green-700 mb-2">💬 Góp ý cho Nam Cà Phê</h4>
-        <p class="text-xs text-gray-500 mb-2">
-          Mọi chia sẻ của bạn giúp Nam Cà Phê phục vụ tốt hơn trong những lần ghé thăm tiếp theo. 🥰
+        <p class="text-xs text-gray-600 mb-2">
+          Mọi ý kiến đóng góp của quý khách là động lực để Nam Cà Phê hoàn thiện tốt hơn mỗi ngày. Xin chân thành cảm ơn! 💚
         </p>
-        <input id="gopyName" type="text" placeholder="Họ và tên của bạn" class="w-full border p-2 rounded mb-2 text-sm" />
+        <input id="gopyName" type="text" placeholder="Họ tên của bạn" class="w-full border rounded p-2 text-sm mb-2">
         <textarea id="gopyText" rows="3" placeholder="Nội dung góp ý..." class="w-full border rounded p-2 text-sm"></textarea>
         <button onclick="sendGopy()" class="mt-2 bg-green-600 hover:bg-green-700 transition text-white px-4 py-1.5 rounded text-sm w-full">
           Gửi góp ý
@@ -182,56 +186,52 @@
 
       <!-- ======= GIỚI THIỆU ======= -->
       <div id="gioithieu" class="card p-4">
-        <h2 class="text-lg font-bold text-green-700 mb-3 text-center">
-          ✨ LỜI CẢM ƠN – KHAI TRƯƠNG NAM CÀ PHÊ ✨
-        </h2>
+        <h2 class="text-lg font-bold text-green-700 mb-3 text-center">✨ LỜI CẢM ƠN – KHAI TRƯƠNG NAM CÀ PHÊ ✨</h2>
 
-        <p class="mb-2">
-          Hôm nay, 📅 <b>Ngày 29/11/2025</b>, <b>NAM CÀ PHÊ</b> 
-          (📍 <b>62 Trần Thị Lý, xã Thăng Bình, TP. Đà Nẵng</b>) 
+        <p class="mb-2 text-sm">
+          Hôm nay, <b>ngày 29/11/2025</b>, <b>NAM CÀ PHÊ</b> (📍 62 Trần Thị Lý, xã Thăng Bình, TP. Đà Nẵng)
           hân hoan chào đón ngày khai trương trong không khí thật tưng bừng và ấm áp.
         </p>
-
-        <p class="mb-2">
-          Chúng tôi xin gửi lời cảm ơn chân thành đến tất cả quý khách hàng, bạn bè và người thân 
-          đã ghé thăm, ủng hộ và chia sẻ niềm vui cùng quán trong ngày đặc biệt này. 
-          Sự hiện diện của quý khách là niềm vinh hạnh và cũng là động lực để 
-          <b>NAM CÀ PHÊ</b> không ngừng hoàn thiện mỗi ngày.
+        <p class="mb-2 text-sm">
+          Chúng tôi xin gửi lời cảm ơn chân thành đến tất cả quý khách hàng, bạn bè và người thân đã ghé thăm,
+          ủng hộ và chia sẻ niềm vui cùng quán trong ngày đặc biệt này. Sự hiện diện của quý khách là niềm vinh hạnh
+          và là động lực to lớn để <b>NAM CÀ PHÊ</b> không ngừng cố gắng.
         </p>
 
-        <h3 class="font-semibold text-green-700 mt-3 mb-1">🎉 Ưu đãi khai trương</h3>
-        <ul class="list-disc list-inside text-sm mb-2">
-          <li>🎁 <b>Giảm 10%</b> trên toàn bộ hoá đơn.</li>
-          <li>🥤 <b>Mua 2 ly Trà Sữa size L – Tặng 1 ly Trà Sữa size M</b><br>
-              (Quý khách được tự chọn topping &amp; hương vị)</li>
-        </ul>
-        <p class="mb-2 text-sm text-gray-600">
-          ⏳ Chương trình áp dụng đến hết ngày <b>01/12/2025</b>.
-        </p>
+        <div class="border-l-4 border-green-500 bg-green-50 px-3 py-2 my-3 text-sm">
+          <p class="font-semibold mb-1">🎉 Ưu đãi khai trương đặc biệt:</p>
+          <ul class="list-disc list-inside">
+            <li>Giảm <b>10%</b> trên toàn bộ hoá đơn.</li>
+            <li>
+              <b>Mua 2 ly Trà Sữa size L – Tặng 1 ly Trà Sữa size M</b><br>
+              <span class="text-xs text-gray-700">(Quý khách được tự chọn topping &amp; hương vị)</span>
+            </li>
+          </ul>
+          <p class="mt-1 text-xs text-gray-600">⏳ Áp dụng đến hết ngày <b>01/12/2025</b>.</p>
+        </div>
 
-        <p class="mb-2">
-          Do lượng khách đến trong ngày khai trương khá đông, 
-          không thể tránh khỏi một số thiếu sót trong phục vụ. 
-          <b>NAM CÀ PHÊ</b> rất mong nhận được sự thông cảm và những góp ý chân thành từ quý khách 
+        <p class="mb-2 text-sm">
+          Do lượng khách đến trong ngày khai trương khá đông, không thể tránh khỏi một số thiếu sót trong phục vụ.
+          <b>NAM CÀ PHÊ</b> rất mong nhận được sự thông cảm và những góp ý chân thành từ quý khách
           để chúng tôi có thể hoàn thiện hơn và mang đến trải nghiệm tốt nhất trong những lần sau.
         </p>
 
-        <p class="mb-2">
-          🌿 Với thiết kế hiện đại – tinh tế, không gian thoáng đãng cùng view đẹp, 
-          <b>NAM CÀ PHÊ</b> hy vọng sẽ trở thành nơi lý tưởng để quý khách thư giãn, 
-          làm việc hoặc trò chuyện cùng bạn bè. Đội ngũ nhân viên tận tình, chu đáo 
-          luôn sẵn sàng mang đến cho quý khách những ly nước chất lượng và sự hài lòng trọn vẹn.
+        <p class="mb-2 text-sm">
+          🌿 Với thiết kế hiện đại – tinh tế, không gian kết hợp cùng view đẹp và thoáng đãng,
+          <b>NAM CÀ PHÊ</b> hy vọng sẽ trở thành nơi lý tưởng để quý khách thư giãn, làm việc hoặc
+          trò chuyện cùng bạn bè. Đội ngũ nhân viên phục vụ tận tình, chu đáo luôn sẵn sàng
+          mang đến cho quý khách những ly nước chất lượng và sự hài lòng trọn vẹn.
         </p>
 
-        <p class="mt-3 font-semibold text-center">
-          Một lần nữa, xin chân thành cảm ơn và rất hân hạnh được phục vụ quý khách! ❤️<br/>
+        <p class="mt-3 text-sm font-semibold text-center">
+          Một lần nữa, xin chân thành cảm ơn và hân hạnh được phục vụ quý khách! ❤️<br>
           <span class="text-green-700">NAM CÀ PHÊ – Hương vị làm nên cảm xúc</span>
         </p>
       </div>
 
-      <!-- ======= THỰC ĐƠN / MENU NƯỚC ======= -->
+      <!-- ======= THỰC ĐƠN / SẢN PHẨM ======= -->
       <div id="sanpham" class="card p-4 hidden">
-        <h2 class="text-lg font-bold text-green-700 mb-4">☕ Thực Đơn NAM CÀ PHÊ</h2>
+        <h2 class="text-lg font-bold text-green-700 mb-4">☕ Thực đơn NAM CÀ PHÊ</h2>
 
         <div class="space-y-6 text-sm">
 
@@ -239,6 +239,7 @@
           <div>
             <h3 class="font-semibold text-green-700 mb-2">✅ 1. CÀ PHÊ</h3>
             <div class="grid sm:grid-cols-2 gap-3">
+
               <!-- Cà phê đen -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
                 <div>
@@ -250,6 +251,7 @@
                   <button onclick="addToCart('Cà phê đen', 16000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <!-- Cà phê sữa -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
                 <div>
@@ -261,6 +263,7 @@
                   <button onclick="addToCart('Cà phê sữa', 17000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <!-- Cà phê đen Sài Gòn -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
                 <div>
@@ -272,6 +275,7 @@
                   <button onclick="addToCart('Cà phê đen Sài Gòn', 18000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <!-- Cà phê sữa Sài Gòn -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
                 <div>
@@ -283,6 +287,7 @@
                   <button onclick="addToCart('Cà phê sữa Sài Gòn', 20000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <!-- Cà phê muối -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
                 <div>
@@ -294,6 +299,7 @@
                   <button onclick="addToCart('Cà phê muối', 28000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <!-- Bạc xỉu -->
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
                 <div>
@@ -305,6 +311,7 @@
                   <button onclick="addToCart('Bạc xỉu', 25000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -313,28 +320,40 @@
             <h3 class="font-semibold text-green-700 mb-2">🍫 2. CA CAO</h3>
             <div class="grid sm:grid-cols-2 gap-3">
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Ca cao nóng/đá</p><p class="text-xs text-gray-500">25k</p></div>
+                <div>
+                  <p class="font-medium">Ca cao nóng/đá</p>
+                  <p class="text-xs text-gray-500">25k</p>
+                </div>
                 <div class="mt-3 flex gap-2 flex-wrap">
                   <button onclick="openOrderModal('Ca cao nóng/đá')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Ca cao nóng/đá', 25000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Ca cao muối</p><p class="text-xs text-gray-500">26k</p></div>
+                <div>
+                  <p class="font-medium">Ca cao muối</p>
+                  <p class="text-xs text-gray-500">26k</p>
+                </div>
                 <div class="mt-3 flex gap-2 flex-wrap">
                   <button onclick="openOrderModal('Ca cao muối')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Ca cao muối', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Socola nóng</p><p class="text-xs text-gray-500">26k</p></div>
+                <div>
+                  <p class="font-medium">Socola nóng</p>
+                  <p class="text-xs text-gray-500">26k</p>
+                </div>
                 <div class="mt-3 flex gap-2 flex-wrap">
                   <button onclick="openOrderModal('Socola nóng')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Socola nóng', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Ca cao latte</p><p class="text-xs text-gray-500">26k</p></div>
+                <div>
+                  <p class="font-medium">Ca cao latte</p>
+                  <p class="text-xs text-gray-500">26k</p>
+                </div>
                 <div class="mt-3 flex gap-2 flex-wrap">
                   <button onclick="openOrderModal('Ca cao latte')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Ca cao latte', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
@@ -347,6 +366,7 @@
           <div>
             <h3 class="font-semibold text-green-700 mb-2">🍵 3. TRÀ</h3>
             <div class="grid sm:grid-cols-2 gap-3">
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà gừng</p><p class="text-xs text-gray-500">22k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -354,6 +374,7 @@
                   <button onclick="addToCart('Trà gừng', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà chanh</p><p class="text-xs text-gray-500">22k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -361,6 +382,7 @@
                   <button onclick="addToCart('Trà chanh', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà Lipton</p><p class="text-xs text-gray-500">22k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -368,6 +390,7 @@
                   <button onclick="addToCart('Trà Lipton', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà đào</p><p class="text-xs text-gray-500">25k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -375,6 +398,7 @@
                   <button onclick="addToCart('Trà đào', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà vải</p><p class="text-xs text-gray-500">25k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -382,6 +406,7 @@
                   <button onclick="addToCart('Trà vải', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà việt quất</p><p class="text-xs text-gray-500">25k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -389,6 +414,7 @@
                   <button onclick="addToCart('Trà việt quất', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Trà đào cam sả</p><p class="text-xs text-gray-500">28k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -396,6 +422,7 @@
                   <button onclick="addToCart('Trà đào cam sả', 28000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -403,7 +430,7 @@
           <div>
             <h3 class="font-semibold text-green-700 mb-2">🥤 4. TRÀ SỮA</h3>
             <div class="grid sm:grid-cols-2 gap-3">
-              <!-- Trà sữa truyền thống -->
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div>
                   <p class="font-medium">Trà sữa truyền thống</p>
@@ -415,7 +442,7 @@
                   <button onclick="addToCart('Trà sữa truyền thống (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
                 </div>
               </div>
-              <!-- Trà sữa thái xanh -->
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div>
                   <p class="font-medium">Trà sữa thái xanh</p>
@@ -427,7 +454,7 @@
                   <button onclick="addToCart('Trà sữa thái xanh (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
                 </div>
               </div>
-              <!-- Trà sữa khoai môn -->
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div>
                   <p class="font-medium">Trà sữa khoai môn</p>
@@ -439,7 +466,7 @@
                   <button onclick="addToCart('Trà sữa khoai môn (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
                 </div>
               </div>
-              <!-- Sữa tươi trân châu đường đen -->
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div>
                   <p class="font-medium">Sữa tươi trân châu đường đen</p>
@@ -451,6 +478,7 @@
                   <button onclick="addToCart('Sữa tươi trân châu đường đen (L)', 28000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -535,6 +563,7 @@
           <div>
             <h3 class="font-semibold text-green-700 mb-2">🍈 7. NƯỚC ÉP</h3>
             <div class="grid sm:grid-cols-2 gap-3">
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Chanh đá</p><p class="text-xs text-gray-500">22k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -590,6 +619,7 @@
                   <button onclick="addToCart('Nước ép mix vị', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -661,8 +691,9 @@
 
           <!-- 10. NƯỚC ĐÓNG CHAI -->
           <div>
-            <h3 class="font-semibold text-green-700 mb-2">🧃 10. NƯỚC ĐÓNG CHAI</h3>
+            <h3 class="font-semibold text-green-700 mb-2">🧃 10. NƯỚC ĐÓNG CHAI / SNACK</h3>
             <div class="grid sm:grid-cols-2 gap-3">
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Bò húc</p><p class="text-xs text-gray-500">22k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -670,6 +701,7 @@
                   <button onclick="addToCart('Bò húc', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Sting</p><p class="text-xs text-gray-500">22k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -677,6 +709,7 @@
                   <button onclick="addToCart('Sting', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Pepsi</p><p class="text-xs text-gray-500">15k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -684,6 +717,7 @@
                   <button onclick="addToCart('Pepsi', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Khoáng</p><p class="text-xs text-gray-500">15k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -691,6 +725,7 @@
                   <button onclick="addToCart('Khoáng', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Hạt dừa</p><p class="text-xs text-gray-500">15k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -698,6 +733,7 @@
                   <button onclick="addToCart('Hạt dừa', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
                 <div><p class="font-medium">Hạt hướng dương</p><p class="text-xs text-gray-500">15k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
@@ -705,83 +741,73 @@
                   <button onclick="addToCart('Hạt hướng dương', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
+
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- ======= TIN TỨC / THÔNG BÁO (tạm để, có thể dùng sau) ======= -->
-      <div id="thongbao" class="card p-4 hidden">
-        <h2 class="text-lg font-bold text-green-700 mb-3">📢 Tin tức - Thông báo</h2>
-        <div id="newsList" class="space-y-3 text-sm text-gray-500">Đang trong quá trình hoàn thiện...</div>
+      <!-- ======= LIÊN HỆ ======= -->
+      <div id="lienheSection" class="card p-4 hidden">
+        <h2 class="text-lg font-bold text-green-700 mb-3">📍 Liên hệ NAM CÀ PHÊ</h2>
+        <p class="text-sm mb-1"><b>NAM CÀ PHÊ</b></p>
+        <p class="text-sm mb-1">Địa chỉ: 62 Trần Thị Lý, xã Thăng Bình, TP. Đà Nẵng</p>
+        <p class="text-sm mb-4">
+          Điện thoại:
+          <a href="tel:0905638959" class="text-blue-600 hover:underline">
+            0905 638 959 (Nam)
+          </a>
+        </p>
+
+        <div class="aspect-video w-full overflow-hidden rounded-lg shadow">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3932414.5703062806!2d103.74066778749997!3d15.7379825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420b003dce5bf9%3A0x73125560dcbe374a!2zTkFNIEPDgCBQSMOK!5e0!3m2!1svi!2s!4v1764414484264!5m2!1svi!2s"
+            width="100%" height="100%" style="border:0;" allowfullscreen=""
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
       </div>
 
-      <!-- ======= DANH SÁCH GÓP Ý (ADMIN) ======= -->
-      <div id="gopyPage" class="card p-4 hidden">
-        <h2 class="text-lg font-bold text-green-700 mb-3">
-          💬 Danh sách góp ý từ khách hàng (Admin)
-        </h2>
-        <p class="text-xs text-gray-500 mb-3">
-          Chỉ tài khoản admin mới xem được mục này. Góp ý được sắp xếp từ mới đến cũ.
-        </p>
-        <div id="gopyList" class="text-sm space-y-2"></div>
+      <!-- ======= FORM GÓP Ý (ADMIN XEM DANH SÁCH) ======= -->
+      <div id="gopyAdminSection" class="card p-4 hidden">
+        <h2 class="text-lg font-bold text-green-700 mb-3">📜 Danh sách góp ý (Admin)</h2>
+        <div id="gopyAdminList" class="text-sm space-y-2">
+          Chỉ admin mới xem được danh sách góp ý.
+        </div>
       </div>
 
       <!-- ======= DANH SÁCH ĐƠN HÀNG (ADMIN) ======= -->
       <div id="ordersSection" class="card p-4 hidden">
-        <h2 class="text-lg font-bold text-green-700 mb-3">
-          📦 Danh sách khách đặt hàng (Admin)
-        </h2>
+        <h2 class="text-lg font-bold text-green-700 mb-3">📦 Danh sách khách đặt hàng (Admin)</h2>
         <div id="ordersList" class="space-y-3 text-sm text-gray-700">
           Đang tải danh sách đơn hàng...
         </div>
       </div>
-
     </section>
 
     <!-- ==== CỘT PHẢI ==== -->
     <aside>
-      <div class="card p-3 text-sm">
-        <h3 class="font-semibold text-green-700 mb-2">Thông báo nhanh</h3>
+      <div class="card p-3 text-sm mb-3">
+        <h3 class="font-semibold text-green-700 mb-2">⚡ Thông báo nhanh</h3>
         <div id="thongbaoMarquee">
           <div id="thongbaoContent">
             <p>✔ Mừng khai trương giảm giá 10%</p>
-            <p>✔ Ưu đãi mua 2 tặng 1 Trà Sữa size L</p>
+            <p>✔ Mua 2 ly Trà Sữa L tặng 1 ly M</p>
+            <p>✔ Không gian rộng rãi, thoáng mát</p>
           </div>
-        </div>
-      </div>
-
-      <!-- LIÊN HỆ + BẢN ĐỒ -->
-      <div class="card p-3 mt-3 text-sm" id="lienhe">
-        <h4 class="font-semibold text-green-700 mb-2">📍 Liên hệ</h4>
-        <p><b>NAM CÀ PHÊ</b></p>
-        <p>Địa chỉ: 62 Trần Thị Lý, xã Thăng Bình, TP. Đà Nẵng</p>
-        <p>Điện thoại: <b>0905 638 959 (Nam)</b></p>
-
-        <!-- Bản đồ Google Map -->
-        <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border mt-3">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3932414.5703062806!2d103.74066778749997!3d15.7379825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420b003dce5bf9%3A0x73125560dcbe374a!2zTkFNIEPDgCBQSMOK!5e0!3m2!1svi!2s!4v1764414484264!5m2!1svi!2s"
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
         </div>
       </div>
     </aside>
   </main>
 
   <footer class="container-max mx-auto px-4 py-4 text-center text-xs text-gray-600">
-    © 2025 Nam Cà Phê — Thiết kế & vận hành bởi <b>Mr. Thiên</b>
+    © 2025 Nam Cà Phê — Hương vị làm nên cảm xúc
   </footer>
 
   <!-- ======== MODAL GIỎ HÀNG ======== -->
   <div id="cartModal" class="modal">
-    <div class="bg-white rounded-xl p-5 w-11/12 max-w-lg shadow-xl">
+    <div class="modal-content bg-white rounded-xl p-5 w-11/12 max-w-lg shadow-xl">
       <h3 class="text-lg font-semibold text-green-700 mb-3 flex items-center gap-2">
         🛒 Giỏ hàng của bạn
       </h3>
@@ -808,7 +834,7 @@
 
   <!-- ======== MODAL ĐẶT HÀNG ======== -->
   <div id="orderModal" class="modal">
-    <div class="bg-white rounded-xl p-5 w-11/12 max-w-md shadow-xl">
+    <div class="modal-content bg-white rounded-xl p-5 w-11/12 max-w-md shadow-xl">
       <h3 class="text-lg font-semibold text-green-700 mb-3">📦 Thông tin đặt hàng</h3>
       <p class="text-sm mb-2 text-gray-700">
         Món / đơn hàng: <b id="orderItemName">...</b>
@@ -838,11 +864,12 @@
   <!-- ======== FIREBASE SCRIPT (MODULE) ======== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { 
-      getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged 
+    import {
+      getAuth, signInWithEmailAndPassword,
+      signOut, onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { 
-      getFirestore, doc, setDoc, getDoc, addDoc, deleteDoc, updateDoc,
+    import {
+      getFirestore, doc, setDoc, addDoc, deleteDoc, updateDoc,
       collection, serverTimestamp, onSnapshot, query, orderBy
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -859,66 +886,82 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
     const adminEmail = "thien.miraeasset@gmail.com";
-    window.adminEmail = adminEmail;
 
     let currentUser = null;
     let ordersUnsub = null;
+    let gopyUnsub = null;
 
-    // ===== ĐĂNG NHẬP ADMIN =====
-    window.doLogin = async function() {
+    // Đăng nhập admin
+    window.doLogin = async function () {
       const email = loginEmail.value.trim();
       const pass = loginPass.value.trim();
-
       if (!email || !pass) {
         alert("Vui lòng nhập đầy đủ Email và Mật khẩu!");
         return;
       }
-
-      if (email !== adminEmail) {
-        alert("Chỉ tài khoản Admin mới được phép đăng nhập!");
-        return;
-      }
-
       try {
         const userCred = await signInWithEmailAndPassword(auth, email, pass);
-        currentUser = userCred.user;
-
-        if (rememberMe.checked) {
-          localStorage.setItem("savedEmail", email);
-          localStorage.setItem("savedPass", pass);
-        } else {
-          localStorage.removeItem("savedEmail");
-          localStorage.removeItem("savedPass");
+        if (userCred.user.email !== adminEmail) {
+          await signOut(auth);
+          alert("Tài khoản này không có quyền admin!");
+          return;
         }
-
-        localStorage.setItem("userEmail", currentUser.email);
-
-        loginBox.classList.add("hidden");
-        loggedBox.classList.remove("hidden");
-        loggedInfo.innerHTML = `Xin chào <b>Admin</b>`;
-        enableAdminUI(currentUser.email);
       } catch (e) {
-        alert("Đăng nhập thất bại. Vui lòng kiểm tra lại mật khẩu!");
+        alert("Đăng nhập thất bại: " + e.message);
       }
     };
 
-    // ===== ĐĂNG XUẤT ADMIN =====
-    window.doLogout = async function() {
+    // Đăng xuất
+    window.doLogout = async function () {
       await signOut(auth);
-      currentUser = null;
-      localStorage.removeItem("userEmail");
-      loginBox.classList.remove("hidden");
-      loggedBox.classList.add("hidden");
-      enableAdminUI("");
     };
 
-    // ===== GÓP Ý: THÊM VÀO FIRESTORE =====
-    window.sendGopy = async function() {
+    function enableAdminUI(isAdmin) {
+      const gopyMenu = document.getElementById("gopyMenu");
+      const orderListMenu = document.getElementById("orderListMenu");
+
+      if (isAdmin) {
+        gopyMenu?.classList.remove("hidden");
+        orderListMenu?.classList.remove("hidden");
+        startOrdersListener();
+        startGopyListener();
+      } else {
+        gopyMenu?.classList.add("hidden");
+        orderListMenu?.classList.add("hidden");
+
+        if (ordersUnsub) {
+          ordersUnsub();
+          ordersUnsub = null;
+        }
+        if (gopyUnsub) {
+          gopyUnsub();
+          gopyUnsub = null;
+        }
+      }
+    }
+
+    // Lắng nghe trạng thái đăng nhập
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user && user.email === adminEmail ? user : null;
+
+      if (currentUser) {
+        loginBox.classList.add("hidden");
+        loggedBox.classList.remove("hidden");
+        loggedInfo.innerHTML = `Đang đăng nhập với tài khoản admin: <b>${currentUser.email}</b>`;
+        enableAdminUI(true);
+      } else {
+        loginBox.classList.remove("hidden");
+        loggedBox.classList.add("hidden");
+        enableAdminUI(false);
+      }
+    });
+
+    // Lưu góp ý
+    window.sendGopy = async function () {
       const name = gopyName.value.trim();
       const content = gopyText.value.trim();
-
       if (!name || !content) {
-        alert("Vui lòng nhập Họ tên và Nội dung góp ý.");
+        alert("Vui lòng nhập Họ tên và Nội dung góp ý!");
         return;
       }
 
@@ -928,95 +971,79 @@
           content,
           created: serverTimestamp()
         });
-
         gopyName.value = "";
         gopyText.value = "";
-
-        alert(
-          "Nam Cà Phê xin chân thành cảm ơn và ghi nhận góp ý của bạn.\n" +
-          "Chúng tôi sẽ nỗ lực hoàn thiện hơn để mang đến trải nghiệm tốt hơn trong những lần ghé thăm tiếp theo! ☕🌿"
-        );
-      } catch (err) {
-        console.error(err);
-        alert("Có lỗi xảy ra khi gửi góp ý. Vui lòng thử lại sau!");
+        alert(`Nam Cà Phê xin chân thành ghi nhận góp ý của ${name}. Chúng tôi sẽ lắng nghe và cải thiện dịch vụ tốt hơn trong thời gian tới. Cảm ơn bạn đã đồng hành cùng Nam Cà Phê! 💚`);
+      } catch (e) {
+        alert("Lỗi khi gửi góp ý: " + e.message);
       }
     };
 
-    // ===== LẮNG NGHE DANH SÁCH GÓP Ý (ADMIN VIEW) =====
-    const qGopy = query(collection(db, "gopy"), orderBy("created", "desc"));
-    onSnapshot(qGopy, (snapshot) => {
-      const listEl = document.getElementById("gopyList");
+    // Lắng nghe danh sách góp ý (admin)
+    function startGopyListener() {
+      const listEl = document.getElementById("gopyAdminList");
       if (!listEl) return;
 
-      listEl.innerHTML = "";
-      if (snapshot.empty) {
-        listEl.innerHTML = `<p class="text-gray-500 text-sm">Chưa có góp ý nào.</p>`;
-        return;
+      if (gopyUnsub) {
+        gopyUnsub();
+        gopyUnsub = null;
       }
 
-      snapshot.forEach((docu) => {
-        const d = docu.data();
-        const created =
-          d.created?.toDate
+      const qGopy = query(collection(db, "gopy"), orderBy("created", "desc"));
+      gopyUnsub = onSnapshot(qGopy, (snapshot) => {
+        if (snapshot.empty) {
+          listEl.innerHTML = `<p class="text-gray-500 text-sm">Chưa có góp ý nào.</p>`;
+          return;
+        }
+
+        let html = "";
+        snapshot.forEach((docu) => {
+          const d = docu.data();
+          const created = d.created?.toDate
             ? d.created.toDate().toLocaleString("vi-VN")
             : "";
-
-        const el = document.createElement("div");
-        el.className = "border rounded p-2 bg-gray-50";
-
-        const isAdmin = localStorage.getItem("userEmail") === adminEmail;
-        const deleteBtn = isAdmin
-          ? `<button onclick="deleteGopy('${docu.id}')" class="text-xs text-red-500 mt-1 underline">Xóa góp ý</button>`
-          : "";
-
-        el.innerHTML = `
-          <div class="flex justify-between items-center mb-1">
-            <span class="text-xs text-gray-400">${created}</span>
-          </div>
-          <div class="text-gray-700 text-sm">
-            <b>${d.name}</b>: ${d.content}
-          </div>
-          ${deleteBtn}
-        `;
-        listEl.appendChild(el);
+          html += `
+            <div class="border rounded p-2 bg-gray-50">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-semibold text-sm">${d.name || "Khách"}</span>
+                <span class="text-[10px] text-gray-500">${created}</span>
+              </div>
+              <div class="text-sm text-gray-800">${d.content || ""}</div>
+              <button onclick="deleteGopy('${docu.id}')" class="mt-1 text-xs text-red-500 underline">
+                Xóa góp ý
+              </button>
+            </div>
+          `;
+        });
+        listEl.innerHTML = html;
       });
-    });
+    }
 
-    // XÓA GÓP Ý (chỉ admin)
-    window.deleteGopy = async function(id) {
-      const userEmail = localStorage.getItem("userEmail");
-      if (userEmail !== adminEmail) {
+    window.deleteGopy = async function (id) {
+      if (!currentUser || currentUser.email !== adminEmail) {
         alert("Chỉ admin mới được xóa góp ý!");
         return;
       }
       if (!confirm("Bạn có chắc muốn xóa góp ý này không?")) return;
-      try {
-        await deleteDoc(doc(db, "gopy", id));
-        alert("Đã xóa góp ý!");
-      } catch (err) {
-        console.error(err);
-        alert("Lỗi khi xóa góp ý!");
-      }
+      await deleteDoc(doc(db, "gopy", id));
     };
 
-    // ===== LƯU ĐƠN HÀNG XUỐNG FIRESTORE =====
-    window.saveOrderToFirestore = async function(orderData) {
+    // Lưu đơn hàng xuống Firestore
+    window.saveOrderToFirestore = async function (orderData) {
       try {
         await addDoc(collection(db, "orders"), {
           ...orderData,
           status: "pending",
           created: serverTimestamp()
         });
-        console.log("Đã lưu đơn hàng lên Firestore");
       } catch (err) {
         console.error("Lỗi lưu đơn hàng:", err);
       }
     };
 
-    // ===== CẬP NHẬT TRẠNG THÁI ĐƠN HÀNG =====
-    window.updateOrderStatus = async function(orderId, newStatus) {
-      const email = localStorage.getItem("userEmail");
-      if (email !== adminEmail) {
+    // Cập nhật trạng thái đơn hàng
+    window.updateOrderStatus = async function (orderId, newStatus) {
+      if (!currentUser || currentUser.email !== adminEmail) {
         alert("Chỉ admin mới được cập nhật trạng thái đơn hàng!");
         return;
       }
@@ -1028,7 +1055,7 @@
       }
     };
 
-    // ===== LẮNG NGHE DANH SÁCH ĐƠN HÀNG (ADMIN) =====
+    // Lắng nghe danh sách đơn hàng (admin)
     function startOrdersListener() {
       const ordersListEl = document.getElementById("ordersList");
       if (!ordersListEl) return;
@@ -1038,11 +1065,7 @@
         ordersUnsub = null;
       }
 
-      const qOrders = query(
-        collection(db, "orders"),
-        orderBy("created", "desc")
-      );
-
+      const qOrders = query(collection(db, "orders"), orderBy("created", "desc"));
       ordersUnsub = onSnapshot(qOrders, (snapshot) => {
         if (snapshot.empty) {
           ordersListEl.innerHTML = `<p class="text-gray-500 text-sm">Chưa có đơn hàng nào.</p>`;
@@ -1052,10 +1075,11 @@
         let html = "";
         snapshot.forEach((docu) => {
           const d = docu.data();
-          const created =
-            d.created?.toDate ? d.created.toDate().toLocaleString("vi-VN") : "";
+          const created = d.created?.toDate
+            ? d.created.toDate().toLocaleString("vi-VN")
+            : "";
           const itemsText = (d.items || [])
-            .map((i) => {
+            .map(i => {
               const p = i.price ? ` - ${i.price.toLocaleString("vi-VN")}đ` : "";
               return `• ${i.name} x ${i.qty}${p}`;
             })
@@ -1063,15 +1087,13 @@
 
           const status = d.status || "pending";
           const statusLabel = status === "done" ? "Đã xử lý" : "Chưa xử lý";
-          const statusClass =
-            status === "done"
-              ? "bg-green-100 text-green-700"
-              : "bg-yellow-100 text-yellow-700";
+          const statusClass = status === "done"
+            ? "bg-green-100 text-green-700"
+            : "bg-yellow-100 text-yellow-700";
 
-          const toggleBtn =
-            status === "done"
-              ? `<button onclick="updateOrderStatus('${docu.id}','pending')" class="mt-2 text-xs px-2 py-1 rounded border border-yellow-400 text-yellow-700 hover:bg-yellow-50">Đánh dấu CHƯA xử lý</button>`
-              : `<button onclick="updateOrderStatus('${docu.id}','done')" class="mt-2 text-xs px-2 py-1 rounded border border-green-500 text-green-700 hover:bg-green-50">Đánh dấu ĐÃ xử lý</button>`;
+          const toggleBtn = status === "done"
+            ? `<button onclick="updateOrderStatus('${docu.id}','pending')" class="mt-2 text-xs px-2 py-1 rounded border border-yellow-400 text-yellow-700 hover:bg-yellow-50">Đánh dấu CHƯA xử lý</button>`
+            : `<button onclick="updateOrderStatus('${docu.id}','done')" class="mt-2 text-xs px-2 py-1 rounded border border-green-500 text-green-700 hover:bg-green-50">Đánh dấu ĐÃ xử lý</button>`;
 
           html += `
             <div class="border rounded-lg p-3 bg-gray-50">
@@ -1096,102 +1118,50 @@
       });
     }
 
-    // ===== BẬT / TẮT UI ADMIN =====
-    function enableAdminUI(email) {
-      const orderMenu = document.getElementById("orderListMenu");
-      const gopyMenu = document.getElementById("gopyMenu");
+    // Show/hide các section trung tâm
+    window.showSection = function (section) {
+      const gioithieu = document.getElementById('gioithieu');
+      const sanpham = document.getElementById('sanpham');
+      const lienheSection = document.getElementById('lienheSection');
+      const gopyAdminSection = document.getElementById('gopyAdminSection');
+      const ordersSection = document.getElementById('ordersSection');
 
-      if (!orderMenu || !gopyMenu) return;
-
-      if (email === adminEmail) {
-        orderMenu.classList.remove("hidden");
-        gopyMenu.classList.remove("hidden");
-        startOrdersListener();
-      } else {
-        orderMenu.classList.add("hidden");
-        gopyMenu.classList.add("hidden");
-        if (ordersUnsub) {
-          ordersUnsub();
-          ordersUnsub = null;
-        }
-      }
-    }
-
-    window.enableAdminUI = enableAdminUI;
-
-    // ===== CHUYỂN SECTION =====
-    window.showSection = function(section) {
-      const gioithieu = document.getElementById("gioithieu");
-      const sanpham = document.getElementById("sanpham");
-      const thongbao = document.getElementById("thongbao");
-      const gopyPage = document.getElementById("gopyPage");
-      const ordersSection = document.getElementById("ordersSection");
-
-      [gioithieu, sanpham, thongbao, gopyPage, ordersSection].forEach((el) => {
-        if (el) el.classList.add("hidden");
+      [gioithieu, sanpham, lienheSection, gopyAdminSection, ordersSection].forEach(el => {
+        if (el) el.classList.add('hidden');
       });
 
-      if (section === "gioithieu") {
-        gioithieu.classList.remove("hidden");
-      } else if (section === "sanpham") {
-        sanpham.classList.remove("hidden");
-      } else if (section === "thongbao") {
-        thongbao.classList.remove("hidden");
-      } else if (section === "gopy") {
-        const email = localStorage.getItem("userEmail");
-        if (email === adminEmail) {
-          gopyPage.classList.remove("hidden");
+      if (section === 'gioithieu') {
+        gioithieu?.classList.remove('hidden');
+      } else if (section === 'sanpham') {
+        sanpham?.classList.remove('hidden');
+      } else if (section === 'lienhe') {
+        lienheSection?.classList.remove('hidden');
+      } else if (section === 'gopyAdmin') {
+        if (currentUser && currentUser.email === adminEmail) {
+          gopyAdminSection?.classList.remove('hidden');
         } else {
           alert("Chỉ admin mới được xem danh sách góp ý!");
-          gioithieu.classList.remove("hidden");
+          gioithieu?.classList.remove('hidden');
         }
-      } else if (section === "orders") {
-        const email = localStorage.getItem("userEmail");
-        if (email === adminEmail) {
-          ordersSection.classList.remove("hidden");
+      } else if (section === 'orders') {
+        if (currentUser && currentUser.email === adminEmail) {
+          ordersSection?.classList.remove('hidden');
         } else {
-          alert("Chỉ admin mới được xem danh sách khách đặt hàng!");
-          gioithieu.classList.remove("hidden");
+          alert("Chỉ admin mới được xem danh sách đơn đặt hàng!");
+          gioithieu?.classList.remove('hidden');
         }
       } else {
-        gioithieu.classList.remove("hidden");
+        gioithieu?.classList.remove('hidden');
       }
     };
 
-    // ===== KHỞI TẠO =====
+    // Khởi tạo
     window.addEventListener("load", () => {
-      document.body.classList.add("banner-loaded");
-
-      const savedEmail = localStorage.getItem("savedEmail");
-      const savedPass = localStorage.getItem("savedPass");
-      if (savedEmail && savedPass) {
-        loginEmail.value = savedEmail;
-        loginPass.value = savedPass;
-        rememberMe.checked = true;
-      }
-
-      showSection("gioithieu");
-
-      onAuthStateChanged(auth, (user) => {
-        if (user && user.email === adminEmail) {
-          currentUser = user;
-          localStorage.setItem("userEmail", user.email);
-          loginBox.classList.add("hidden");
-          loggedBox.classList.remove("hidden");
-          loggedInfo.innerHTML = `Xin chào <b>Admin</b>`;
-          enableAdminUI(user.email);
-        } else {
-          currentUser = null;
-          loginBox.classList.remove("hidden");
-          loggedBox.classList.add("hidden");
-          localStorage.removeItem("userEmail");
-          enableAdminUI("");
-        }
-      });
+      showSection('gioithieu');
     });
   </script>
 
-  <!-- ======== GIỎ HÀNG & ĐẶT HÀNG (SCRIPT THƯỜNG) ======== -->
+  <!-- ⭐⭐⭐ GIỎ HÀNG & ĐẶT HÀNG (SCRIPT THƯỜNG) ⭐⭐⭐ -->
   <script>
     let cart = [];
     let currentOrderSource = "single"; // 'single' | 'cart'
@@ -1300,27 +1270,29 @@
       saveCart();
     };
 
-    // Mở / đóng modal giỏ hàng
     window.openCart = function() {
       const modal = document.getElementById("cartModal");
-      if (modal) modal.style.display = "flex";
+      if (modal) {
+        modal.classList.add("show");
+      }
       renderCart();
     };
 
     function closeCartModal() {
       const modal = document.getElementById("cartModal");
-      if (modal) modal.style.display = "none";
+      if (modal) {
+        modal.classList.remove("show");
+      }
     }
     window.closeCartModal = closeCartModal;
 
-    // Modal đặt hàng
     window.openOrderModal = function(itemName) {
       currentOrderSource = "single";
       currentOrderItem = itemName;
       const orderNameEl = document.getElementById("orderItemName");
       if (orderNameEl) orderNameEl.textContent = itemName;
       const modal = document.getElementById("orderModal");
-      if (modal) modal.style.display = "flex";
+      if (modal) modal.classList.add("show");
     };
 
     window.openOrderFromCart = function() {
@@ -1333,12 +1305,12 @@
       const orderNameEl = document.getElementById("orderItemName");
       if (orderNameEl) orderNameEl.textContent = currentOrderItem;
       const modal = document.getElementById("orderModal");
-      if (modal) modal.style.display = "flex";
+      if (modal) modal.classList.add("show");
     };
 
     window.closeOrderModal = function() {
       const modal = document.getElementById("orderModal");
-      if (modal) modal.style.display = "none";
+      if (modal) modal.classList.remove("show");
 
       document.getElementById("orderCustomerName").value = "";
       document.getElementById("orderCustomerPhone").value = "";
@@ -1403,7 +1375,6 @@
       }
     });
 
-    // Khởi tạo giỏ hàng khi load trang
     window.addEventListener("load", loadCart);
   </script>
 
