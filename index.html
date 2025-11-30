@@ -110,16 +110,31 @@
   <nav class="bg-green-600 text-white shadow-sm sticky top-0 z-40">
     <div class="container-max mx-auto px-4">
       <ul class="flex flex-wrap gap-3 md:gap-6 py-3 font-semibold text-sm items-center">
-        <li><a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">Giới thiệu</a></li>
-        <li><a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Thực Đơn</a></li>
-        <li><a href="#lienhe" class="hover:underline" onclick="showSection('lienhe')">Liên hệ</a></li>
+        <li>
+          <a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">Giới thiệu</a>
+        </li>
+        <li>
+          <a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Thực Đơn</a>
+        </li>
+        <li>
+          <a href="#lienheSection" class="hover:underline" onclick="showSection('lienhe')">Liên hệ</a>
+        </li>
+
+        <!-- Nút đăng nhập Admin -->
+        <li id="adminLoginNav">
+          <button type="button"
+                  class="hover:underline text-left"
+                  onclick="openAdminLogin()">
+            Đăng nhập Admin
+          </button>
+        </li>
 
         <!-- Chỉ admin mới thấy -->
         <li id="gopyMenu" class="hidden">
-          <a href="#gopyAdmin" class="hover:underline" onclick="showSection('gopyAdmin')">Form góp ý</a>
+          <a href="#gopyAdminSection" class="hover:underline" onclick="showSection('gopyAdmin')">Form góp ý</a>
         </li>
         <li id="orderListMenu" class="hidden">
-          <a href="#orders" class="hover:underline" onclick="showSection('orders')">Danh sách khách đặt hàng</a>
+          <a href="#ordersSection" class="hover:underline" onclick="showSection('orders')">Danh sách khách đặt hàng</a>
         </li>
 
         <!-- GIỎ HÀNG -->
@@ -142,17 +157,8 @@
 
     <!-- ==== CỘT TRÁI ==== -->
     <aside>
-      <!-- Đăng nhập admin -->
-      <div id="loginBox" class="card p-3 text-sm">
-        <h3 class="font-semibold text-green-700 mb-2">🔐 Đăng nhập quản trị</h3>
-        <p class="text-xs text-gray-600 mb-2">Chỉ dành cho Admin để xem danh sách góp ý & đơn đặt hàng.</p>
-        <input id="loginEmail" type="email" placeholder="Email admin" class="w-full border p-1.5 rounded mb-1" />
-        <input id="loginPass" type="password" placeholder="Mật khẩu" class="w-full border p-1.5 rounded mb-2" />
-        <button onclick="doLogin()" class="w-full bg-green-600 hover:bg-green-700 transition text-white py-1.5 rounded text-sm">Đăng nhập</button>
-      </div>
-
       <!-- Đã đăng nhập admin -->
-      <div id="loggedBox" class="card p-3 mt-3 hidden text-sm">
+      <div id="loggedBox" class="card p-3 text-sm hidden">
         <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">
           Xin chào Admin
         </div>
@@ -530,10 +536,10 @@
                 </div>
               </div>
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Sinh tố mãng cầu</p><p class="text-xs text-gray-500">30k</p></div>
+                <div><p class="font-medium">Sinh tố bơ</p><p class="text-xs text-gray-500">30k</p></div>
                 <div class="mt-3 flex gap-2 flex-wrap">
-                  <button onclick="openOrderModal('Sinh tố mãng cầu')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
-                  <button onclick="addToCart('Sinh tố mãng cầu', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                  <button onclick="openOrderModal('Sinh tố bơ')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sinh tố bơ', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
               <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
@@ -803,24 +809,24 @@
           alt="Quảng cáo Nam Cà Phê"
           class="w-full h-full object-cover">
       </a>
-      </div>
+
       <!-- QUẢNG CÁO (HÌNH) 2 -->
-  <div class="mt-3">
-    <a href="https://zalo.me/0964307247"
-       target="_blank"
-       class="block card overflow-hidden">
-      <img
-        src="https://upanhnhanh.com/2adb26e8baa8a5f59e8fbfc54643f192"
-        alt="Quảng cáo Nam Cà Phê 2"
-        class="w-full h-32 md:h-40 object-cover">
-    </a>
-  </div>
+      <div class="mt-3">
+        <a href="https://zalo.me/0964307247"
+           target="_blank"
+           class="block card overflow-hidden">
+          <img
+            src="https://upanhnhanh.com/2adb26e8baa8a5f59e8fbfc54643f192"
+            alt="Quảng cáo Nam Cà Phê 2"
+            class="w-full h-32 md:h-40 object-cover">
+        </a>
+      </div>
     </aside>
   </main>
 
   <footer class="container-max mx-auto px-4 py-4 text-center text-xs text-gray-600">
     © 2025 Nam Cà Phê — Thiết kế bởi <b>Mr.Thiên</b>
-    </div>
+  </footer>
 
   <!-- Bộ đếm lượt truy cập -->
   <div class="flex justify-center">
@@ -831,7 +837,6 @@
       />
     </a>
   </div>
-  </footer>
 
   <!-- ======== MODAL GIỎ HÀNG ======== -->
   <div id="cartModal" class="modal">
@@ -884,7 +889,34 @@
     </div>
   </div>
 
-  <!-- ZALO -->
+  <!-- ======== MODAL ĐĂNG NHẬP ADMIN ======== -->
+  <div id="adminLoginModal" class="modal">
+    <div class="modal-content bg-white rounded-xl p-5 w-11/12 max-w-sm shadow-xl card" id="loginBox">
+      <h3 class="font-semibold text-green-700 mb-2 text-base">🔐 Đăng nhập quản trị</h3>
+      <p class="text-xs text-gray-600 mb-2">
+        Chỉ dành cho Admin để xem danh sách góp ý &amp; đơn đặt hàng.
+      </p>
+      <input id="loginEmail" type="email" placeholder="Email admin"
+             class="w-full border p-1.5 rounded mb-1 text-sm" />
+      <input id="loginPass" type="password" placeholder="Mật khẩu"
+             class="w-full border p-1.5 rounded mb-3 text-sm" />
+
+      <div class="flex justify-end gap-2 text-sm">
+        <button type="button"
+                onclick="closeAdminLogin()"
+                class="px-3 py-1.5 rounded border border-gray-300 text-gray-700 hover:bg-gray-50 transition">
+          Hủy
+        </button>
+        <button type="button"
+                onclick="doLogin()"
+                class="px-3 py-1.5 rounded bg-green-600 text-white hover:bg-green-700 transition">
+          Đăng nhập
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZALO FLOAT BUTTON -->
   <a href="https://zalo.me/0905638959" target="_blank" class="zalo-button" title="Chat qua Zalo">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
   </a>
@@ -921,8 +953,10 @@
 
     // Đăng nhập admin
     window.doLogin = async function () {
-      const email = loginEmail.value.trim();
-      const pass = loginPass.value.trim();
+      const emailInput = document.getElementById("loginEmail");
+      const passInput = document.getElementById("loginPass");
+      const email = emailInput ? emailInput.value.trim() : "";
+      const pass = passInput ? passInput.value.trim() : "";
       if (!email || !pass) {
         alert("Vui lòng nhập đầy đủ Email và Mật khẩu!");
         return;
@@ -947,15 +981,18 @@
     function enableAdminUI(isAdmin) {
       const gopyMenu = document.getElementById("gopyMenu");
       const orderListMenu = document.getElementById("orderListMenu");
+      const adminLoginNav = document.getElementById("adminLoginNav");
 
       if (isAdmin) {
         gopyMenu?.classList.remove("hidden");
         orderListMenu?.classList.remove("hidden");
+        adminLoginNav?.classList.add("hidden");
         startOrdersListener();
         startGopyListener();
       } else {
         gopyMenu?.classList.add("hidden");
         orderListMenu?.classList.add("hidden");
+        adminLoginNav?.classList.remove("hidden");
 
         if (ordersUnsub) {
           ordersUnsub();
@@ -972,22 +1009,30 @@
     onAuthStateChanged(auth, (user) => {
       currentUser = user && user.email === adminEmail ? user : null;
 
+      const loginBoxEl = document.getElementById("loginBox");
+      const loggedBoxEl = document.getElementById("loggedBox");
+      const loggedInfoEl = document.getElementById("loggedInfo");
+      const adminLoginModal = document.getElementById("adminLoginModal");
+
       if (currentUser) {
-        loginBox.classList.add("hidden");
-        loggedBox.classList.remove("hidden");
-        loggedInfo.innerHTML = `Xin chào Admin`;
+        if (loginBoxEl) loginBoxEl.classList.add("hidden");
+        if (loggedBoxEl) loggedBoxEl.classList.remove("hidden");
+        if (loggedInfoEl) loggedInfoEl.innerHTML = `Xin chào Admin`;
         enableAdminUI(true);
+        if (adminLoginModal) adminLoginModal.classList.remove("show");
       } else {
-        loginBox.classList.remove("hidden");
-        loggedBox.classList.add("hidden");
+        if (loginBoxEl) loginBoxEl.classList.remove("hidden");
+        if (loggedBoxEl) loggedBoxEl.classList.add("hidden");
         enableAdminUI(false);
       }
     });
 
     // Lưu góp ý
     window.sendGopy = async function () {
-      const name = gopyName.value.trim();
-      const content = gopyText.value.trim();
+      const nameEl = document.getElementById("gopyName");
+      const textEl = document.getElementById("gopyText");
+      const name = nameEl ? nameEl.value.trim() : "";
+      const content = textEl ? textEl.value.trim() : "";
       if (!name || !content) {
         alert("Vui lòng nhập Họ tên và Nội dung góp ý!");
         return;
@@ -999,8 +1044,8 @@
           content,
           created: serverTimestamp()
         });
-        gopyName.value = "";
-        gopyText.value = "";
+        if (nameEl) nameEl.value = "";
+        if (textEl) textEl.value = "";
         alert(`Nam Cà Phê xin chân thành ghi nhận góp ý của ${name}. Chúng tôi sẽ lắng nghe và cải thiện dịch vụ tốt hơn trong thời gian tới. Cảm ơn bạn đã đồng hành cùng Nam Cà Phê! 💚`);
       } catch (e) {
         alert("Lỗi khi gửi góp ý: " + e.message);
@@ -1340,17 +1385,27 @@
       const modal = document.getElementById("orderModal");
       if (modal) modal.classList.remove("show");
 
-      document.getElementById("orderCustomerName").value = "";
-      document.getElementById("orderCustomerPhone").value = "";
-      document.getElementById("orderCustomerAddress").value = "";
-      document.getElementById("orderNote").value = "";
+      const nameEl = document.getElementById("orderCustomerName");
+      const phoneEl = document.getElementById("orderCustomerPhone");
+      const addrEl = document.getElementById("orderCustomerAddress");
+      const noteEl = document.getElementById("orderNote");
+
+      if (nameEl) nameEl.value = "";
+      if (phoneEl) phoneEl.value = "";
+      if (addrEl) addrEl.value = "";
+      if (noteEl) noteEl.value = "";
     };
 
     window.submitOrder = function() {
-      const name = document.getElementById("orderCustomerName").value.trim();
-      const phone = document.getElementById("orderCustomerPhone").value.trim();
-      const address = document.getElementById("orderCustomerAddress").value.trim();
-      const note = document.getElementById("orderNote").value.trim();
+      const nameEl = document.getElementById("orderCustomerName");
+      const phoneEl = document.getElementById("orderCustomerPhone");
+      const addrEl = document.getElementById("orderCustomerAddress");
+      const noteEl = document.getElementById("orderNote");
+
+      const name = nameEl ? nameEl.value.trim() : "";
+      const phone = phoneEl ? phoneEl.value.trim() : "";
+      const address = addrEl ? addrEl.value.trim() : "";
+      const note = noteEl ? noteEl.value.trim() : "";
 
       if (!name || !phone || !address) {
         alert("Vui lòng nhập đầy đủ Họ tên, Số điện thoại và Địa chỉ!");
@@ -1391,15 +1446,35 @@
       closeOrderModal();
     };
 
+    // ===== ĐĂNG NHẬP ADMIN (MỞ / ĐÓNG MODAL) =====
+    window.openAdminLogin = function () {
+      const modal = document.getElementById("adminLoginModal");
+      if (modal) modal.classList.add("show");
+    };
+
+    window.closeAdminLogin = function () {
+      const modal = document.getElementById("adminLoginModal");
+      if (modal) modal.classList.remove("show");
+      const emailInput = document.getElementById("loginEmail");
+      const passInput = document.getElementById("loginPass");
+      if (emailInput) emailInput.value = "";
+      if (passInput) passInput.value = "";
+    };
+
     // Đóng modal khi bấm nền tối
     window.addEventListener("click", function(e) {
       const cartModal = document.getElementById("cartModal");
       const orderModal = document.getElementById("orderModal");
+      const adminLoginModal = document.getElementById("adminLoginModal");
+
       if (e.target === cartModal) {
         closeCartModal();
       }
       if (e.target === orderModal) {
         closeOrderModal();
+      }
+      if (e.target === adminLoginModal) {
+        closeAdminLogin();
       }
     });
 
