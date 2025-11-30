@@ -18,7 +18,7 @@
       background: white;
       border-radius: 0.5rem;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
     }
     .card:hover {
       transform: translateY(-2px);
@@ -94,6 +94,225 @@
     @media (max-width: 1024px) {
       .container-max { padding-left: 12px; padding-right: 12px; }
     }
+
+    /* ==== TRANG TRÍ THỰC ĐƠN ==== */
+    .menu-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 1.25rem;
+    }
+    .menu-title-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .menu-title-main span.icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #bbf7d0, #16a34a);
+      color: white;
+      font-size: 16px;
+    }
+    .menu-subtitle {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+    .menu-tags {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 0.5rem;
+      padding-bottom: 2px;
+      margin-top: 6px;
+    }
+    .menu-tag-pill {
+      white-space: nowrap;
+      font-size: 0.8rem;
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: #15803d;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+    .menu-tag-pill:hover {
+      background: #22c55e;
+      color: white;
+      border-color: #22c55e;
+    }
+
+    .menu-category-block {
+      position: relative;
+      border-radius: 0.9rem;
+      border: 1px solid #e5e7eb;
+      background:
+        radial-gradient(circle at 0 0, rgba(34,197,94,0.08), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(34,197,94,0.06), transparent 55%),
+        #ffffff;
+      padding: 1.1rem 1rem 1rem;
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+    }
+    .menu-category-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: #166534;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .menu-category-label small {
+      font-weight: 500;
+      color: #9ca3af;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .menu-item-card {
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 0.75rem 0.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-item-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(16,185,129,0.06), transparent 40%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+    .menu-item-card:hover::before {
+      opacity: 1;
+    }
+    .menu-item-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15,23,42,0.08);
+      border-color: #bbf7d0;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .menu-item-name {
+      font-weight: 600;
+      color: #111827;
+      font-size: 0.92rem;
+    }
+    .menu-price-pill {
+      font-size: 0.78rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #bbf7d0;
+      white-space: nowrap;
+    }
+    .menu-item-extra {
+      font-size: 0.7rem;
+      color: #9ca3af;
+      margin-top: 3px;
+    }
+    .menu-actions {
+      margin-top: 0.55rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .menu-badge-hot {
+      font-size: 0.7rem;
+      color: #f97316;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 2px;
+    }
+    .menu-badge-hot span {
+      font-size: 0.7rem;
+    }
+
+    @media (max-width: 640px) {
+      .menu-category-block {
+        padding: 0.9rem 0.8rem 0.8rem;
+      }
+      .menu-item-card {
+        padding: 0.7rem 0.75rem;
+      }
+    }
+
+    /* ==== DARK MODE ==== */
+    body.dark-mode {
+      background-color: #020617;
+      color: #e5e7eb;
+    }
+    body.dark-mode nav {
+      background-color: #022c22;
+    }
+    body.dark-mode .banner-marquee {
+      background-color: rgba(22, 101, 52, 0.9);
+    }
+    body.dark-mode .card {
+      background: #020617;
+      border: 1px solid #1f2937;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    }
+    body.dark-mode .menu-category-block {
+      background:
+        radial-gradient(circle at 0 0, rgba(34,197,94,0.12), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(34,197,94,0.08), transparent 55%),
+        #020617;
+      border-color: #1f2937;
+    }
+    body.dark-mode .menu-item-card {
+      background: #020617;
+      border-color: #1f2937;
+    }
+    body.dark-mode .menu-price-pill {
+      background: #052e16;
+      border-color: #16a34a;
+      color: #bbf7d0;
+    }
+    body.dark-mode .menu-subtitle {
+      color: #9ca3af;
+    }
+    body.dark-mode .menu-tag-pill {
+      background: #022c22;
+      border-color: #16a34a;
+      color: #bbf7d0;
+    }
+    body.dark-mode .menu-tag-pill:hover {
+      background: #16a34a;
+      color: #f9fafb;
+    }
+    body.dark-mode input,
+    body.dark-mode textarea {
+      background-color: #020617;
+      color: #e5e7eb;
+      border-color: #4b5563;
+    }
+    body.dark-mode input::placeholder,
+    body.dark-mode textarea::placeholder {
+      color: #6b7280;
+    }
   </style>
 </head>
 <body>
@@ -135,6 +354,16 @@
         </li>
         <li id="orderListMenu" class="hidden">
           <a href="#ordersSection" class="hover:underline" onclick="showSection('orders')">Danh sách khách đặt hàng</a>
+        </li>
+
+        <!-- Nút Dark mode -->
+        <li>
+          <button type="button"
+                  onclick="toggleDarkMode()"
+                  class="flex items-center gap-1 text-xs md:text-sm px-3 py-1 rounded-full bg-green-700/60 hover:bg-green-800 transition">
+            <span id="themeIcon">🌙</span>
+            <span class="hidden sm:inline" id="themeText">Dark</span>
+          </button>
         </li>
 
         <!-- GIỎ HÀNG -->
@@ -229,84 +458,137 @@
         </p>
       </div>
 
-      <!-- ======= THỰC ĐƠN / SẢN PHẨM ======= -->
+      <!-- ======= THỰC ĐƠN / SẢN PHẨM (ĐÃ TRANG TRÍ + DARK MODE HỖ TRỢ) ======= -->
       <div id="sanpham" class="card p-4 hidden">
-        <h2 class="text-lg font-bold text-green-700 mb-4">☕ Thực đơn NAM CÀ PHÊ</h2>
+        <div class="menu-header">
+          <div class="menu-title-main">
+            <span class="icon">☕</span>
+            <div>
+              <h2 class="text-lg font-bold text-green-700">
+                Thực đơn NAM CÀ PHÊ
+              </h2>
+              <p class="menu-subtitle">
+                Chọn món bạn thích – Nam Cà Phê pha chế tỉ mỉ cho từng ly nước 💚
+              </p>
+            </div>
+          </div>
+
+          <!-- Tag danh mục (cuộn nhanh, chỉ là anchor) -->
+          <div class="menu-tags">
+            <a href="#menu-ca-phe" class="menu-tag-pill">Cà phê</a>
+            <a href="#menu-ca-cao" class="menu-tag-pill">Ca cao</a>
+            <a href="#menu-tra" class="menu-tag-pill">Trà</a>
+            <a href="#menu-tra-sua" class="menu-tag-pill">Trà sữa</a>
+            <a href="#menu-sua-chua" class="menu-tag-pill">Sữa chua</a>
+            <a href="#menu-sinh-to" class="menu-tag-pill">Sinh tố</a>
+            <a href="#menu-nuoc-ep" class="menu-tag-pill">Nước ép</a>
+            <a href="#menu-da-xay" class="menu-tag-pill">Đá xay</a>
+            <a href="#menu-soda" class="menu-tag-pill">Soda</a>
+            <a href="#menu-dong-chai" class="menu-tag-pill">Nước đóng chai / Snack</a>
+          </div>
+        </div>
 
         <div class="space-y-6 text-sm">
 
           <!-- 1. CÀ PHÊ -->
-          <div>
-            <h3 class="font-semibold text-green-700 mb-2">✅ 1. CÀ PHÊ</h3>
+          <div id="menu-ca-phe" class="menu-category-block">
+            <div class="menu-category-label">
+              ✅ 1. CÀ PHÊ
+              <small>ĐẬM ĐÀ – TỈNH TÁO</small>
+            </div>
             <div class="grid sm:grid-cols-2 gap-3">
 
               <!-- Cà phê đen -->
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
-                <div>
-                  <p class="font-medium">Cà phê đen</p>
-                  <p class="text-xs text-gray-500">16k / 18k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Cà phê đen</p>
+                    <p class="menu-item-extra">Đậm vị truyền thống, dành cho người yêu cafe nguyên chất.</p>
+                    <div class="menu-badge-hot">
+                      <span>🔥</span> <span>Bán chạy</span>
+                    </div>
+                  </div>
+                  <span class="menu-price-pill">16k / 18k</span>
                 </div>
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Cà phê đen')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Cà phê đen', 16000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
               <!-- Cà phê sữa -->
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
-                <div>
-                  <p class="font-medium">Cà phê sữa</p>
-                  <p class="text-xs text-gray-500">17k / 19k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Cà phê sữa</p>
+                    <p class="menu-item-extra">Cà phê phin cùng sữa đặc béo nhẹ, dễ uống.</p>
+                  </div>
+                  <span class="menu-price-pill">17k / 19k</span>
                 </div>
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Cà phê sữa')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Cà phê sữa', 17000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
               <!-- Cà phê đen Sài Gòn -->
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
-                <div>
-                  <p class="font-medium">Cà phê đen Sài Gòn</p>
-                  <p class="text-xs text-gray-500">18k / 20k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Cà phê đen Sài Gòn</p>
+                    <p class="menu-item-extra">Đậm hơn, ngọt hơn phong cách miền Nam.</p>
+                  </div>
+                  <span class="menu-price-pill">18k / 20k</span>
                 </div>
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Cà phê đen Sài Gòn')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Cà phê đen Sài Gòn', 18000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
               <!-- Cà phê sữa Sài Gòn -->
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
-                <div>
-                  <p class="font-medium">Cà phê sữa Sài Gòn</p>
-                  <p class="text-xs text-gray-500">20k / 22k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Cà phê sữa Sài Gòn</p>
+                    <p class="menu-item-extra">Ngọt béo, hợp cho buổi sáng năng lượng.</p>
+                  </div>
+                  <span class="menu-price-pill">20k / 22k</span>
                 </div>
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Cà phê sữa Sài Gòn')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Cà phê sữa Sài Gòn', 20000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
               <!-- Cà phê muối -->
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
-                <div>
-                  <p class="font-medium">Cà phê muối</p>
-                  <p class="text-xs text-gray-500">28k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Cà phê muối</p>
+                    <p class="menu-item-extra">Vị lạ miệng, béo mặn nhẹ, cực cuốn.</p>
+                    <div class="menu-badge-hot">
+                      <span>⭐</span> <span>Món gợi ý</span>
+                    </div>
+                  </div>
+                  <span class="menu-price-pill">28k</span>
                 </div>
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Cà phê muối')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Cà phê muối', 28000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
               <!-- Bạc xỉu -->
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition">
-                <div>
-                  <p class="font-medium">Bạc xỉu</p>
-                  <p class="text-xs text-gray-500">25k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Bạc xỉu</p>
+                    <p class="menu-item-extra">Nhiều sữa, ít cà phê – hợp khách thích béo.</p>
+                  </div>
+                  <span class="menu-price-pill">25k</span>
                 </div>
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Bạc xỉu')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Bạc xỉu', 25000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
@@ -316,45 +598,60 @@
           </div>
 
           <!-- 2. CA CAO -->
-          <div>
-            <h3 class="font-semibold text-green-700 mb-2">🍫 2. CA CAO</h3>
+          <div id="menu-ca-cao" class="menu-category-block">
+            <div class="menu-category-label">
+              🍫 2. CA CAO
+              <small>NGỌT ẤM – DỄ UỐNG</small>
+            </div>
             <div class="grid sm:grid-cols-2 gap-3">
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Ca cao nóng/đá</p>
-                  <p class="text-xs text-gray-500">25k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Ca cao nóng/đá</p>
+                    <p class="menu-item-extra">Hợp cho cả trời lạnh và trời nóng.</p>
+                  </div>
+                  <span class="menu-price-pill">25k</span>
                 </div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Ca cao nóng/đá')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Ca cao nóng/đá', 25000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Ca cao muối</p>
-                  <p class="text-xs text-gray-500">26k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Ca cao muối</p>
+                    <p class="menu-item-extra">Đậm vị ca cao, hậu vị mằn mặn thú vị.</p>
+                  </div>
+                  <span class="menu-price-pill">26k</span>
                 </div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Ca cao muối')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Ca cao muối', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Socola nóng</p>
-                  <p class="text-xs text-gray-500">26k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Socola nóng</p>
+                    <p class="menu-item-extra">Thơm béo, thích hợp cho tối thư giãn.</p>
+                  </div>
+                  <span class="menu-price-pill">26k</span>
                 </div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Socola nóng')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Socola nóng', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Ca cao latte</p>
-                  <p class="text-xs text-gray-500">26k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Ca cao latte</p>
+                    <p class="menu-item-extra">Mịn màng, thơm sữa, vị ca cao rõ.</p>
+                  </div>
+                  <span class="menu-price-pill">26k</span>
                 </div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Ca cao latte')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Ca cao latte', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
@@ -363,61 +660,85 @@
           </div>
 
           <!-- 3. TRÀ -->
-          <div>
-            <h3 class="font-semibold text-green-700 mb-2">🍵 3. TRÀ</h3>
+          <div id="menu-tra" class="menu-category-block">
+            <div class="menu-category-label">
+              🍵 3. TRÀ
+              <small>THANH MÁT</small>
+            </div>
             <div class="grid sm:grid-cols-2 gap-3">
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Trà gừng</p><p class="text-xs text-gray-500">22k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà gừng</p><p class="menu-item-extra">Ấm họng, tốt khi thời tiết trở lạnh.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Trà gừng')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Trà gừng', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Trà chanh</p><p class="text-xs text-gray-500">22k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà chanh</p><p class="menu-item-extra">Giải khát nhanh, vị chua ngọt dễ uống.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Trà chanh')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Trà chanh', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Trà Lipton</p><p class="text-xs text-gray-500">22k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà Lipton</p><p class="menu-item-extra">Trà túi lọc quen thuộc, thơm nhẹ.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Trà Lipton')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Trà Lipton', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Trà đào</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà đào</p><p class="menu-item-extra">Có miếng đào, vị thơm dễ chịu.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Trà đào')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Trà đào', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Trà vải</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà vải</p><p class="menu-item-extra">Ngọt nhẹ, thơm vải, dễ uống.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Trà vải')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Trà vải', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Trà việt quất</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà việt quất</p><p class="menu-item-extra">Màu đẹp, vị trái cây nhẹ nhàng.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Trà việt quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Trà việt quất', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Trà đào cam sả</p><p class="text-xs text-gray-500">28k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà đào cam sả</p><p class="menu-item-extra">Mix vị thơm, hơi the, rất “trending”.</p></div>
+                  <span class="menu-price-pill">28k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Trà đào cam sả')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Trà đào cam sả', 28000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
@@ -427,52 +748,70 @@
           </div>
 
           <!-- 4. TRÀ SỮA -->
-          <div>
-            <h3 class="font-semibold text-green-700 mb-2">🥤 4. TRÀ SỮA</h3>
+          <div id="menu-tra-sua" class="menu-category-block">
+            <div class="menu-category-label">
+              🥤 4. TRÀ SỮA
+              <small>GIỚI TRẺ YÊU THÍCH</small>
+            </div>
             <div class="grid sm:grid-cols-2 gap-3">
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Trà sữa truyền thống</p>
-                  <p class="text-xs text-gray-500">M: 22k — L: 25k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Trà sữa truyền thống</p>
+                    <p class="menu-item-extra">Vị trà sữa cơ bản, topping dễ mix.</p>
+                  </div>
+                  <span class="menu-price-pill">M: 22k — L: 25k</span>
                 </div>
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Trà sữa truyền thống')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Trà sữa truyền thống (M)', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
                   <button onclick="addToCart('Trà sữa truyền thống (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Trà sữa thái xanh</p>
-                  <p class="text-xs text-gray-500">M: 22k — L: 25k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Trà sữa thái xanh</p>
+                    <p class="menu-item-extra">Màu xanh đẹp mắt, béo thơm.</p>
+                  </div>
+                  <span class="menu-price-pill">M: 22k — L: 25k</span>
                 </div>
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Trà sữa thái xanh')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Trà sữa thái xanh (M)', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
                   <button onclick="addToCart('Trà sữa thái xanh (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Trà sữa khoai môn</p>
-                  <p class="text-xs text-gray-500">M: 22k — L: 25k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Trà sữa khoai môn</p>
+                    <p class="menu-item-extra">Màu tím nhẹ, béo khoai môn.</p>
+                  </div>
+                  <span class="menu-price-pill">M: 22k — L: 25k</span>
                 </div>
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Trà sữa khoai môn')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Trà sữa khoai môn (M)', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
                   <button onclick="addToCart('Trà sữa khoai môn (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <p class="font-medium">Sữa tươi trân châu đường đen</p>
-                  <p class="text-xs text-gray-500">M: 25k — L: 28k</p>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Sữa tươi trân châu đường đen</p>
+                    <p class="menu-item-extra">Trân châu dẻo, đường đen thơm.</p>
+                    <div class="menu-badge-hot">
+                      <span>🔥</span> <span>Rất được đặt</span>
+                    </div>
+                  </div>
+                  <span class="menu-price-pill">M: 25k — L: 28k</span>
                 </div>
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Sữa tươi trân châu đường đen')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Sữa tươi trân châu đường đen (M)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
                   <button onclick="addToCart('Sữa tươi trân châu đường đen (L)', 28000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
@@ -483,40 +822,58 @@
           </div>
 
           <!-- 5. SỮA CHUA -->
-          <div>
-            <h3 class="font-semibold text-green-700 mb-2">🍶 5. SỮA CHUA</h3>
+          <div id="menu-sua-chua" class="menu-category-block">
+            <div class="menu-category-label">
+              🍶 5. SỮA CHUA
+              <small>MÁT LẠNH</small>
+            </div>
             <div class="grid sm:grid-cols-2 gap-3">
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Sữa chua hũ</p><p class="text-xs text-gray-500">14k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sữa chua hũ</p><p class="menu-item-extra">Chua nhẹ, béo vừa, ăn rất cuốn.</p></div>
+                  <span class="menu-price-pill">14k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Sữa chua hũ')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Sữa chua hũ', 14000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Sữa chua đá</p><p class="text-xs text-gray-500">22k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sữa chua đá</p><p class="menu-item-extra">Xay đá mát lạnh, hợp trời nóng.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Sữa chua đá')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Sữa chua đá', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Sữa chua Việt Quất</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sữa chua Việt Quất</p><p class="menu-item-extra">Vị trái cây thơm, màu đẹp.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Sữa chua Việt Quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Sữa chua Việt Quất', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Sữa chua Dâu</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sữa chua Dâu</p><p class="menu-item-extra">Hợp khách thích vị dâu ngọt thơm.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Sữa chua Dâu')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Sữa chua Dâu', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Sữa chua nếp cẩm</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sữa chua nếp cẩm</p><p class="menu-item-extra">Có nếp, ăn vui miệng, no nhẹ.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Sữa chua nếp cẩm')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Sữa chua nếp cẩm', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
@@ -525,33 +882,48 @@
           </div>
 
           <!-- 6. SINH TỐ -->
-          <div>
-            <h3 class="font-semibold text-green-700 mb-2">🍓 6. SINH TỐ</h3>
+          <div id="menu-sinh-to" class="menu-category-block">
+            <div class="menu-category-label">
+              🍓 6. SINH TỐ
+              <small>TRÁI CÂY TƯƠI</small>
+            </div>
             <div class="grid sm:grid-cols-2 gap-3">
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Sinh tố xoài</p><p class="text-xs text-gray-500">30k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sinh tố xoài</p><p class="menu-item-extra">Ngọt thơm, dễ uống.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Sinh tố xoài')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Sinh tố xoài', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Sinh tố bơ</p><p class="text-xs text-gray-500">30k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sinh tố bơ</p><p class="menu-item-extra">Béo bùi, rất hợp với sữa đặc.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Sinh tố bơ')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Sinh tố bơ', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Sinh tố dâu</p><p class="text-xs text-gray-500">30k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sinh tố dâu</p><p class="menu-item-extra">Vị dâu chua nhẹ, màu hồng đẹp.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Sinh tố dâu')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Sinh tố dâu', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Sinh tố việt quất</p><p class="text-xs text-gray-500">30k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sinh tố việt quất</p><p class="menu-item-extra">Hơi chua nhẹ, rất lạ miệng.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Sinh tố việt quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Sinh tố việt quất', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
@@ -560,61 +932,85 @@
           </div>
 
           <!-- 7. NƯỚC ÉP -->
-          <div>
-            <h3 class="font-semibold text-green-700 mb-2">🍈 7. NƯỚC ÉP</h3>
+          <div id="menu-nuoc-ep" class="menu-category-block">
+            <div class="menu-category-label">
+              🍈 7. NƯỚC ÉP
+              <small>THANH LỌC</small>
+            </div>
             <div class="grid sm:grid-cols-2 gap-3">
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Chanh đá</p><p class="text-xs text-gray-500">22k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Chanh đá</p><p class="menu-item-extra">Chua ngọt, mát lạnh.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Chanh đá')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Chanh đá', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Nước ép thơm</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Nước ép thơm</p><p class="menu-item-extra">Thơm – ngọt – dễ uống.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Nước ép thơm')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Nước ép thơm', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Nước ép cà rốt</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Nước ép cà rốt</p><p class="menu-item-extra">Tốt cho mắt, màu cam đẹp.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Nước ép cà rốt')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Nước ép cà rốt', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Nước ép cóc</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Nước ép cóc</p><p class="menu-item-extra">Vị chua – mặn – ngọt kiểu “ăn vặt”.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Nước ép cóc')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Nước ép cóc', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Chanh dây</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Chanh dây</p><p class="menu-item-extra">Thơm chanh dây, chua thanh.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Chanh dây')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Chanh dây', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Nước ép cam</p><p class="text-xs text-gray-500">28k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Nước ép cam</p><p class="menu-item-extra">Cam tươi vắt, giàu vitamin C.</p></div>
+                  <span class="menu-price-pill">28k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Nước ép cam')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Nước ép cam', 28000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Nước ép mix vị</p><p class="text-xs text-gray-500">30k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Nước ép mix vị</p><p class="menu-item-extra">Mix 2–3 loại trái cây, uống rất vui.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Nước ép mix vị')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Nước ép mix vị', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
@@ -624,26 +1020,38 @@
           </div>
 
           <!-- 8. ĐÁ XAY -->
-          <div>
-            <h3 class="font-semibold text-green-700 mb-2">🧊 8. ĐÁ XAY</h3>
+          <div id="menu-da-xay" class="menu-category-block">
+            <div class="menu-category-label">
+              🧊 8. ĐÁ XAY
+              <small>LẠNH SÂU</small>
+            </div>
             <div class="grid sm:grid-cols-2 gap-3">
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Chanh tuyết</p><p class="text-xs text-gray-500">30k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Chanh tuyết</p><p class="menu-item-extra">Vị chanh xay tuyết mịn, cực mát.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Chanh tuyết')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Chanh tuyết', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Matcha đá xay</p><p class="text-xs text-gray-500">30k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Matcha đá xay</p><p class="menu-item-extra">Thơm matcha, béo sữa.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Matcha đá xay')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Matcha đá xay', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Socola đá xay</p><p class="text-xs text-gray-500">30k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Socola đá xay</p><p class="menu-item-extra">Đậm vị socola, xay mịn.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Socola đá xay')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Socola đá xay', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
@@ -652,36 +1060,51 @@
           </div>
 
           <!-- 9. SODA -->
-          <div>
-            <h3 class="font-semibold text-green-700 mb-2">🥤 9. SODA</h3>
+          <div id="menu-soda" class="menu-category-block">
+            <div class="menu-category-label">
+              🥤 9. SODA
+              <small>CÓ GAS SẢNG KHOÁI</small>
+            </div>
             <div class="grid sm:grid-cols-2 gap-3">
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Soda Blue Sky</p><p class="text-xs text-gray-500">22k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Soda Blue Sky</p><p class="menu-item-extra">Màu xanh mát, chua ngọt nhẹ.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Soda Blue Sky')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Soda Blue Sky', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Soda bạc hà</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Soda bạc hà</p><p class="menu-item-extra">Mát lạnh, thơm mùi bạc hà.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Soda bạc hà')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Soda bạc hà', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Soda dâu</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Soda dâu</p><p class="menu-item-extra">Hơi ngọt, mùi dâu dễ chịu.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Soda dâu')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Soda dâu', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Soda việt quất</p><p class="text-xs text-gray-500">25k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Soda việt quất</p><p class="menu-item-extra">Màu tím đẹp, vị trái cây.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Soda việt quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Soda việt quất', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
@@ -690,53 +1113,74 @@
           </div>
 
           <!-- 10. NƯỚC ĐÓNG CHAI / SNACK -->
-          <div>
-            <h3 class="font-semibold text-green-700 mb-2">🧃 10. NƯỚC ĐÓNG CHAI / SNACK</h3>
+          <div id="menu-dong-chai" class="menu-category-block">
+            <div class="menu-category-label">
+              🧃 10. NƯỚC ĐÓNG CHAI / SNACK
+              <small>NHANH – GỌN</small>
+            </div>
             <div class="grid sm:grid-cols-2 gap-3">
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Bò húc</p><p class="text-xs text-gray-500">22k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Bò húc</p><p class="menu-item-extra">Tăng lực, dùng khi cần tỉnh táo.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Bò húc')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Bò húc', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Sting</p><p class="text-xs text-gray-500">22k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sting</p><p class="menu-item-extra">Nước tăng lực vị dâu quen thuộc.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Sting')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Sting', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Pepsi</p><p class="text-xs text-gray-500">15k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Pepsi</p><p class="menu-item-extra">Nước ngọt có gas.</p></div>
+                  <span class="menu-price-pill">15k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Pepsi')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Pepsi', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Khoáng</p><p class="text-xs text-gray-500">15k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Khoáng</p><p class="menu-item-extra">Nước khoáng đóng chai.</p></div>
+                  <span class="menu-price-pill">15k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Khoáng')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Khoáng', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Hạt dừa</p><p class="text-xs text-gray-500">15k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Hạt dừa</p><p class="menu-item-extra">Snack nhâm nhi cùng nước uống.</p></div>
+                  <span class="menu-price-pill">15k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Hạt dừa')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Hạt dừa', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
               </div>
 
-              <div class="border rounded-lg p-3 flex flex-col justify-between hover:shadow-md transition">
-                <div><p class="font-medium">Hạt hướng dương</p><p class="text-xs text-gray-500">15k</p></div>
-                <div class="mt-3 flex gap-2 flex-wrap">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Hạt hướng dương</p><p class="menu-item-extra">Nhâm nhi tám chuyện rất hợp.</p></div>
+                  <span class="menu-price-pill">15k</span>
+                </div>
+                <div class="menu-actions">
                   <button onclick="openOrderModal('Hạt hướng dương')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
                   <button onclick="addToCart('Hạt hướng dương', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
                 </div>
@@ -829,7 +1273,7 @@
   </footer>
 
   <!-- Bộ đếm lượt truy cập -->
-  <div class="flex justify-center">
+  <div class="flex justify-center mb-4">
     <a href="https://hits.sh/coffee-nam.github.io/trangchu/">
       <img
         alt="Lượt truy cập"
@@ -1234,7 +1678,7 @@
     });
   </script>
 
-  <!-- ⭐⭐⭐ GIỎ HÀNG & ĐẶT HÀNG (SCRIPT THƯỜNG) ⭐⭐⭐ -->
+  <!-- ⭐⭐⭐ GIỎ HÀNG & ĐẶT HÀNG & DARK MODE (SCRIPT THƯỜNG) ⭐⭐⭐ -->
   <script>
     let cart = [];
     let currentOrderSource = "single"; // 'single' | 'cart'
@@ -1478,7 +1922,41 @@
       }
     });
 
-    window.addEventListener("load", loadCart);
+    // ===== DARK MODE =====
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle("dark-mode");
+      const isDark = body.classList.contains("dark-mode");
+      const icon = document.getElementById("themeIcon");
+      const text = document.getElementById("themeText");
+
+      if (icon) icon.textContent = isDark ? "☀️" : "🌙";
+      if (text) text.textContent = isDark ? "Light" : "Dark";
+
+      try {
+        localStorage.setItem("namcoffee_theme", isDark ? "dark" : "light");
+      } catch (e) {}
+    }
+    window.toggleDarkMode = toggleDarkMode;
+
+    function loadTheme() {
+      try {
+        const t = localStorage.getItem("namcoffee_theme");
+        if (t === "dark") {
+          document.body.classList.add("dark-mode");
+          const icon = document.getElementById("themeIcon");
+          const text = document.getElementById("themeText");
+          if (icon) icon.textContent = "☀️";
+          if (text) text.textContent = "Light";
+        }
+      } catch (e) {}
+    }
+
+    // Khởi động giỏ + theme
+    window.addEventListener("load", function () {
+      loadCart();
+      loadTheme();
+    });
   </script>
 
 </body>
