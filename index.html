@@ -380,7 +380,6 @@
   <div class="banner-marquee w-full">
     <span>🌿 Nam Cà Phê ! Nơi thư giãn lý tưởng, phục vụ chu đáo, mọi góp ý xin quý khách vui lòng gọi hoặc nhắn tin Zalo : 0905 638 959. 🌿</span>
   </div>
-
   <!-- ======== MAIN ======== -->
   <main class="container-max mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[260px_1fr_240px] gap-6">
 
@@ -458,7 +457,7 @@
         </p>
       </div>
 
-      <!-- ======= THỰC ĐƠN / SẢN PHẨM (ĐÃ TRANG TRÍ + DARK MODE HỖ TRỢ) ======= -->
+      <!-- ======= THỰC ĐƠN / SẢN PHẨM ======= -->
       <div id="sanpham" class="card p-4 hidden">
         <div class="menu-header">
           <div class="menu-title-main">
@@ -1281,7 +1280,6 @@
       />
     </a>
   </div>
-
   <!-- ======== MODAL GIỎ HÀNG ======== -->
   <div id="cartModal" class="modal">
     <div class="modal-content bg-white rounded-xl p-5 w-11/12 max-w-lg shadow-xl">
@@ -1343,7 +1341,13 @@
       <input id="loginEmail" type="email" placeholder="Email admin"
              class="w-full border p-1.5 rounded mb-1 text-sm" />
       <input id="loginPass" type="password" placeholder="Mật khẩu"
-             class="w-full border p-1.5 rounded mb-3 text-sm" />
+             class="w-full border p-1.5 rounded mb-2 text-sm" />
+
+      <!-- Checkbox ghi nhớ tài khoản -->
+      <label class="flex items-center gap-2 text-xs text-gray-600 mb-3">
+        <input type="checkbox" id="rememberLogin" class="rounded border-gray-300">
+        <span>Ghi nhớ tài khoản trên thiết bị này (không dùng trên máy công cộng)</span>
+      </label>
 
       <div class="flex justify-end gap-2 text-sm">
         <button type="button"
@@ -1364,7 +1368,6 @@
   <a href="https://zalo.me/0905638959" target="_blank" class="zalo-button" title="Chat qua Zalo">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
   </a>
-
   <!-- ======== FIREBASE SCRIPT (MODULE) ======== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -1395,6 +1398,37 @@
     let ordersUnsub = null;
     let gopyUnsub = null;
 
+    // ===== GHI NHỚ EMAIL ADMIN (LOCALSTORAGE) =====
+    function prefillRememberedLogin() {
+      try {
+        const remember = localStorage.getItem("namcoffee_admin_remember");
+        if (remember === "1") {
+          const savedEmail = localStorage.getItem("namcoffee_admin_email") || "";
+          const emailInput = document.getElementById("loginEmail");
+          const rememberCheckbox = document.getElementById("rememberLogin");
+          if (emailInput) emailInput.value = savedEmail;
+          if (rememberCheckbox) rememberCheckbox.checked = true;
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    function saveRememberOption(email) {
+      const rememberCheckbox = document.getElementById("rememberLogin");
+      try {
+        if (rememberCheckbox && rememberCheckbox.checked) {
+          localStorage.setItem("namcoffee_admin_remember", "1");
+          localStorage.setItem("namcoffee_admin_email", email);
+        } else {
+          localStorage.removeItem("namcoffee_admin_remember");
+          localStorage.removeItem("namcoffee_admin_email");
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
     // Đăng nhập admin
     window.doLogin = async function () {
       const emailInput = document.getElementById("loginEmail");
@@ -1412,6 +1446,8 @@
           alert("Tài khoản này không có quyền admin!");
           return;
         }
+        // ✅ Lưu tuỳ chọn ghi nhớ email nếu checkbox được tick
+        saveRememberOption(email);
       } catch (e) {
         alert("Đăng nhập thất bại: " + e.message);
       }
@@ -1674,10 +1710,10 @@
 
     // Khởi tạo
     window.addEventListener("load", () => {
+      prefillRememberedLogin();   // 👈 tự động điền lại email nếu có lưu
       showSection('gioithieu');
     });
   </script>
-
   <!-- ⭐⭐⭐ GIỎ HÀNG & ĐẶT HÀNG & DARK MODE (SCRIPT THƯỜNG) ⭐⭐⭐ -->
   <script>
     let cart = [];
@@ -1958,6 +1994,3 @@
       loadTheme();
     });
   </script>
-
-</body>
-</html>
