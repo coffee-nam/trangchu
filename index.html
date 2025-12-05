@@ -1271,7 +1271,7 @@
          target="_blank"
          class="block card overflow-hidden">
         <img
-          src="https://upanhnhanh.com/1edfe5fc80fd6383baaf7d6244d04f48"
+          src="https://upanhnhanh.com/1edfe5fc80fd6383baaf7d624d04f48"
           alt="Quảng cáo Nam Cà Phê"
           class="w-full h-full object-cover">
       </a>
@@ -1420,6 +1420,9 @@
     let currentUser = null;
     let ordersUnsub = null;
     let gopyUnsub = null;
+
+    // 👉 Cache đơn hàng để in hóa đơn
+    let ordersCache = {};
 
     // ===== GHI NHỚ EMAIL ADMIN (LOCALSTORAGE) =====
     function prefillRememberedLogin() {
@@ -1631,6 +1634,126 @@
       }
     };
 
+    // 👉 HÀM IN HÓA ĐƠN KHỔ 80mm
+    window.printOrder = function (orderId) {
+      if (!currentUser || currentUser.email !== adminEmail) {
+        alert("Chỉ admin mới được in hóa đơn!");
+        return;
+      }
+
+      const d = ordersCache[orderId];
+      if (!d) {
+        alert("Không tìm thấy dữ liệu đơn hàng để in.");
+        return;
+      }
+
+      const now = new Date();
+      const printTime = now.toLocaleString("vi-VN");
+
+      // Thông tin quán
+      const shopName = "NAM CÀ PHÊ";
+      const shopAddress = "62 Trần Thị Lý, Xã Thăng Bình, TP. Đà Nẵng";
+      const shopPhone = "0905 638 959";
+
+      let total = 0;
+      let itemsHtml = "";
+
+      (d.items || []).forEach((item, idx) => {
+        const qty = item.qty || 1;
+        const price = item.price || 0;
+        const lineTotal = price * qty;
+        total += lineTotal;
+
+        itemsHtml += `
+          <tr>
+            <td>${idx + 1}. ${item.name} x ${qty}</td>
+            <td class="right">
+              ${price ? price.toLocaleString("vi-VN") + "đ" : ""}
+            </td>
+          </tr>
+        `;
+      });
+
+      const totalText = total.toLocaleString("vi-VN") + "đ";
+
+      const billHtml = `
+        <div class="bill">
+          <div class="center bold big">${shopName}</div>
+          <div class="center small">${shopAddress}</div>
+          <div class="center small">ĐT: ${shopPhone}</div>
+          <hr>
+          <div class="small">Thời gian in: ${printTime}</div>
+          <div class="small">Khách hàng: ${d.customerName || ""}</div>
+          <div class="small">SĐT: ${d.customerPhone || ""}</div>
+          <div class="small">Địa chỉ: ${d.customerAddress || ""}</div>
+          <hr>
+          <table class="items">
+            <tbody>
+              ${itemsHtml}
+            </tbody>
+          </table>
+          <hr>
+          <div class="right bold">Tổng cộng: ${totalText}</div>
+          <hr>
+          <div class="center small">Cảm ơn quý khách !</div>
+          <div class="center small">Hẹn gặp lại</div>
+        </div>
+      `;
+
+      const printWindow = window.open("", "", "width=400,height=600");
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Hóa đơn</title>
+            <style>
+              body {
+                margin: 0;
+                padding: 0;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+              }
+              .bill {
+                width: 80mm;
+                padding: 4px 8px;
+                font-size: 12px;
+              }
+              .center { text-align: center; }
+              .right  { text-align: right; }
+              .bold   { font-weight: 600; }
+              .big    { font-size: 14px; }
+              .small  { font-size: 11px; }
+              hr {
+                border: 0;
+                border-top: 1px dashed #000;
+                margin: 4px 0;
+              }
+              table {
+                width: 100%;
+                border-collapse: collapse;
+              }
+              td {
+                font-size: 12px;
+                vertical-align: top;
+              }
+              .items td:last-child {
+                white-space: nowrap;
+              }
+              @page {
+                size: 80mm auto;
+                margin: 2mm;
+              }
+            </style>
+          </head>
+          <body>
+            ${billHtml}
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.focus();
+      printWindow.print();
+      printWindow.close();
+    };
+
     // Lắng nghe danh sách đơn hàng (admin)
     function startOrdersListener() {
       const ordersListEl = document.getElementById("ordersList");
@@ -1649,15 +1772,27 @@
         }
 
         let html = "";
+        ordersCache = {}; // reset cache
+
         snapshot.forEach((docu) => {
           const d = docu.data();
           const created = d.created?.toDate
             ? d.created.toDate().toLocaleString("vi-VN")
             : "";
+
+          // Lưu cache để in
+          ordersCache[docu.id] = {
+            ...d,
+            id: docu.id,
+            createdText: created
+          };
+
           const itemsText = (d.items || [])
             .map(i => {
-              const p = i.price ? ` - ${i.price.toLocaleString("vi-VN")}đ` : "";
-              return `• ${i.name} x ${i.qty}${p}`;
+              const priceText = i.price
+                ? ` - ${i.price.toLocaleString("vi-VN")}đ`
+                : "";
+              return `• ${i.name} x ${i.qty}${priceText}`;
             })
             .join("<br>");
 
@@ -1670,6 +1805,14 @@
           const toggleBtn = status === "done"
             ? `<button onclick="updateOrderStatus('${docu.id}','pending')" class="mt-2 text-xs px-2 py-1 rounded border border-yellow-400 text-yellow-700 hover:bg-yellow-50">Đánh dấu CHƯA xử lý</button>`
             : `<button onclick="updateOrderStatus('${docu.id}','done')" class="mt-2 text-xs px-2 py-1 rounded border border-green-500 text-green-700 hover:bg-green-50">Đánh dấu ĐÃ xử lý</button>`;
+
+          // Nút in hóa đơn chỉ hiện khi đã xử lý
+          const printBtn = status === "done"
+            ? `<button onclick="printOrder('${docu.id}')"
+                 class="mt-2 text-xs px-2 py-1 rounded border border-blue-500 text-blue-600 hover:bg-blue-50">
+                 In hóa đơn
+               </button>`
+            : "";
 
           html += `
             <div class="border rounded-lg p-3 bg-gray-50">
@@ -1684,7 +1827,10 @@
                 <p><b>Địa chỉ:</b> ${d.customerAddress}</p>
                 <p class="mt-1"><b>Món:</b><br>${itemsText}</p>
                 ${d.note ? `<p class="mt-1"><b>Ghi chú:</b> ${d.note}</p>` : ""}
-                ${toggleBtn}
+                <div class="flex flex-wrap gap-2 mt-2">
+                  ${toggleBtn}
+                  ${printBtn}
+                </div>
               </div>
             </div>
           `;
@@ -1733,10 +1879,11 @@
 
     // Khởi tạo
     window.addEventListener("load", () => {
-      prefillRememberedLogin();   // 👈 tự động điền lại email nếu có lưu
+      prefillRememberedLogin();   // tự động điền lại email nếu có lưu
       showSection('gioithieu');
     });
   </script>
+
   <!-- ⭐⭐⭐ GIỎ HÀNG & ĐẶT HÀNG & DARK MODE (SCRIPT THƯỜNG) ⭐⭐⭐ -->
   <script>
     let cart = [];
@@ -1917,6 +2064,7 @@
 
       let items = [];
       if (currentOrderSource === "single") {
+        // Đơn 1 món – hiện tại không lưu price (có thể nâng cấp sau)
         items = [{ name: currentOrderItem, qty: 1 }];
       } else {
         items = cart.map(i => ({
@@ -2017,3 +2165,5 @@
       loadTheme();
     });
   </script>
+</body>
+</html>
